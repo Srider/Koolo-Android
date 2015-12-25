@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/quotes_layout">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:id="@+id/quotes_switch_layout"
+        android:gravity="center"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:maxLines="1"
+            android:textSize="16sp"
+            android:text="@string/quotes_switch_text"
+            android:id="@+id/quotes_switch_header"
+            android:layout_weight="0.75"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/Light_Grey"
+            android:layout_alignParentTop="true" />
+
+        <ToggleButton
+            android:id="@+id/quotes_toggle_button"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:onClick="onToggleClicked"
+            android:text="ToggleButton" />
+    </LinearLayout>
+
+    <ListView android:id="@+id/quotes_list"
+        android:layout_width="match_parent" android:layout_height="170dp"
+        android:layout_below="@+id/quotes_switch_layout"
+        layout="@layout/view_quotes_cell"/>
+
+    <LinearLayout
+        android:layout_weight="1.5"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/quotes_list"
+        android:layout_height="45dp"
+        android:layout_margin="10dp"
+        android:id="@+id/quotes_entry_layout"
+        android:gravity="left"
+        android:weightSum="1"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight=".75"
+            android:id="@+id/edit_text_quote"
+            android:background="@drawable/drawable_edit_text_border"
+            android:maxLines="3"
+            android:hint="@string/enter_quotes_placeholder_text"
+            android:gravity="left"
+            android:textColorHint="@color/Light_Grey"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:textColor="@color/Black"/>
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight=".25"
+            android:gravity="right"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:text="@string/quotes_typing_status_text"
+            android:imeOptions="actionDone"
+            android:id="@+id/log_quote_button"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/holo_red_dark" />
+    </LinearLayout>
+
+</RelativeLayout>

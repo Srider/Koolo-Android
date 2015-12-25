@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="layby_blue">#00A1E4</color>
+    <color name="Dark_Grey">#333333</color>
+    <color name="layby_text_color_white">#FFFFFF</color>
+    <color name="White">#FFFFFF</color>
+    <color name="Brown">#774420</color>
+    <color name="Orange">#FC601D</color>
+    <color name="SkyBlue">#1ED0A8</color>
+    <color name="Yellow">#F8CB0A</color>
+    <color name="Light_Grey">#9CA8B4</color>
+    <color name="Red">#C10A16</color>
+    <color name="Pink">#CC27E5</color>
+    <color name="Blue">#1083D3</color>
+    <color name="Black">#000000</color>
+    <color name="Transparent">#80000000</color>
+</resources>

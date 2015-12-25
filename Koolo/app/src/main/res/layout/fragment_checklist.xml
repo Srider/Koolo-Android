@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/checklist_background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/background"/>
+
+    <Button
+        android:layout_height="25dp"
+        android:layout_width="25dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_alignParentLeft="true"
+        android:text="i"
+        android:id="@+id/info_button"
+        android:background="@drawable/drawable_button_white_border"
+        android:textColor="@android:color/black" />
+
+    <ListView android:id="@+id/checklist_detail"
+        android:layout_below="@+id/info_button"
+        layout="@layout/view_checklist_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="0dp"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@null"
+        android:scrollbars="none" />
+</RelativeLayout>

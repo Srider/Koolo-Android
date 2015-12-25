@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.srravela.koolo" >
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <application
+        android:name="com.example.srravela.koolo.KooloApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme" >
+        <supports-screens
+            android:anyDensity="true"
+            android:largeScreens="true"
+            android:normalScreens="true"
+            android:resizeable="true"
+            android:smallScreens="true"
+            android:xlargeScreens="true" />
+
+        <activity
+            android:name=".main.activities.KooloSplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".main.activities.KooloMainActivity"
+            android:label="@string/title_activity_koolo_main" >
+        </activity>
+        <activity
+            android:name=".settings.activities.KooloSettingsActivity"
+            android:label="@string/title_activity_koolo_settings" >
+        </activity>
+        <activity
+            android:name=".home.activities.KooloHomeActivity"
+            android:label="@string/title_activity_koolo_home" >
+        </activity>
+        <activity
+            android:name=".quotes.activities.KooloQuotesActivity"
+            android:label="@string/title_activity_koolo_quotes" >
+        </activity>
+        <activity
+            android:name=".passcode.activities.KooloPasscodeActivity"
+            android:label="@string/title_activity_koolo_passcode" >
+        </activity>
+        <activity
+            android:name=".checklists.activities.KooloChecklistActivity"
+            android:label="@string/title_activity_koolo_checklist" >
+        </activity>
+        <activity
+            android:name=".KooloBaseActivity"
+            android:label="@string/title_activity_koolo_base" >
+        </activity>
+        <activity
+            android:name=".moods.activities.KooloMoodsActivity"
+            android:label="@string/title_activity_koolo_moods" >
+        </activity>
+        <activity
+            android:name=".background.KooloBackgroundImageActivity"
+            android:label="@string/title_activity_koolo_background_image" >
+        </activity>
+        <activity
+            android:name=".updates.KooloUpdatesActivity"
+            android:label="@string/title_activity_koolo_updates" >
+        </activity>
+        <activity
+            android:name=".contributors.KooloContributorsActivity"
+            android:label="@string/title_activity_koolo_contributors" >
+        </activity>
+        <activity
+            android:name=".license.KooloLicenseActivity"
+            android:label="@string/title_activity_koolo_license" >
+        </activity>
+        <activity
+            android:name=".review.activities.KooloReviewActivity"
+            android:label="@string/title_activity_koolo_review" >
+        </activity>
+        <activity
+            android:name=".humor.activities.KooloHumourActivity"
+            android:label="@string/title_activity_koolo_humour" >
+        </activity>
+        <activity
+            android:name=".passcode.activities.KooloPasscodeVerificationActivity"
+            android:label="@string/title_activity_koolo_passcode_verification">
+        </activity>
+    </application>
+
+</manifest>

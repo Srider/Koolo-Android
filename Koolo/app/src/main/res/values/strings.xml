@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Koolo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_home">Home</string>
+    <string name="action_quotes">Quotes</string>
+    <string name="action_passcode">Passcode</string>
+    <string name="action_review">Review</string>
+    <string name="action_update">Updates</string>
+    <string name="action_background_image">Background Image</string>
+    <string name="action_license">License</string>
+    <string name="action_mood_shot">Moods</string>
+    <string name="action_select_humor_title">Select Humor Color</string>
+    <string name="action_select_humor_done">Done</string>
+
+
+    <!--Activity Strings -->
+    <string name="title_activity_koolo_main">KooloMainActivity</string>
+    <string name="title_activity_koolo_settings">KooloSettingsActivity</string>
+    <string name="title_activity_koolo_home">KooloHomeActivity</string>
+    <string name="title_activity_koolo_quotes">KooloQuotesActivity</string>
+    <string name="title_activity_koolo_passcode">KooloPasscodeActivity</string>
+    <string name="title_activity_koolo_moods">KooloMoodsActivity</string>
+    <string name="title_activity_koolo_checklist">KooloChecklistActivity</string>
+    <string name="title_activity_koolo_base">KooloBaseActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_koolo_background_image">KooloBackgroundImageActivity</string>
+    <string name="title_activity_koolo_updates">KooloUpdatesActivity</string>
+    <string name="title_activity_koolo_contributors">KooloContributorsActivity</string>
+    <string name="title_activity_koolo_license">KooloLicenseActivity</string>
+    <string name="title_activity_koolo_review">KooloReviewActivity</string>
+    <string name="title_activity_koolo_humour">KooloHumourActivity</string>
+    <string name="title_activity_koolo_passcode_verification">KooloPasscodeVerificationActivity
+    </string>
+
+</resources>

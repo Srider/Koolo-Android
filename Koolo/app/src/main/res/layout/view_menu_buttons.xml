@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="50dp"
+    android:layout_height="140dp"
+    android:weightSum="3">
+    <Button
+        android:layout_height="0dp"
+        android:layout_width="45dp"
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:id="@+id/checklist_button"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/check_list"/>
+
+    <Button
+        android:layout_height="0dp"
+        android:layout_width="45dp"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:id="@+id/calendar_button"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/calander"/>
+
+    <Button
+        android:layout_height="0dp"
+        android:layout_width="45dp"
+        android:layout_weight="1"
+        android:layout_margin="2dp"
+        android:id="@+id/camera_button"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/camera"/>
+</LinearLayout>

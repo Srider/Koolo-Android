@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.srravela.koolo.moods.fragments.KooloMoodShotFormatterFragment">
+
+    <ImageView
+        android:id="@+id/moodshot_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/background" />
+
+    <!-- <include
+         android:id="@+id/mood_button_scroll"
+         android:layout_width="match_parent"
+         android:layout_height="80dp"
+         android:gravity="bottom"
+         layout="@layout/view_mood_buttons"
+         android:layout_alignParentBottom="true"/>-->
+
+
+    <FrameLayout
+        android:id="@+id/fragment_checklist_container1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom" />
+    </FrameLayout>
+    <!--  <ImageView
+          android:id="@+id/pager"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+
+          android:src="@drawable/info" />-->
+
+
+</RelativeLayout>

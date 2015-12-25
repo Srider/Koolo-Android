@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="humours_file_name">humours.txt</string>
+
+    <string-array name="koolo_humour_color_choices">
+        <item>Lykkelig</item>
+        <item>Glad</item>
+        <item>Rolig</item>
+        <item>Fremgang</item>
+        <item>Sing</item>
+        <item>Sing-Rolig</item>
+        <item>Glad-Sing</item>
+        <item>Lykkelig-Rolig</item>
+        <item>Fremgang-Sing</item>
+        <item>Fremgang-Rolig</item>
+    </string-array>
+</resources>

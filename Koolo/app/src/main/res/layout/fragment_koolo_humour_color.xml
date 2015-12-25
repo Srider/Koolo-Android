@@ -1,0 +1,10 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.srravela.checklist.fragments.KooloHumourColorFragment">
+    <ListView android:id="@+id/humour_detail"
+        layout="@layout/view_humour_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" />
+</FrameLayout>

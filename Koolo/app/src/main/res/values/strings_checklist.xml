@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="checklist_title"> Checklists</string>
+    <string name="my_health"> My Health</string>
+    <string name="three_sentence"> Three Sentence</string>
+    <string name="ready_to_transfer">Ready for transfer</string>
+
+    <!--Three Sentence Questions -->
+    <string name="question_1_string">1. My age, diagnosis and brief history</string>
+    <string name="question_2_string">2. My treatment plan</string>
+    <string name="question_3_string">3. Mitn tracks slim / concerns for a talk about during the hour</string>
+
+    <!-- Information Strings -->
+    <string name="select_template_text">Select a template that the question at a sweep located at</string>
+
+    <!-- New Goals and Transfer Titles -->
+    <string name="new_goal_options">New Goal</string>
+    <string name="new_transfer_options">New Transfer</string>
+
+    <!-- New Goals and Transfer Entry Titles -->
+    <string name="add_goal_menu_option">Add Goal</string>
+    <string name="add_transfer_menu_option">Add Transfer</string>
+    <string name="three_sentence_save">Save</string>
+
+    <!-- File Names -->
+    <string name="transfers_file_name">transfers.txt</string>
+    <string name="goals_file_name">goals.txt</string>
+
+
+</resources>

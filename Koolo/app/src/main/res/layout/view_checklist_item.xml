@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="120dp"
+    android:id="@+id/checklist_cell_layout">
+<View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/checklist_timeline_margin"
+    android:background="@color/Light_Grey"
+    android:id="@+id/timeline_view" />
+
+    <Button
+        android:id="@+id/checklist_status_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="@dimen/checklist_status_button_left_margin"
+        android:layout_marginTop="@dimen/checklist_status_button_top_margin"
+        android:layout_marginBottom="@dimen/checklist_status_button_top_margin"
+        android:background="@drawable/drawable_plain_round_button_green"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/checklist_text"
+        android:layout_marginLeft="@dimen/checklist_edit_text_left_margin"
+        android:layout_marginRight="@dimen/checklist_edit_text_right_margin"
+        android:layout_marginTop="@dimen/checklist_edit_text_top_margin"
+        android:layout_marginBottom="@dimen/checklist_edit_text_bottom_margin"
+        android:maxLines="4"
+        android:gravity="left"
+        android:inputType="text"
+        android:textColor="@android:color/white"
+        android:background="@drawable/drawable_edit_text_white_border"
+        android:alpha="0.7"
+        android:textSize="12sp"/>
+
+
+</FrameLayout>

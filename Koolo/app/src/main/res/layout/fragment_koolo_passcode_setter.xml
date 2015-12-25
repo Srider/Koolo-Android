@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:id="@+id/passcode_header"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="14sp"
+        android:text="Enter Passcode"
+        android:maxLines="1"
+        android:layout_weight="1"
+        android:textColor="@android:color/black"/>
+
+    <LinearLayout android:id="@+id/passcode_edit_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/passcode_header"
+        android:layout_marginTop="50dp"
+        android:weightSum="4">
+
+        <EditText
+            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:inputType="numberPassword|numberDecimal"
+            android:maxLength="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="0sp"
+            android:focusable="true"
+            android:imeOptions="actionDone"
+            android:id="@+id/digit1_edit_text"
+            android:cursorVisible="false"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/drawable_passcode_empty_color_style"/>
+
+        <EditText
+            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:inputType="numberPassword|numberDecimal"
+            android:maxLength="1"
+            android:textSize="0sp"
+            android:focusable="true"
+            android:layout_marginRight="20dp"
+            android:imeOptions="actionDone"
+            android:id="@+id/digit2_edit_text"
+            android:cursorVisible="false"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/drawable_passcode_empty_color_style"/>
+
+        <EditText
+            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:inputType="numberPassword|numberDecimal"
+            android:maxLength="1"
+            android:focusable="true"
+            android:imeOptions="actionDone"
+            android:layout_marginRight="20dp"
+            android:id="@+id/digit3_edit_text"
+            android:cursorVisible="false"
+            android:textSize="0sp"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/drawable_passcode_empty_color_style"/>
+
+        <EditText
+            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/digit4_edit_text"
+            android:inputType="numberPassword|numberDecimal"
+            android:maxLength="1"
+            android:textSize="0sp"
+            android:focusable="true"
+            android:imeOptions="actionDone"
+            android:cursorVisible="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@drawable/drawable_passcode_empty_color_style" />
+    </LinearLayout>
+</RelativeLayout>
+
