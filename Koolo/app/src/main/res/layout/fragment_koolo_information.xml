@@ -9,97 +9,182 @@
         android:scaleType="fitXY"
         android:src="@drawable/background"/>
 
-    <LinearLayout
+    <!--<LinearLayout-->
+        <!--android:id="@+id/finished_legend"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="1"-->
+        <!--android:layout_margin="@dimen/activity_vertical_margin">-->
+
+        <!--<View-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight=".18"-->
+            <!--android:id="@+id/legend_color"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:background="@drawable/drawable_color_round_green"-->
+            <!--android:layout_margin="@dimen/activity_vertical_margin"/>-->
+
+        <!--<TextView-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight=".82"-->
+            <!--android:text="Finished"-->
+            <!--android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--android:gravity="left|center_vertical"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:layout_margin="@dimen/activity_vertical_margin"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/not_done_legend"-->
+        <!--android:layout_below="@+id/finished_legend"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="1"-->
+        <!--android:layout_marginLeft="@dimen/activity_vertical_margin"-->
+        <!--android:layout_marginRight="@dimen/activity_vertical_margin"-->
+        <!--android:layout_marginBottom="@dimen/activity_vertical_margin">-->
+
+        <!--<View-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight=".18"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:background="@drawable/drawable_color_round_red"-->
+            <!--android:layout_margin="@dimen/activity_vertical_margin"/>-->
+
+        <!--<TextView-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight=".82"-->
+            <!--android:text="Not done"-->
+            <!--android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--android:gravity="left|center_vertical"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:layout_margin="@dimen/activity_vertical_margin"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ongoing_legend"-->
+        <!--android:layout_below="@+id/not_done_legend"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="1"-->
+        <!--android:layout_marginLeft="@dimen/activity_vertical_margin"-->
+        <!--android:layout_marginRight="@dimen/activity_vertical_margin"-->
+        <!--android:layout_marginBottom="@dimen/activity_vertical_margin">-->
+
+        <!--<View-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight=".18"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:background="@drawable/drawable_color_round_yellow"-->
+            <!--android:layout_margin="@dimen/activity_vertical_margin"/>-->
+
+        <!--<TextView-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight=".82"-->
+            <!--android:text="Ongoing"-->
+            <!--android:layout_gravity="center_horizontal|center_vertical"-->
+            <!--android:gravity="left|center_vertical"-->
+            <!--android:textColor="@color/White"-->
+            <!--android:layout_margin="@dimen/activity_vertical_margin"/>-->
+
+    <!--</LinearLayout>-->
+
+    <RelativeLayout
         android:id="@+id/finished_legend"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:weightSum="1"
         android:layout_margin="@dimen/activity_vertical_margin">
 
         <View
             android:layout_height="50dp"
-            android:layout_width="0dp"
-            android:layout_weight=".18"
-            android:id="@+id/legend_color"
+            android:layout_width="50dp"
+            android:id="@+id/finished_legend_color"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/drawable_color_round_green"
-            android:layout_margin="@dimen/activity_vertical_margin"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/drawable_color_round_green"/>
 
         <TextView
             android:layout_height="40dp"
-            android:layout_width="0dp"
-            android:layout_weight=".82"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/finished_legend_color"
             android:text="Finished"
-            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:gravity="left|center_vertical"
-            android:textColor="@color/White"
-            android:layout_margin="@dimen/activity_vertical_margin"/>
+            android:textColor="@color/White"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/not_done_legend"
         android:layout_below="@+id/finished_legend"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_margin="@dimen/activity_vertical_margin">
 
         <View
+            android:id="@+id/not_done_legend_color"
             android:layout_height="50dp"
-            android:layout_width="0dp"
-            android:layout_weight=".18"
+            android:layout_width="50dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/drawable_color_round_red"
-            android:layout_margin="@dimen/activity_vertical_margin"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/drawable_color_round_red"/>
 
         <TextView
             android:layout_height="40dp"
-            android:layout_width="0dp"
-            android:layout_weight=".82"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/not_done_legend_color"
             android:text="Not done"
-            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:gravity="left|center_vertical"
-            android:textColor="@color/White"
-            android:layout_margin="@dimen/activity_vertical_margin"/>
+            android:textColor="@color/White"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ongoing_legend"
         android:layout_below="@+id/not_done_legend"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginRight="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_margin="@dimen/activity_vertical_margin">
 
         <View
+            android:id="@+id/ongoing_legend_color"
             android:layout_height="50dp"
-            android:layout_width="0dp"
-            android:layout_weight=".18"
+            android:layout_width="50dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/drawable_color_round_yellow"
-            android:layout_margin="@dimen/activity_vertical_margin"/>
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/drawable_color_round_yellow"/>
 
         <TextView
             android:layout_height="40dp"
-            android:layout_width="0dp"
-            android:layout_weight=".82"
+            android:layout_width="match_parent"
             android:text="Ongoing"
-            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_toRightOf="@+id/ongoing_legend_color"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:gravity="left|center_vertical"
-            android:textColor="@color/White"
-            android:layout_margin="@dimen/activity_vertical_margin"/>
+            android:textColor="@color/White"/>
 
-    </LinearLayout>
-
+    </RelativeLayout>
         <TextView
             android:text="@string/select_template_text"
             android:layout_margin="@dimen/activity_vertical_margin"

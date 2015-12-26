@@ -1,27 +1,25 @@
 package com.example.srravela.koolo.humor.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.entities.Humour;
-import com.example.srravela.koolo.entities.Utils;
 import com.example.srravela.koolo.humor.activities.KooloHumourActivity;
 import com.example.srravela.koolo.humor.listeners.HumourTextUpdatedListener;
 import com.example.srravela.koolo.humor.utils.HumourDataStore;
-import com.example.srravela.koolo.moods.activities.KooloMoodsActivity;
 import com.example.srravela.koolo.humor.adapters.KooloHumourColorAdapter;
 import com.example.srravela.koolo.humor.listeners.KooloHumourColorListener;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class KooloHumourColorFragment extends Fragment implements HumourTextUpdatedListener {
@@ -80,6 +78,7 @@ public class KooloHumourColorFragment extends Fragment implements HumourTextUpda
     private void initUI(){
         setHasOptionsMenu(true);
         hunourColorsList=(ListView)rootView.findViewById(R.id.humour_detail);
+
         if(humourDetails!=null){
             humourColorAdapter = new KooloHumourColorAdapter(humourDetails, mContext, this);
             hunourColorsList.setAdapter(humourColorAdapter);
@@ -98,4 +97,5 @@ public class KooloHumourColorFragment extends Fragment implements HumourTextUpda
         sharedHumoursDataStore.writeHumoursToFile(humourDetails);
         humourColorAdapter.notifyDataSetChanged();
     }
+
 }

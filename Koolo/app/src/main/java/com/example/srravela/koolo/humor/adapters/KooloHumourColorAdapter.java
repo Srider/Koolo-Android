@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.srravela.koolo.R;
@@ -92,6 +94,7 @@ public class KooloHumourColorAdapter  extends BaseAdapter implements EditText.On
         convertView= layoutInflater.inflate(R.layout.view_humour_color, null);
         Humour item = items.get(position);
         String humourItemText = item.getHumourText();
+
         EditText humourText = (EditText)convertView.findViewById(R.id.humour_text);
         humourText.setOnEditorActionListener(this);
         humourText.setTag(""+position);
@@ -166,5 +169,4 @@ public class KooloHumourColorAdapter  extends BaseAdapter implements EditText.On
         items.add(editTextTag, editedHumour);
         mHumourTextListener.onHumourTextUpdated(items);
     }
-
 }

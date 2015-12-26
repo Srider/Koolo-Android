@@ -246,42 +246,6 @@ public class KooloPasscodeVerificationFragment extends Fragment implements View.
         }
     }
 
-//    private void checkAndAddDigit(int digit) {
-//        String passcode = null;
-//        String actualPasscode = null;
-//        if (passcodeBuilder == null) {
-//            passcodeBuilder = new StringBuilder();
-//        }
-//        passcodeBuilder.append(digit);
-//
-//        if (passcodeBuilder.length() == 4) {
-//            passcode = passcodeBuilder.toString();
-//            SharedPreferences enablePasscodePreferences = mContext.getSharedPreferences(KooloApplication.PASSCODE_ENABLED, mContext.MODE_PRIVATE);
-//            actualPasscode = enablePasscodePreferences.getString(KooloApplication.SELECTED_PASSCODE, passcode);
-//            retryCount += 1;
-//            if (retryCount < 3) {
-//                if (passcode.equals(actualPasscode)) {
-//                    //Correct Passcode Entered.
-//                    //TODO: Pop Fragment.
-//                    Toast.makeText(mContext, "Correct passcode entered.", Toast.LENGTH_SHORT).show();
-//                    Bundle bundle=new Bundle();
-//                    bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_ENTERED_ACTION);
-//                    mListener.onPasscodeVerification(bundle);
-//                } else {
-//                    passcodeBuilder = null;
-//                    Toast.makeText(mContext, "Retry - " + retryCount, Toast.LENGTH_SHORT).show();
-//                }
-//            } else {
-//                //Launch Security Question.
-//                Bundle bundle=new Bundle();
-//                bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_RETRY_EXPIRED);
-//                mListener.onPasscodeVerification(bundle);
-//            }
-//        } else if (passcodeBuilder.length() > 4){
-//            passcodeBuilder = null;
-//        }
-//    }
-
     private void checkAndAddDigit(int digit) {
         String passcode = null;
         String actualPasscode = null;

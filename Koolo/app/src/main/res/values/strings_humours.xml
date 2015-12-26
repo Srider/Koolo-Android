@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="humours_file_name">humours.txt</string>
+    <string name="done_option_string">Done</string>
 
     <string-array name="koolo_humour_color_choices">
         <item>Lykkelig</item>

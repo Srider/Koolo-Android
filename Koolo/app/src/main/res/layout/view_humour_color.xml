@@ -1,65 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:orientation="horizontal" android:layout_width="match_parent"-->
-    <!--android:layout_height="65dp"-->
-    <!--android:weightSum="1">-->
-
-    <!--<View-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_weight="0.14"-->
-        <!--android:layout_margin="@dimen/humour_edit_text_margin"-->
-        <!--android:background="@color/Light_Grey"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:id="@+id/color_view"/>-->
-
-    <!--<EditText-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="0.86"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:id="@+id/humour_text"-->
-        <!--android:layout_marginRight="@dimen/humour_edit_text_margin"-->
-        <!--android:imeOptions="actionDone"-->
-        <!--android:maxLines="1"-->
-        <!--android:layout_gravity="left|center_vertical"-->
-        <!--android:inputType="text"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:background="@drawable/drawable_edit_text_border"-->
-        <!--android:alpha="0.7"-->
-        <!--android:textSize="18sp"/>-->
-<!--</LinearLayout>-->
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:orientation="horizontal" android:layout_width="match_parent"-->
-    <!--android:layout_height="65dp"-->
-    <!--android:weightSum="1">-->
-
-    <!--<View-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="45dp"-->
-        <!--android:layout_weight="0.14"-->
-        <!--android:layout_margin="@dimen/humour_edit_text_margin"-->
-        <!--android:background="@color/Light_Grey"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:id="@+id/color_view"/>-->
-
-    <!--<EditText-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_weight="0.75"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:id="@+id/humour_text"-->
-        <!--android:layout_marginRight="@dimen/humour_edit_text_margin"-->
-        <!--android:layout_marginLeft="@dimen/humour_edit_text_margin"-->
-        <!--android:imeOptions="actionDone"-->
-        <!--android:maxLines="1"-->
-        <!--android:layout_gravity="left|center_vertical"-->
-        <!--android:inputType="textNoSuggestions"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:background="@drawable/drawable_edit_text_border"-->
-        <!--android:alpha="0.7"-->
-        <!--android:textSize="18sp"/>-->
-<!--</LinearLayout>-->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="65dp">
@@ -86,4 +25,35 @@
         android:background="@drawable/drawable_edit_text_border"
         android:alpha="0.7"
         android:textSize="18sp"/>
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="@dimen/humour_edit_text_margin"-->
+        <!--android:layout_toRightOf="@+id/color_view">-->
+
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:id="@+id/humour_text"-->
+            <!--android:layout_toRightOf="@+id/color_view"-->
+            <!--android:layout_margin="@dimen/humour_edit_text_margin"-->
+            <!--android:imeOptions="actionDone"-->
+            <!--android:maxLines="1"-->
+            <!--android:layout_gravity="left|center_vertical"-->
+            <!--android:inputType="textNoSuggestions"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:background="@drawable/drawable_edit_text_border"-->
+            <!--android:alpha="0.7"-->
+            <!--android:textSize="18sp"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/clear_text_button"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_margin="@dimen/humour_edit_text_margin"-->
+            <!--android:layout_gravity="right|center_vertical"-->
+            <!--android:background="@drawable/close" />-->
+
+    <!--</FrameLayout>-->
 </RelativeLayout>

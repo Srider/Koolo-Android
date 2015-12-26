@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.passcode.activities.KooloPasscodeActivity;
 import com.example.srravela.koolo.passcode.listeners.KooloPasscodeInteractionListener;
+import com.example.srravela.koolo.passcode.listeners.KooloPasscodeVerificationListener;
 
 public class KooloPasscodeSetterFragment extends Fragment implements EditText.OnEditorActionListener{
 
@@ -72,6 +74,7 @@ public class KooloPasscodeSetterFragment extends Fragment implements EditText.On
         mActivity=(KooloPasscodeActivity)getActivity();
         mContext=mActivity.getApplicationContext();
         mListener =(KooloPasscodeInteractionListener) mActivity;
+
         intiUI();
 
         setHasOptionsMenu(true);
@@ -80,7 +83,6 @@ public class KooloPasscodeSetterFragment extends Fragment implements EditText.On
     private void intiUI(){
         digit1EditText = (EditText)rootView.findViewById(R.id.digit1_edit_text);
         digit1EditText.setTag("1");
-//        digit1EditText.setOnKeyListener(this);
         digit1EditText.setOnEditorActionListener(this);
         digit1EditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         digit1EditText.addTextChangedListener(new TextWatcher() {
@@ -115,7 +117,6 @@ public class KooloPasscodeSetterFragment extends Fragment implements EditText.On
         digit2EditText = (EditText)rootView.findViewById(R.id.digit2_edit_text);
         digit2EditText.setTag("2");
         digit2EditText.setOnEditorActionListener(this);
-//        digit2EditText.setOnKeyListener(this);
         digit2EditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         digit2EditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -149,7 +150,6 @@ public class KooloPasscodeSetterFragment extends Fragment implements EditText.On
         digit3EditText = (EditText)rootView.findViewById(R.id.digit3_edit_text);
         digit3EditText.setTag("3");
         digit3EditText.setOnEditorActionListener(this);
-//        digit3EditText.setOnKeyListener(this);
         digit3EditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         digit3EditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -183,7 +183,6 @@ public class KooloPasscodeSetterFragment extends Fragment implements EditText.On
         digit4EditText = (EditText)rootView.findViewById(R.id.digit4_edit_text);
         digit4EditText.setTag("4");
         digit4EditText.setOnEditorActionListener(this);
-//        digit4EditText.setOnKeyListener(this);
         digit4EditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         digit4EditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -286,6 +285,10 @@ public class KooloPasscodeSetterFragment extends Fragment implements EditText.On
             enablePasscodeEditor.putString(KooloApplication.SELECTED_PASSCODE, passcode);
             enablePasscodeEditor.commit();
             Toast.makeText(mContext, "Passcode set", Toast.LENGTH_SHORT).show();
+
+            Bundle bundle=new Bundle();
+            bundle.putInt(KooloPasscodeInteractionListener.KOOLO_PASSCODE_ACTION, KooloPasscodeInteractionListener.KOOLO_PASSCODE_SET_ACTION);
+            mListener.onPasscodeInteraction(bundle);
         } else {
             Toast.makeText(mContext, "Passcode should be 4 characters", Toast.LENGTH_SHORT).show();
         }

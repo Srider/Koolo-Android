@@ -71,6 +71,9 @@ public class KooloPasscodeActivity extends KooloBaseActivity implements KooloPas
             case KOOLO_ENTER_PASSCODE_BUTTON_CLICKED_ACTION:
                 loadEnterPasscodeFragment();
                 break;
+            case KOOLO_PASSCODE_SET_ACTION:
+                popAction();
+                break;
         }
     }
 
@@ -84,6 +87,19 @@ public class KooloPasscodeActivity extends KooloBaseActivity implements KooloPas
         transaction.replace(R.id.fragment_passcode_container, fragment, "koolosetpasscodefragment");
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+       popAction();
+    }
+
+    public void popAction() {
+        if(getFragmentManager().getBackStackEntryCount() > 1) {
+            getFragmentManager().popBackStack();
+        } else {
+            finish();
+        }
     }
 
     @Override

@@ -2,6 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.srravela.koolo.humor.activities.KooloHumourActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/humours_done_action" android:title="@string/done_option_string"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
