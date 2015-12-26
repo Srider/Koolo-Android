@@ -33,7 +33,13 @@
         <!--android:layout_marginBottom="@dimen/activity_horizontal_margin" />-->
 <!--</LinearLayout>-->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none"
+    android:scrollbarSize="0dp"
+    android:fillViewport="true">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -136,5 +142,5 @@
             android:background="@drawable/drawable_checklist_item_edit_text_border"
             android:layout_marginTop="@dimen/three_sentence_margin" />
     </LinearLayout>
-
 </RelativeLayout>
+    </ScrollView>

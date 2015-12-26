@@ -89,4 +89,11 @@ public class KooloPasscodeVerificationActivity extends KooloBaseActivity impleme
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if(getFragmentManager().getBackStackEntryCount() > 1) {
+            getFragmentManager().popBackStack();
+        }
+    }
 }

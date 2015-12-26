@@ -90,6 +90,6 @@
         android:layout_margin="10dp"
         android:inputType="text"
         android:imeOptions="actionDone"
-        android:background="@drawable/drawable_edit_text_blue_border"
+        android:background="@drawable/drawable_edit_text_border"
         android:maxLines="1"/>
 </RelativeLayout>

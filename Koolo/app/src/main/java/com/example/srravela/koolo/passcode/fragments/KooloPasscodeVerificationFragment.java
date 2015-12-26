@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,25 +132,67 @@ public class KooloPasscodeVerificationFragment extends Fragment implements View.
 
     }
 
+//    private void onDoneAction(String passcodeEntered) {
+//        SharedPreferences enablePasscodePreferences=mContext.getSharedPreferences(KooloApplication.PASSCODE_ENABLED, mContext.MODE_PRIVATE);
+//        String actualPasscode = enablePasscodePreferences.getString(KooloApplication.SELECTED_PASSCODE, null);
+//
+//
+//        if(retryCount<3) {
+//            if (actualPasscode.equals(passcodeEntered)) {
+//                Toast.makeText(mContext, "Access Granted", Toast.LENGTH_SHORT).show();
+//                Bundle bundle=new Bundle();
+//                bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_ENTERED_ACTION);
+//                mListener.onPasscodeVerification(bundle);
+//            } else {
+//                retryCount += 1;
+//                Toast.makeText(mContext, "Wrong passcode entered", Toast.LENGTH_SHORT).show();
+//            }
+//        } else {
+//            //Trigger security question page.
+//            if(canProceedToSecurityQuestion()) {
+//                Bundle bundle = new Bundle();
+//                bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_RETRY_EXPIRED);
+//                mListener.onPasscodeVerification(bundle);
+//            }
+//
+//        }
+//    }
+
     private void onDoneAction(String passcodeEntered) {
         SharedPreferences enablePasscodePreferences=mContext.getSharedPreferences(KooloApplication.PASSCODE_ENABLED, mContext.MODE_PRIVATE);
         String actualPasscode = enablePasscodePreferences.getString(KooloApplication.SELECTED_PASSCODE, null);
-        if(retryCount<3) {
-            if (actualPasscode.equals(passcodeEntered)) {
-                Toast.makeText(mContext, "Access Granted", Toast.LENGTH_SHORT).show();
-                Bundle bundle=new Bundle();
-                bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_ENTERED_ACTION);
-                mListener.onPasscodeVerification(bundle);
-            } else {
-                retryCount += 1;
 
-                Toast.makeText(mContext, "Wrong passcode entered", Toast.LENGTH_SHORT).show();
-            }
-        } else {
+        if (actualPasscode.equals(passcodeEntered)) {
+            Toast.makeText(mContext, "Access Granted", Toast.LENGTH_SHORT).show();
             Bundle bundle=new Bundle();
-            bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_RETRY_EXPIRED);
+            bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_ENTERED_ACTION);
             mListener.onPasscodeVerification(bundle);
+        } else {
+            retryCount += 1;
+            if(retryCount>=3) {
+                //Trigger security question page.
+                if(canProceedToSecurityQuestion()) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_RETRY_EXPIRED);
+                    mListener.onPasscodeVerification(bundle);
+                }
+            } else {
+                Toast toast = Toast.makeText(mContext,"Wrong passcode entered", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER|Gravity.TOP, 0, 0);
+                toast.show();
+            }
         }
+    }
+
+    private boolean canProceedToSecurityQuestion() {
+        boolean canProceed = false;
+        SharedPreferences securityQuestionSharedPreferences=mContext.getSharedPreferences(KooloApplication.SECURITY_QUESTION, mContext.MODE_PRIVATE);
+        String securityQuestion = securityQuestionSharedPreferences.getString(KooloApplication.SELECTED_SECURITY_QUESTION, null);
+        String actualAnswer = securityQuestionSharedPreferences.getString(KooloApplication.SECURITY_QUESTION_ANSWER, null);
+        if(securityQuestion != null && !(securityQuestion.isEmpty()) && actualAnswer != null && !(actualAnswer.isEmpty())) {
+            canProceed = true;
+        }
+        return canProceed;
     }
 
     @Override
@@ -203,6 +246,42 @@ public class KooloPasscodeVerificationFragment extends Fragment implements View.
         }
     }
 
+//    private void checkAndAddDigit(int digit) {
+//        String passcode = null;
+//        String actualPasscode = null;
+//        if (passcodeBuilder == null) {
+//            passcodeBuilder = new StringBuilder();
+//        }
+//        passcodeBuilder.append(digit);
+//
+//        if (passcodeBuilder.length() == 4) {
+//            passcode = passcodeBuilder.toString();
+//            SharedPreferences enablePasscodePreferences = mContext.getSharedPreferences(KooloApplication.PASSCODE_ENABLED, mContext.MODE_PRIVATE);
+//            actualPasscode = enablePasscodePreferences.getString(KooloApplication.SELECTED_PASSCODE, passcode);
+//            retryCount += 1;
+//            if (retryCount < 3) {
+//                if (passcode.equals(actualPasscode)) {
+//                    //Correct Passcode Entered.
+//                    //TODO: Pop Fragment.
+//                    Toast.makeText(mContext, "Correct passcode entered.", Toast.LENGTH_SHORT).show();
+//                    Bundle bundle=new Bundle();
+//                    bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_ENTERED_ACTION);
+//                    mListener.onPasscodeVerification(bundle);
+//                } else {
+//                    passcodeBuilder = null;
+//                    Toast.makeText(mContext, "Retry - " + retryCount, Toast.LENGTH_SHORT).show();
+//                }
+//            } else {
+//                //Launch Security Question.
+//                Bundle bundle=new Bundle();
+//                bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_RETRY_EXPIRED);
+//                mListener.onPasscodeVerification(bundle);
+//            }
+//        } else if (passcodeBuilder.length() > 4){
+//            passcodeBuilder = null;
+//        }
+//    }
+
     private void checkAndAddDigit(int digit) {
         String passcode = null;
         String actualPasscode = null;
@@ -210,31 +289,9 @@ public class KooloPasscodeVerificationFragment extends Fragment implements View.
             passcodeBuilder = new StringBuilder();
         }
         passcodeBuilder.append(digit);
-
         if (passcodeBuilder.length() == 4) {
             passcode = passcodeBuilder.toString();
-            SharedPreferences enablePasscodePreferences = mContext.getSharedPreferences(KooloApplication.PASSCODE_ENABLED, mContext.MODE_PRIVATE);
-            actualPasscode = enablePasscodePreferences.getString(KooloApplication.SELECTED_PASSCODE, passcode);
-            retryCount += 1;
-            if (retryCount < 3) {
-                if (passcode.equals(actualPasscode)) {
-                    //Correct Passcode Entered.
-                    //TODO: Pop Fragment.
-                    Toast.makeText(mContext, "Correct passcode entered.", Toast.LENGTH_SHORT).show();
-                    Bundle bundle=new Bundle();
-                    bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_ENTERED_ACTION);
-                    mListener.onPasscodeVerification(bundle);
-                } else {
-                    passcodeBuilder = null;
-                    Toast.makeText(mContext, "Retry - " + retryCount, Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                //Launch Security Question.
-                Bundle bundle=new Bundle();
-                bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_PASSCODE_RETRY_EXPIRED);
-                mListener.onPasscodeVerification(bundle);
-            }
-        } else if (passcodeBuilder.length() > 4){
+            onDoneAction(passcode);
             passcodeBuilder = null;
         }
     }

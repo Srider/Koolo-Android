@@ -77,8 +77,8 @@
         android:id="@+id/checklist_options">
 
         <Button
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             android:layout_height="125dp"
             android:layout_width="125dp"
             android:id="@+id/health_button"
@@ -89,24 +89,23 @@
             android:layout_centerHorizontal="true"/>
 
         <Button
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
             android:layout_height="125dp"
             android:layout_width="125dp"
             android:id="@+id/sentence_button"
             android:text="@string/three_sentence"
-            android:layout_below="@+id/health_button"
             android:textColor="@color/White"
             android:textAllCaps="false"
             android:background="@drawable/drawable_checklist_options_button_shape"
             android:layout_centerHorizontal="true"/>
 
         <Button
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_alignParentBottom="true"
             android:layout_height="125dp"
             android:layout_width="125dp"
-            android:layout_below="@+id/sentence_button"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/trasnfer_button"
             android:text="@string/ready_to_transfer"
             android:textColor="@color/White"

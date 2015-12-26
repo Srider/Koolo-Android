@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
@@ -104,13 +106,22 @@ public class KooloSecurityQuestionFragment extends Fragment implements EditText.
         SharedPreferences securityQuestionSharedPreferences=mContext.getSharedPreferences(KooloApplication.SECURITY_QUESTION, mContext.MODE_PRIVATE);
         actualAnswer = securityQuestionSharedPreferences.getString(KooloApplication.SECURITY_QUESTION_ANSWER, null);
 
-        if(securityQuestionAnswer != null) {
+        if(securityQuestionAnswer != null && !(securityQuestionAnswer.isEmpty())) {
             if(securityQuestionAnswer.equals(actualAnswer)) {
                 //TODO: GO back to previous screen.
                 Bundle bundle=new Bundle();
                 bundle.putInt(KooloPasscodeVerificationListener.KOOLO_PASSCODE_VERIFICATION, KooloPasscodeVerificationListener.KOOLO_CORRECT_SECURITY_ANSWER_ENTERED);
                 mListener.onPasscodeVerification(bundle);
+            } else {
+                Toast toast = Toast.makeText(mContext,"Wrong security answer entered", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.CENTER|Gravity.TOP, 0, 0);
+                toast.show();
+                securityQuestionAnswerText.setText(null);
             }
+        } else {
+            Toast toast = Toast.makeText(mContext,"Security answer cannot be empty .", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER|Gravity.TOP, 0, 0);
+            toast.show();
         }
     }
 }

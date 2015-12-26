@@ -1,2 +1,0 @@
-# Koolo-Android
-Koolo-Android

@@ -74,7 +74,7 @@ public class KooloChecklistActivity extends KooloBaseActivity implements KooloCh
                 loadNewGoalOrTransferEntryItem(false);
                 break;
             case THREE_QUESTIONS_ANSWERED:
-                loadChecklistOptionsFragment();
+                popAction();
                 break;
             case KOOLO_INFO_BUTTON_CLICKED:
                 loadInfoFragment();

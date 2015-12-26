@@ -1,7 +1,9 @@
 package com.example.srravela.koolo.quotes.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -19,13 +21,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.srravela.koolo.KooloApplication;
+import com.example.srravela.koolo.KooloBaseActivity;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.entities.Humour;
 import com.example.srravela.koolo.entities.Quotes;
 import com.example.srravela.koolo.humor.utils.HumourDataStore;
+import com.example.srravela.koolo.quotes.activities.KooloQuotesActivity;
 import com.example.srravela.koolo.quotes.adapters.KooloQuotesAdapter;
 import com.example.srravela.koolo.quotes.listeners.KooloQuotesInteractionListener;
 import com.example.srravela.koolo.quotes.utils.QuotesDataStore;
@@ -39,7 +44,7 @@ import java.util.List;
 public class KooloQuotesFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener, TextWatcher, EditText.OnEditorActionListener {
     public static final String TAG=KooloQuotesFragment.class.getSimpleName();
     private Context mContext;
-    private Activity mActivity;
+    private KooloQuotesActivity mActivity;
     private View rootView;
     ListView mQuotesList;
     List<Quotes> mQuotesDetails;
@@ -82,7 +87,7 @@ public class KooloQuotesFragment extends Fragment implements AdapterView.OnItemC
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mActivity=getActivity();
+        mActivity= (KooloQuotesActivity) getActivity();
         mContext=mActivity.getApplicationContext();
         mListener =(KooloQuotesInteractionListener) mActivity;
         setHasOptionsMenu(true);
@@ -210,16 +215,32 @@ public class KooloQuotesFragment extends Fragment implements AdapterView.OnItemC
     }
 
     private void onDoneAction(TextView editedTextView) {
-        mQuotesDetails.add(new Quotes(editedTextView.getText().toString(), false));
-        QuotesDataStore sharedQuotesDataStore = QuotesDataStore.getSharedQuotesDataStore(mContext.getResources().getString(R.string.quotes_file_name), mContext);
-        boolean writeStatus = sharedQuotesDataStore.writeQuotesToFile(mQuotesDetails);
-        if(writeStatus) {
-            Log.i(TAG, "QUOTES WRITE SUCCESS");
+        String newQuote = editedTextView.getText().toString();
+
+        if(newQuote!= null && !(newQuote.isEmpty())) {
+            mQuotesDetails.add(new Quotes(editedTextView.getText().toString(), false));
+            QuotesDataStore sharedQuotesDataStore = QuotesDataStore.getSharedQuotesDataStore(mContext.getResources().getString(R.string.quotes_file_name), mContext);
+            boolean writeStatus = sharedQuotesDataStore.writeQuotesToFile(mQuotesDetails);
+            if(writeStatus) {
+                Log.i(TAG, "QUOTES WRITE SUCCESS");
+            } else {
+                Log.i(TAG, "ERROR - QUOTES WRITE FAILED !!!");
+            }
+            quoteEditText.setText("");
+            mQuotesAdapter.notifyDataSetChanged();
         } else {
-            Log.i(TAG, "ERROR - QUOTES WRITE FAILED !!!");
+            AlertDialog alertDialog = new AlertDialog.Builder((KooloQuotesActivity)getActivity()).create();
+            alertDialog.setTitle("New Quote Alert");
+            alertDialog.setMessage("Quote cannot be empty !");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
-        quoteEditText.setText("");
-        mQuotesAdapter.notifyDataSetChanged();
+
     }
 
     private void configureQuotePermission() {
