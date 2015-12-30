@@ -72,7 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // code to get the single moodShot
+    /*// code to get the single moodShot
     public MoodShot getMoodShots(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -87,6 +87,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cursor.getString(1), cursor.getString(2));
         // return moodShot
         return moodShot;
+    }*/
+
+    // code to get the single moodShot
+    public List<MoodShot> getMoodShots(String moodColor) {
+        List<MoodShot> moodShotList = new ArrayList<MoodShot>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_MOODSHOTS, new String[] {MOOD_COLOR,MOOD_CAPTURE_DATE,MOOD_CAPTURE_URI}, MOOD_COLOR + "=?",
+                new String[] { moodColor }, null, null, null, null);
+        if (cursor != null)
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    MoodShot moodShot = new MoodShot();
+                    moodShot.setMoodColor(cursor.getString(0));
+                    moodShot.setMoodCaptureDate(cursor.getString(1));
+                    moodShot.setMoodCaptureUri(cursor.getString(2));
+                    // Adding moodShot to list
+                    moodShotList.add(moodShot);
+                } while (cursor.moveToNext());
+            }
+
+        // return moodShot
+        return moodShotList;
     }
 
     // code to get all MoodShot in a list view

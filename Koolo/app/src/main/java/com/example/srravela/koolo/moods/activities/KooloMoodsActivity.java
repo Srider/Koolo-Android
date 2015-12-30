@@ -64,7 +64,7 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         setContentView(R.layout.activity_koolo_moods);
         mContext=getApplicationContext();
         databaseHandler = new DatabaseHandler(mContext);
-         actionBar = getSupportActionBar();
+       // actionBar = getSupportActionBar();
        // actionBar.hide();
 
         initUI();
@@ -80,10 +80,19 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_koolo_moodline, menu);
+       // getMenuInflater().inflate(R.menu.menu_koolo_moodline, menu);
         return true;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+       /* mActivity.getActionBar().hide();*/
+        actionBar = getSupportActionBar();
+        actionBar.setTitle(getResources().getString(R.string.mood_line_title));
+
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -137,7 +146,7 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         Fragment fragment= KooloMoodsListFragment.newInstance();
         transaction.replace(R.id.fragment_moods_container, fragment, "moodlistfragment");
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
     /**
      * Method for loading Loacations and Management Fragment.
@@ -147,7 +156,8 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         Fragment fragment= KooloMoodMapFragment.newInstance();
         transaction.replace(R.id.fragment_moods_container, fragment, "moodmapfragment");
-        transaction.commit();
+        transaction.addToBackStack("MoodMapFragment");
+        transaction.commitAllowingStateLoss();
     }
 
     private void loadMoodsCameraActivity() {
@@ -159,7 +169,7 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         File file = getOutputPhotoFile();
         fileUri = Uri.fromFile(getOutputPhotoFile());
         i.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-        startActivityForResult(i, CAPTURE_IMAGE_ACTIVITY_REQ );
+        startActivityForResult(i, CAPTURE_IMAGE_ACTIVITY_REQ);
     }
 
     private void loadMoodsGalleryActivity() {
@@ -178,8 +188,8 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         Fragment moodShotFormatterFragment= KooloMoodShotFormatterFragment.newInstance();
         moodShotFormatterFragment.setArguments(bundle);
 
-        transaction.add(R.id.fragment_moods_container, moodShotFormatterFragment, "moodmapfragment");
-        transaction.addToBackStack("moodmapfragment");
+        transaction.replace(R.id.fragment_moods_container, moodShotFormatterFragment, "moodmapfragment");
+        transaction.addToBackStack("MoodShotFormatterFragment");
         transaction.commitAllowingStateLoss();
     }
     public interface OnBackPressedListener {
@@ -210,9 +220,19 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
        if (fragmentList != null) {
            //TODO: Perform your logic to pass back press here
-           for(Fragment fragment : fragmentList){
-               if(fragment instanceof OnBackPressedListener){
-                   ((OnBackPressedListener)fragment).onBackPressed();
+           for(Fragment fragment : fragmentList) {
+               /*if(fragment instanceof OnBackPressedListener){
+                  // ((OnBackPressedListener)fragment).onBackPressed();
+                   finish();
+               } */
+               if (fragment instanceof KooloMoodsListFragment) {
+                   super.onBackPressed();
+                   break;
+               } else if (fragment instanceof KooloMoodShotFormatterFragment) {
+                   super.onBackPressed();
+                   break;
+               } else {
+                   finish();
                }
            }
        }
@@ -267,12 +287,16 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
                             Toast.LENGTH_LONG).show();
                 }
                //  showPhoto(photoUri);
-                MoodShot moodShot = new MoodShot();
+               /* MoodShot moodShot = new MoodShot();
                 moodShot.setMoodCaptureUri(photoUri.toString());
                 moodShot.setMoodColor("BLACK");
                 moodShot.setMoodCaptureDate(getDate());
                 databaseHandler.addMoodShot(moodShot);
-                loadMoodListFragment();
+                loadMoodListFragment();*/
+
+                //Uri selectedImage = data.getData();
+                loadMoodshotFormatterFragment(Uri.parse(photoUri.toString()));
+
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
             } else {
@@ -285,9 +309,9 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
           //  super.onActivityResult(requestCode, resultCode, data);
             if (data != null) {
                 Uri selectedImage = data.getData();
-                actionBar.show();
+             /*   actionBar.show();
                 actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
-                        | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
+                        | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);*/
                 loadMoodshotFormatterFragment(selectedImage);
                /* KooloApplication.setImageUri(selectedImage.toString());
                 SharedPreferences backgroundImagePreferences=mContext.getSharedPreferences(KooloApplication.SELECTED_BACKGROUND_IMAGE_URI, mContext.MODE_PRIVATE);
@@ -300,7 +324,10 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
                 backgroundImageFlagEditor.putBoolean(KooloApplication.BACKGROUND_IMAGE_SELECTED, true);
                 backgroundImageFlagEditor.commit();*/
               //  finish();
-            }
+            }/* else if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQ){
+                Uri selectedImage = data.getData();
+                loadMoodshotFormatterFragment(selectedImage);
+            }*/
         }
 
     }
