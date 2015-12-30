@@ -236,11 +236,7 @@ public class KooloMoodsListFragment extends Fragment implements View.OnClickList
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        MoodShot tempMoodShot = moodsListItems.get(position);
-        triggerMoodShotFormatterFragment();
-    }
+   
 
     @Override
     public void onBackPressed() {
