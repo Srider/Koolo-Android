@@ -69,7 +69,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity=(KooloMoodsActivity)getActivity();
-        databaseHandler = new DatabaseHandler(mContext);
+        databaseHandler = new DatabaseHandler(mActivity);
         selectedImage =  getArguments().getString("selectedImage");
     }
 
@@ -129,9 +129,10 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
                 break;
             case R.id.action_bar_humor_done_tv:
                 if(mSelectedMoodShot != null) {
-                    databaseHandler = new DatabaseHandler(mActivity);
+
                     databaseHandler.addMoodShot(mSelectedMoodShot);
                 }
+              //  mListener.onMoodsAction();
                 getFragmentManager().popBackStack();
                 break;
         }
@@ -139,7 +140,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
     }
 
     private String getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.ENGLISH);
         Date date = new Date();
         return dateFormat.format(date);
     }
@@ -210,6 +211,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
     @Override
     public void onDetach() {
         super.onDetach();
+        databaseHandler.close();
         mListener = null;
     }
 }

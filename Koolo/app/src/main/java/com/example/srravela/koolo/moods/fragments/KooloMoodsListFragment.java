@@ -75,6 +75,7 @@ public class KooloMoodsListFragment extends Fragment implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity=(KooloMoodsActivity)getActivity();
+        databaseHandler = new DatabaseHandler(mActivity);
         if(getArguments() != null &&  getArguments().getString("COLOR_CHOOSER") !=null ) {
             colorChooser = getArguments().getString("COLOR_CHOOSER");
             isColorSelected = getArguments().getBoolean("SELECTED_COLOR");
@@ -107,10 +108,10 @@ public class KooloMoodsListFragment extends Fragment implements View.OnClickList
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mActivity=(KooloMoodsActivity)getActivity();
+
         mListener = mActivity;
         mContext=mActivity.getApplicationContext();
-        databaseHandler = new DatabaseHandler(mContext);
+
         initUI();
     }
 
@@ -138,8 +139,6 @@ public class KooloMoodsListFragment extends Fragment implements View.OnClickList
         //Checklist
         moodslist=(ListView)rootView.findViewById(R.id.moods_list);
       // moodsListItems= Utils.getSharedUtils(mContext).loadMoods();
-        moodShots = new ArrayList<MoodShot>();
-        moodShots= databaseHandler.getAllMoodShots();
        /* moodShots = new ArrayList<MoodShot>();
         moodShots.add(moodShot);*/
 
@@ -208,11 +207,15 @@ public class KooloMoodsListFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        isColorSelected = false;
+        colorChooser = null;
         switch(view.getId()) {
             case R.id.moods_camera_button:
+
                 triggerCameraMoodCaptureActivity();
                 break;
             case R.id.moods_add_button:
+
                 triggerGalleryActivity();
                 break;
 
@@ -224,6 +227,7 @@ public class KooloMoodsListFragment extends Fragment implements View.OnClickList
             case R.id.action_bar_moodline_map_tv:
                 //System.err.println("cancel");
                 // getActivity().onBackPressed();
+
                 FragmentManager fragmentManager=mActivity.getSupportFragmentManager();
                 FragmentTransaction transaction=fragmentManager.beginTransaction();
                 Fragment fragment= KooloMoodMapFragment.newInstance();
@@ -236,16 +240,18 @@ public class KooloMoodsListFragment extends Fragment implements View.OnClickList
         }
     }
 
-   
+
 
     @Override
     public void onBackPressed() {
-    getActivity().onBackPressed();
+   // getActivity().onBackPressed();
+        getActivity().finish();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        databaseHandler.close();
         mListener = null;
     }
 

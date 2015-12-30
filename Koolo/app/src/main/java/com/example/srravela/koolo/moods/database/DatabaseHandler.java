@@ -16,7 +16,7 @@ import android.net.Uri;
 import com.example.srravela.koolo.entities.MoodShot;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "kooloManager";
     private static final String TABLE_MOODSHOTS = "moodshots";
     private static final String KEY_ID = "id";
@@ -42,7 +42,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         "("
                         + KEY_ID + " integer primary key autoincrement,"
                         + MOOD_COLOR + " text not null,"
-                        + MOOD_CAPTURE_DATE + " CURRENT_DATE not null,"
+                        + MOOD_CAPTURE_DATE + " CURRENT_TIMESTAMP,"
                         + MOOD_CAPTURE_URI + " text not null);"
         );
     }
@@ -95,7 +95,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_MOODSHOTS, new String[] {MOOD_COLOR,MOOD_CAPTURE_DATE,MOOD_CAPTURE_URI}, MOOD_COLOR + "=?",
-                new String[] { moodColor }, null, null, null, null);
+                new String[] { moodColor }, null, null, MOOD_CAPTURE_DATE+" DESC", null);
         if (cursor != null)
             // looping through all rows and adding to list
             if (cursor.moveToFirst()) {
@@ -117,7 +117,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<MoodShot> getAllMoodShots() {
         List<MoodShot> moodShotList = new ArrayList<MoodShot>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_MOODSHOTS;
+        String selectQuery = "SELECT  * FROM " + TABLE_MOODSHOTS +" ORDER BY "+ MOOD_CAPTURE_DATE+" DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

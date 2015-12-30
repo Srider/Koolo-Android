@@ -137,8 +137,7 @@ public class KooloBaseActivity extends AppCompatActivity {
     public  void applicationDidEnterBackground() {
         if (!isWindowFocused && KooloApplication.count == 0 && !KooloApplication.isExternalIntentLoaded) {
             isAppWentToBg = true;
-            Toast.makeText(getApplicationContext(),
-                    "App is Going to Background", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"App is Going to Background", Toast.LENGTH_SHORT).show();
 
         }
     }

@@ -2,11 +2,8 @@ package com.example.srravela.koolo.moods.adapters;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +14,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.srravela.koolo.R;
-import com.example.srravela.koolo.moods.listeners.KooloMoodsListener;
-import com.example.srravela.koolo.moods.utils.MoodsDataStore;
 import com.example.srravela.koolo.entities.MoodShot;
 import com.example.srravela.koolo.entities.Utils;
+import com.example.srravela.koolo.moods.listeners.KooloMoodsListener;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by srikar on 5/12/15.
@@ -153,8 +153,22 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
                     }
             }
         }
-        holder.moodShotTextView.setText(item.getMoodCaptureDate());
-
+        if(item.getMoodCaptureDate() !=null) {
+            String dateString = item.getMoodCaptureDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            DateFormat targetFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+            String formattedDate = null;
+            Date convertedDate = new Date();
+            try {
+                convertedDate = dateFormat.parse(dateString);
+                System.out.println(convertedDate);
+                formattedDate = targetFormat.format(convertedDate);
+                System.out.println(formattedDate);
+                holder.moodShotTextView.setText(formattedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         holder.moodShotColorButton.setOnClickListener(this);
         Utils.ColorType colorType =  Utils.ColorType.valueOf(item.getMoodColor());
         //Utils.ColorType colorType = item.getMoodColor();

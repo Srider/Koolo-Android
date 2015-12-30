@@ -156,7 +156,6 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         Fragment fragment= KooloMoodMapFragment.newInstance();
         transaction.replace(R.id.fragment_moods_container, fragment, "moodmapfragment");
-        transaction.addToBackStack("MoodMapFragment");
         transaction.commitAllowingStateLoss();
     }
 
@@ -176,7 +175,7 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         KooloApplication.isExternalIntentLoaded = true;
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST);
     }
 
@@ -215,18 +214,19 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
             }
         }
     }*/
-   @Override
+   /*@Override
    public void onBackPressed() {
        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
        if (fragmentList != null) {
            //TODO: Perform your logic to pass back press here
            for(Fragment fragment : fragmentList) {
-               /*if(fragment instanceof OnBackPressedListener){
+               *//*if(fragment instanceof OnBackPressedListener){
                   // ((OnBackPressedListener)fragment).onBackPressed();
                    finish();
-               } */
+               } *//*
                if (fragment instanceof KooloMoodsListFragment) {
-                   super.onBackPressed();
+                   //super.onBackPressed();
+                   finish();
                    break;
                } else if (fragment instanceof KooloMoodShotFormatterFragment) {
                    super.onBackPressed();
@@ -237,6 +237,40 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
            }
        }
    }
+*/
+
+    private boolean onBackPressed(FragmentManager fm) {
+        if (fm != null) {
+            if (fm.getBackStackEntryCount() > 0) {
+                fm.popBackStack();
+                return true;
+            }
+
+            List<Fragment> fragList = fm.getFragments();
+            if (fragList != null && fragList.size() > 0) {
+                for (Fragment frag : fragList) {
+                    if (frag == null) {
+                        continue;
+                    }
+                    if (frag.isVisible()) {
+                        if (onBackPressed(frag.getChildFragmentManager())) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getSupportFragmentManager();
+        if (onBackPressed(fm)) {
+            return;
+        }
+        super.onBackPressed();
+    }
 
     @Override
     public void onMoodsAction(Bundle bundle) {
