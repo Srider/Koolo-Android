@@ -2,6 +2,11 @@ package com.example.srravela.koolo.moods.adapters;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -138,14 +143,29 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
 
                 ContentResolver res = context.getContentResolver();
                 Uri uri = Uri.parse(item.getMoodCaptureUri());
-                 inputStream =  res.openInputStream(uri);
-                Drawable drawable = Drawable.createFromStream(inputStream, null);
+                inputStream =  res.openInputStream(uri);
+               // Drawable drawable = Drawable.createFromStream(inputStream, null);
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = false;
+                options.inPreferredConfig = Bitmap.Config.RGB_565;
+                options.inDither = true;
+
+                options.inSampleSize = 4;
+
+              //  Bitmap myBitmap = BitmapFactory.decodeFile(uri.toString(),options);
+                Bitmap preview_bitmap = BitmapFactory.decodeStream(inputStream, null, options);
+
+                Drawable drawable = new BitmapDrawable(Resources.getSystem(),preview_bitmap);
+               // updateDrawable(d);
                 holder.moodShotImageView.setImageDrawable(drawable);
 
+               // holder.moodShotImageView.getLayoutParams().height = 50;
+               // holder.moodShotImageView.setBackgroundColor(Color.WHITE);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                if(inputStream != null)
+               if(inputStream != null)
                     try {
                         inputStream.close();
                     } catch (IOException e) {
