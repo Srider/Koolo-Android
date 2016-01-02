@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/EditEventCustomActionButtonText"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Black"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/action_bar_mood_map_cancel_tv"
+        style="@style/EditEventCustomActionButtonText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+       android:padding="10dp"
+        android:text="Cancel"
+        android:textColor="@color/White"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/action_bar_mood_map_title_tv"
+        style="@style/EditEventCustomActionButtonText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Mood Map"
+        android:textColor="@color/White"
+        android:textAllCaps="false"
+        android:textSize="18sp" />
+
+
+
+</RelativeLayout>

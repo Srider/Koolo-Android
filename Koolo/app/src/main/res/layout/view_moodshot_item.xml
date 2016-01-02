@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="220dp"
-    android:layout_marginTop="25dp"
     android:layout_marginBottom="25dp"
+    android:layout_marginTop="15dp"
     android:orientation="vertical">
 
     <View
         android:id="@+id/timeline_view"
         android:layout_width="1dp"
-        android:layout_height="190dp"
+        android:layout_height="200dp"
         android:layout_marginLeft="@dimen/checklist_timeline_margin"
         android:background="@color/Light_Grey" />
 
@@ -24,27 +24,22 @@
         android:background="@drawable/drawable_plain_round_button_green"
         android:clickable="false" />
 
+    <View
+        android:id="@+id/traingle_view"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/triangle_black" />
+
     <RelativeLayout
+        android:id="@+id/moodshot_image_date_rv"
         android:layout_width="190dp"
         android:layout_height="200dp"
-        android:layout_marginLeft="20dp"
-
-        android:layout_toRightOf="@+id/moodshot_color_button"
+        android:layout_toRightOf="@id/traingle_view"
         android:background="@color/Black"
         android:orientation="vertical"
-
         android:scaleType="fitXY">
-
-        <TextView
-            android:id="@+id/moodshot_date_tv"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:gravity="center_horizontal"
-            android:text="kdfdjfdklfdf"
-
-            android:textColor="@color/White"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/moodshot_image"
@@ -55,6 +50,18 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/moodshot_date_tv"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="5dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/White"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
 </RelativeLayout>

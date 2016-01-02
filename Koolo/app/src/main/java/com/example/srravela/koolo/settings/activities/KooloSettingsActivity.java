@@ -96,7 +96,7 @@ public class KooloSettingsActivity extends KooloBaseActivity implements KooloSet
 
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 322);
     }
 
