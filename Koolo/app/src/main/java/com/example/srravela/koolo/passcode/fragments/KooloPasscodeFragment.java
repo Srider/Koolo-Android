@@ -89,6 +89,7 @@ public class KooloPasscodeFragment extends Fragment implements AdapterView.OnIte
         mActivity=getActivity();
         mContext=mActivity.getApplicationContext();
         mListener =(KooloPasscodeInteractionListener) mActivity;
+        setHasOptionsMenu(false);
         intiUI();
     }
 

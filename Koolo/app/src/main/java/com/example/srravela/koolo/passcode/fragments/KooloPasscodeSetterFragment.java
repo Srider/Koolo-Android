@@ -77,7 +77,7 @@ public class KooloPasscodeSetterFragment extends Fragment implements EditText.On
 
         intiUI();
 
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
     }
 
     private void intiUI(){
