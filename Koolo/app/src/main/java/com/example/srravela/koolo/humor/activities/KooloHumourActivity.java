@@ -123,4 +123,8 @@ public class KooloHumourActivity extends KooloBaseActivity {
         return humourFileDetails;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

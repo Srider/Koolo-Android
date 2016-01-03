@@ -87,14 +87,14 @@ public class KooloChecklistOptionsFragment extends Fragment implements View.OnCl
         }
 
         mMyHealth  = (Button) rootView.findViewById(R.id.health_button);
-        mMyHealth.setText("My Health"+"\n"+Utils.getSharedUtils(mContext).getItemsCount(true));
+        mMyHealth.setText(getResources().getString(R.string.my_health)+"\n"+Utils.getSharedUtils(mContext).getItemsCount(true));
         mMyHealth.setOnClickListener(this);
 
         mThreeSentenceButton  = (Button) rootView.findViewById(R.id.sentence_button);
         mThreeSentenceButton.setOnClickListener(this);
 
         mTransferButton  = (Button) rootView.findViewById(R.id.trasnfer_button);
-        mTransferButton.setText("My Transfers" + "\n" + Utils.getSharedUtils(mContext).getItemsCount(false));
+        mTransferButton.setText(getResources().getString(R.string.my_transfer_options) + "\n" + Utils.getSharedUtils(mContext).getItemsCount(false));
         mTransferButton.setOnClickListener(this);
     }
 

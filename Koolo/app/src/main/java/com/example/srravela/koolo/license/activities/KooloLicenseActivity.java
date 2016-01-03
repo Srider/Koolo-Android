@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.srravela.koolo.KooloBaseActivity;
 import com.example.srravela.koolo.R;
 
-public class KooloLicenseActivity extends AppCompatActivity {
+public class KooloLicenseActivity extends KooloBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

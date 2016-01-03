@@ -63,17 +63,20 @@ public class KooloSettingsActivity extends KooloBaseActivity implements KooloSet
             case KOOLO_HUMOUR_COLORS_ACTION:
                 loadHumoursActivity();
                 break;
+            case KOOLO_TUTORIAL_ACTION:
+                //TODO: add tutorial.
+                break;
             case KOOLO_REVIEW_ACTION:
-                loadReviewActivity();
+                //TODO: add Review
                 break;
             case KOOLO_UPDATES_ACTION:
-                loadUpdatesActivity();
+                //TODO: add Update
                 break;
             case KOOLO_CONTRIBUTORS_ACTION:
-                loadContributorsActivity();
+                //TODO: add Contributors
                 break;
             case KOOLO_LICENSE_ACTION:
-                loadLicenseActivity();
+                //TODO: add license
                 break;
         }
     }
@@ -93,7 +96,6 @@ public class KooloSettingsActivity extends KooloBaseActivity implements KooloSet
     //Background Image
     void loadBackgroundImageActivity() {
         KooloApplication.isExternalIntentLoaded = true;
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_OPEN_DOCUMENT);

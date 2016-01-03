@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="humours_file_name">humours.txt</string>
-    <string name="done_option_string">Done</string>
-    <string name="cancel_option_string">Cancel</string>
-    <string name="color_selection_string">Color Selection</string>
-    <string name="select_humour_color_string">Select Humor Color</string>
+    <string name="done_option_string">Ferdig</string>
+    <string name="cancel_option_string">Avbryt</string>
+
+    <string name="color_selection_string">Fargevalg</string>
+    <string name="select_humour_color_string">Velg Humor farge</string>
 
     <string-array name="koolo_humour_color_choices">
         <item>Lykkelig</item>

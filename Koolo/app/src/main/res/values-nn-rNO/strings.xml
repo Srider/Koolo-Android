@@ -1,18 +1,17 @@
 <resources>
     <string name="app_name">Koolo</string>
-
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Instillinger</string>
     <string name="action_home">Home</string>
-    <string name="action_quotes">Quotes</string>
-    <string name="action_passcode">Passcode</string>
+    <string name="action_quotes">Sitater</string>
+    <string name="action_passcode">Passkode</string>
     <string name="action_review">Review</string>
-    <string name="action_update">Updates</string>
-    <string name="action_background_image">Background Image</string>
-    <string name="action_license">License</string>
+    <string name="action_update">Oppdateringer</string>
+    <string name="action_background_image">Bakgrunnsbilde</string>
+    <string name="action_license">Lisens</string>
     <string name="action_mood_shot">Moods</string>
     <string name="action_select_humor_title">Select Humor Color</string>
-    <string name="action_select_humor_done">Done</string>
+    <string name="action_select_humor_done">Fredig</string>
 
 
     <!--Activity Strings -->
@@ -36,5 +35,6 @@
     <string name="title_activity_koolo_passcode_verification">KooloPasscodeVerificationActivity
     </string>
 
-    <string name = "pref_locale">en</string>
+    <string name = "pref_locale">nn-rNO</string>
+
 </resources>

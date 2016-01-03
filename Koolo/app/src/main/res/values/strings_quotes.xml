@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="quotes_file_name">quotes.txt</string>
-    <string name="quotes_switch_text">Aktiver sitatpå startskjermen</string>
-    <string name="quotes_typing_status_text">Legg till</string>
+    <string name="quotes_switch_text">Enable Status</string>
+    <string name="quotes_typing_status_text">Add</string>
     <string name="quotes_switch_enable_text">Yes</string>
     <string name="quotes_switch_disable_text">No</string>
     <string name="enter_quotes_placeholder_text">Enter quote</string>
     <string name="default_quote_string">"In the midst of winter, I found there was, within me, an invincible summer."</string>
+
+    <!--Delete After List plugin -->
     <string name="default_day_notification_string">Blodprøver i dag\nKl.10 Daglig</string>
     <string name="default_time_notification_string">Time ved klinikken i dag\nKl.11 Daglig</string>
     <string name="default_last_day_notification_string">Siste kur i dag\nKl.17Daglig</string>

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -139,22 +140,6 @@ public class KooloNewChecklistItemEntryFragment extends Fragment implements Edit
 
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        Bundle bundle=new Bundle();
-//        switch (item.getItemId()){
-//            case R.id.add_new_transfer_option:
-//                bundle.putInt(KooloChecklistListener.KOOLO_CHECKLIST_ACTION, KooloChecklistListener.ADD_NEW_TRANSFER_ITEM_CLICKED);
-//                break;
-//            case R.id.add_new_goal_option:
-//                bundle.putInt(KooloChecklistListener.KOOLO_CHECKLIST_ACTION, KooloChecklistListener.ADD_NEW_GOAL_ITEM_CLICKED);
-//                break;
-//        }
-//        mListener.onChecklistInteraction(bundle);
-//        return super.onOptionsItemSelected(item);
-//    }
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Bundle bundle=new Bundle();
@@ -178,14 +163,18 @@ public class KooloNewChecklistItemEntryFragment extends Fragment implements Edit
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
+
             onDoneAction(v.getText().toString());
         }
         return false;
     }
 
-
     private void onDoneAction(String itemText) {
         Bundle bundle = new Bundle();
+        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editTextChecklistItemEntry.getWindowToken(),
+                InputMethodManager.RESULT_UNCHANGED_SHOWN);
+
         if(itemText!= null&&!(itemText.isEmpty())) {
             Checklist newChecklist = new Checklist(itemText, Utils.StatusType.NOT_DONE);
             List<Checklist> checklistItems = null;

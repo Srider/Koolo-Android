@@ -35,67 +35,82 @@
         </activity>
         <activity
             android:name=".main.activities.KooloMainActivity"
-            android:label="@string/title_activity_koolo_main" >
+            android:label="@string/title_activity_koolo_main"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".settings.activities.KooloSettingsActivity"
-            android:label="@string/title_activity_koolo_settings" >
+            android:label="@string/title_activity_koolo_settings"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".home.activities.KooloHomeActivity"
-            android:label="@string/title_activity_koolo_home" >
+            android:label="@string/title_activity_koolo_home"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".quotes.activities.KooloQuotesActivity"
             android:windowSoftInputMode="adjustResize"
 
-            android:label="@string/title_activity_koolo_quotes" >
+            android:label="@string/title_activity_koolo_quotes"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".passcode.activities.KooloPasscodeActivity"
-            android:label="@string/title_activity_koolo_passcode" >
+            android:label="@string/title_activity_koolo_passcode"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".checklists.activities.KooloChecklistActivity"
             android:windowSoftInputMode="adjustResize"
-            android:label="@string/title_activity_koolo_checklist" >
+            android:label="@string/title_activity_koolo_checklist"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".KooloBaseActivity"
             android:windowSoftInputMode="adjustResize"
-            android:label="@string/title_activity_koolo_base" >
+            android:label="@string/title_activity_koolo_base"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".moods.activities.KooloMoodsActivity"
-            android:label="@string/title_activity_koolo_moods" >
+            android:label="@string/title_activity_koolo_moods"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".background.KooloBackgroundImageActivity"
-            android:label="@string/title_activity_koolo_background_image" >
+            android:label="@string/title_activity_koolo_background_image"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".updates.KooloUpdatesActivity"
-            android:label="@string/title_activity_koolo_updates" >
+            android:label="@string/title_activity_koolo_updates"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".contributors.KooloContributorsActivity"
-            android:label="@string/title_activity_koolo_contributors" >
+            android:label="@string/title_activity_koolo_contributors"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".license.KooloLicenseActivity"
-            android:label="@string/title_activity_koolo_license" >
+            android:label="@string/title_activity_koolo_license"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".review.activities.KooloReviewActivity"
-            android:label="@string/title_activity_koolo_review" >
+            android:label="@string/title_activity_koolo_review"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".humor.activities.KooloHumourActivity"
-            android:label="@string/title_activity_koolo_humour" >
+            android:label="@string/title_activity_koolo_humour"
+            android:configChanges="layoutDirection|locale">
         </activity>
         <activity
             android:name=".passcode.activities.KooloPasscodeVerificationActivity"
-            android:label="@string/title_activity_koolo_passcode_verification">
+            android:label="@string/title_activity_koolo_passcode_verification"
+            android:configChanges="layoutDirection|locale">
         </activity>
     </application>
 

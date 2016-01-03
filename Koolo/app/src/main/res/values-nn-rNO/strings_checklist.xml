@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="checklist_title"> Sjekklister</string>
+    <string name="my_health">Min Helse</string>
+    <string name="three_sentence"> Tre Setninger</string>
+    <string name="ready_to_transfer">Klar for overføring</string>
+
+    <!--Three Sentence Questions -->
+    <string name="question_1_string">1. Min alder, diagnose og kort sykehistorie </string>
+    <string name="question_2_string">2. Min behandlingsplan</string>
+    <string name="question_3_string">3. Mitne spørsmål / bekymringer for å snakke om under timen</string>
+
+    <!-- Information Strings -->
+    <string name="select_template_text">Velg en mal som spørsmålet på et sveip ligger på</string>
+    <string name="not_done_status_string">Ikke ferdig</string>
+    <string name="progress_status_string"> Pågående</string>
+    <string name="done_status_string">Ferdig</string>
+
+    <!-- New Goals and Transfer Titles -->
+    <string name="new_goal_options">Nytt mål</string>
+    <string name="new_transfer_options">Klar for overføring</string>
+
+    <string name="my_transfer_options">Klar for overføring</string>
+
+    <string name="new_transform_options">Overføring</string>
+
+    <!-- New Goals and Transfer Entry Titles -->
+    <string name="add_goal_menu_option">Legg Mål</string>
+    <string name="add_transfer_menu_option">Legg Overføre</string>
+    <string name="three_sentence_save">Spare</string>
+
+    <!-- File Names -->
+    <string name="transfers_file_name">transfers.txt</string>
+    <string name="goals_file_name">goals.txt</string>
+
+
+</resources>

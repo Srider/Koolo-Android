@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="settings_actionbar_title">Innstillinger</string>
-    <string name="settings_back_button_title">AVBRYT</string>
-    <string name="settings_continue_button_title">FERDIG</string>
-
+    <string name="settings_actionbar_title">Settings</string>
+    <string name="settings_back_button_title">Cancel</string>
+    <string name="settings_continue_button_title">Continue</string>
+    <string name="select_picture_string">Select Picture</string>
     <string-array name="koolo_settings">
-        <item>Bakgrunnsbilde</item>
-        <item>Sitater</item>
-        <item>Passkode</item>
-        <item>Humor Color</item>
-        <item>Gjennomgang av applikasjonen</item>
-        <item>Oppdateringer</item>
-        <item>Bidragsytere</item>
-        <item>Lisens</item>
+        <item>Background Image</item>
+        <item>Passcode</item>
+        <item>Quotes</item>
+        <item>License</item>
+        <item>Humor Colors</item>
+        <item>Tutorial</item>
+        <item>Updates</item>
+        <item>Contributors</item>
     </string-array>
 
 </resources>

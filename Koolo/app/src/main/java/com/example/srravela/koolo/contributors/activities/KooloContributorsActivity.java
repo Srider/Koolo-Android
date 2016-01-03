@@ -6,9 +6,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.srravela.koolo.KooloApplication;
+import com.example.srravela.koolo.KooloBaseActivity;
 import com.example.srravela.koolo.R;
 
-public class KooloContributorsActivity extends AppCompatActivity {
+public class KooloContributorsActivity extends KooloBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_actionbar_title">Innstillinger</string>
+
+    <string name="settings_back_button_title">Avbryt</string>
+    <string name="settings_continue_button_title">Fortsette</string>
+    <string name="select_picture_string">Velg bilde</string>
+
+    <string-array name="koolo_settings">
+        <item>Bakgrunnsbilde</item>
+        <item>Passkode</item>
+        <item>Sitater</item>
+        <item>Lisens</item>
+        <item>Humor Colors</item>
+        <item>Tutorial</item>
+        <item>Oppdateringer</item>
+        <item>Bidragsytere</item>
+    </string-array>
+
+</resources>

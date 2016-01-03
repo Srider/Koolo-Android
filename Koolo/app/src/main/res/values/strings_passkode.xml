@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="enable_passkode_text">Slå av passkode</string>
-    <string name="enter_passkode_text">Endre passkode</string>
-    <string name="set_security_question_text">Sett sikkerhetsspersmål </string>
+    <string name="enable_passkode_text">Activate / Deactivate passcode</string>
+    <string name="set_passkode_text">Set passcode</string>
+    <string name="enter_passkode_text">Enter Passcode</string>
+    <string name="set_security_question_text">Set security question </string>
+    <string name="select_security_question_text">Select security question </string>
 
     <string-array name="koolo_passkode_security_questions">
-        <item>Hva er ditt favoritt farge ? </item>
-        <item>Hva er ditt fornavn ?</item>
-        <item>Hva er din favoritt feriested ?</item>
-        <item>hva er ditt favorittspill ?</item>
+        <item>What is your favorite color? </item>
+        <item>What is your first name?</item>
+        <item>What is your favorite vacation spot?</item>
+        <item>What is your favorite game?</item>
     </string-array>
 </resources>

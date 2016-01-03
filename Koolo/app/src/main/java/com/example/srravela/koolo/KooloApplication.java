@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -24,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -77,11 +80,37 @@ public class KooloApplication extends Application implements Application.Activit
         return imageUri;
     }
 
+    private Locale locale = null;
+
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig)
+//    {
+//        super.onConfigurationChanged(newConfig);
+//        if (locale != null)
+//        {
+//            newConfig.locale = locale;
+//            Locale.setDefault(locale);
+//            getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
+//        }
+//    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         this.mContext=getApplicationContext();
         registerActivityLifecycleCallbacks(this);
+//        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//        Configuration config = getBaseContext().getResources().getConfiguration();
+//
+//        String lang = settings.getString(getString(R.string.pref_locale), "");
+//        if (! "".equals(lang) && ! config.locale.getLanguage().equals(lang))
+//        {
+//            locale = new Locale(lang);
+//            Locale.setDefault(locale);
+//            config.locale = locale;
+//            getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+//        }
     }
 
     public static synchronized KooloApplication getInstance(){

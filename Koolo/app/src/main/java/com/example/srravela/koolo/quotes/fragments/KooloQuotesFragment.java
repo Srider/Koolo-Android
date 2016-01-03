@@ -90,7 +90,7 @@ public class KooloQuotesFragment extends Fragment implements AdapterView.OnItemC
         mActivity= (KooloQuotesActivity) getActivity();
         mContext=mActivity.getApplicationContext();
         mListener =(KooloQuotesInteractionListener) mActivity;
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(false);
         intiUI();
     }
 

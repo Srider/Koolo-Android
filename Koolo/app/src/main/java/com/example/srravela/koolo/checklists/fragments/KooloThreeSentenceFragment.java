@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -144,7 +145,6 @@ public class KooloThreeSentenceFragment extends Fragment implements EditText.OnE
             case R.id.three_sentence_save_option:
                 onSaveThreeSentencesAction();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -182,6 +182,7 @@ public class KooloThreeSentenceFragment extends Fragment implements EditText.OnE
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
             onSaveThreeSentencesAction();
+
         }
         return false;
     }

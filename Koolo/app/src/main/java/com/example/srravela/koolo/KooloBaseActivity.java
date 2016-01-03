@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.srravela.koolo.checklists.fragments.KooloChecklistOptionsFragment;
@@ -190,9 +191,6 @@ public class KooloBaseActivity extends AppCompatActivity {
             isBackPressed = false;
             isWindowFocused = true;
         }
-
         super.onWindowFocusChanged(hasFocus);
     }
-
-
 }

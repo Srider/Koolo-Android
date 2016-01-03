@@ -97,37 +97,37 @@ public class KooloSettingsFragment extends Fragment implements AdapterView.OnIte
 
             case 1:
                 //This means Quotes is Clicked.
-                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_QUOTES_ACTION);
+                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_PASSCODE_ACTION);
                 break;
 
             case 2:
                 //This means Passcode is Clicked.
-                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_PASSCODE_ACTION);
+                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_QUOTES_ACTION);
                 break;
 
             case 3:
                 //This means Passcode is Clicked.
-                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_HUMOUR_COLORS_ACTION);
+                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_LICENSE_ACTION);
                 break;
 
             case 4:
                 //This means Review Of Applicatione is Clicked.
-                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_REVIEW_ACTION);
+                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_HUMOUR_COLORS_ACTION);
                 break;
 
             case 5:
                 //This means Review Of Applicatione is Clicked.
-                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_UPDATES_ACTION);
+                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_TUTORIAL_ACTION);
                 break;
 
             case 6:
                 //This means Review Of Applicatione is Clicked.
-                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_CONTRIBUTORS_ACTION);
+                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_UPDATES_ACTION);
                 break;
 
             case 7:
                 //This means Review Of Applicatione is Clicked.
-                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_LICENSE_ACTION);
+                bundle.putInt(KooloSettingsInteractionListener.KOOLO_SETTINGS_ACTION, KooloSettingsInteractionListener.KOOLO_CONTRIBUTORS_ACTION);
                 break;
         }
         mListener.onSettingsInteraction(bundle);

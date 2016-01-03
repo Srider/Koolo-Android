@@ -12,10 +12,15 @@
 
     <!-- Information Strings -->
     <string name="select_template_text">Select a template that the question at a sweep located at</string>
+    <string name="not_done_status_string">Not Done</string>
+    <string name="progress_status_string"> Ongoing</string>
+    <string name="done_status_string">Finished</string>
 
     <!-- New Goals and Transfer Titles -->
     <string name="new_goal_options">New Goal</string>
     <string name="new_transfer_options">New Transfer</string>
+    <string name="my_transfer_options">My Transfer</string>
+    <string name="new_transform_options">New Transform</string>
 
     <!-- New Goals and Transfer Entry Titles -->
     <string name="add_goal_menu_option">Add Goal</string>
