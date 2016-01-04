@@ -37,4 +37,5 @@
     </string>
 
     <string name = "pref_locale">en</string>
+    <string name="title_activity_koolo_calendar">KooloCalendarActivity</string>
 </resources>
