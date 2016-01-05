@@ -122,6 +122,7 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
            holder.moodShotColorButton.setTag(position);
             convertView.setTag(holder);
             holder.moodShotImageView.setOnClickListener(this);
+            holder.moodShotImageView.getLayoutParams().height =  holder.moodShotImageView.getMaxHeight()/2;
         } else {
             // Get the ViewHolder back to get fast access to the TextView
             // and the ImageView.

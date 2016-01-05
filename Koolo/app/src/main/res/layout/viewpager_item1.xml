@@ -17,9 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/color_iv"
-        android:textColor="@color/White"
+        android:textColor="@color/layby_blue"
         android:textSize="14sp"
-        android:padding="11dp"
+        android:padding="10dp"
        />
 
 </RelativeLayout>

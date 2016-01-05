@@ -42,7 +42,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         this.colorName = colorName;
         this.moodSelectListener = moodSelectListener;
     }*/
-   public ViewPagerAdapter(Context context, List<Humour> items,KooloMoodSelectListener moodSelectListener) {
+   public ViewPagerAdapter(Context context, List<Humour> items,KooloMoodSelectListener moodSelectListener ) {
        this.context = context;
        this.items = items;
        this.moodSelectListener = moodSelectListener;
@@ -60,6 +60,15 @@ public class ViewPagerAdapter extends PagerAdapter {
      * Method that returns the view type count.
      * @return int
      */
+    @Override
+    public int getItemPosition(Object object) {
+
+        return POSITION_NONE;
+    }
+    public int getItemPosition1(Object object) {
+
+        return POSITION_NONE;
+    }
     public int getViewTypeCount() {
         return items.size();
     }
@@ -117,13 +126,12 @@ public class ViewPagerAdapter extends PagerAdapter {
         colorCodeImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Bundle bundle = new Bundle();
-                bundle.putString("COLOR_TYPE", item.getColorType().toString());
-                bundle.putString("HUMOUR_TEXT",item.getHumourText());*/
                 selectedHumor = (Humour)v.getTag();
                 moodSelectListener.onMoodSelectListener(selectedHumor);
                 colorNameTextView.setText(selectedHumor.getHumourText());
                 colorNameTextView.setTypeface(null, Typeface.BOLD);
+
+
             }
         });
         // Add viewpager_item1.xml to ViewPager

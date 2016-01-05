@@ -1,14 +1,20 @@
 package com.example.srravela.koolo.moods.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -54,9 +60,11 @@ public class KooloMoodMapFragment extends Fragment implements View.OnClickListen
 
     ImageView backgroundImageView;
 
-    View actionBarButtons;
+    //View actionBarButtons;
     View greenActionView,yellowActionView,blueActionView,magentaActionView,redActionView,blackActionView,grayActionView,whiteActionView,orangeActionView,brownActionView;
     View doneActionView;
+
+
 
 
     @Override
@@ -108,14 +116,14 @@ public class KooloMoodMapFragment extends Fragment implements View.OnClickListen
             backgroundImageView.setImageResource(R.drawable.background);
         }
 
-        actionBarButtons = mActivity.getLayoutInflater().inflate(R.layout.action_bar_mood_map, null, false);
+       /* actionBarButtons = mActivity.getLayoutInflater().inflate(R.layout.action_bar_mood_map, null, false);
         doneActionView = actionBarButtons.findViewById(R.id.action_bar_mood_map_cancel_tv);
 
         doneActionView.setOnClickListener(mActionBarListener);
         mActivity.getSupportActionBar().setCustomView(actionBarButtons);
         View v = mActivity.getSupportActionBar().getCustomView();
         Toolbar parent = (Toolbar) v.getParent();//first get parent toolbar of current action bar
-        parent.setContentInsetsAbsolute(0, 0);
+        parent.setContentInsetsAbsolute(0, 0);*/
        /* lp.width = RelativeLayout.LayoutParams.MATCH_PARENT;
         v.setLayoutParams(lp);*/
         //mActivity.getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -126,6 +134,8 @@ public class KooloMoodMapFragment extends Fragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
+        ActionBar actionBar =mActivity.getSupportActionBar();
+        actionBar.setTitle("Mood Map");
 
     }
 
@@ -150,7 +160,7 @@ public class KooloMoodMapFragment extends Fragment implements View.OnClickListen
         // setTitle("MoodLine");
         FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Fragment fragment = KooloMoodsListFragment.newInstance();
+        Fragment fragment = KooloMoodLineFragment.newInstance();
         Bundle bundle = new Bundle();
         bundle.putString("COLOR_CHOOSER", selectedColor);
         bundle.putBoolean("SELECTED_COLOR", true);
@@ -209,7 +219,11 @@ public class KooloMoodMapFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra(KooloMoodLineFragment.FRAGMENT_KEY,KooloMoodLineFragment.FRAGMENT_VALUE);
+        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
         getFragmentManager().popBackStack();
+
     }
 
     @Override

@@ -5,12 +5,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,6 +34,8 @@ import com.example.srravela.koolo.moods.database.DatabaseHandler;
 import com.example.srravela.koolo.moods.listeners.KooloMoodSelectListener;
 import com.example.srravela.koolo.moods.listeners.KooloMoodsListener;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +43,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMoodsActivity.OnBackPressedListener, KooloMoodSelectListener {
-    private static final String TAG = KooloMoodsListFragment.class.getSimpleName();
+    private static final String TAG = KooloMoodShotFormatterFragment.class.getSimpleName();
     private ImageView backgroundImageView;
     private ImageView moodshotImageView;
     private View rootView;
@@ -71,6 +78,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         mActivity=(KooloMoodsActivity)getActivity();
         databaseHandler = new DatabaseHandler(mActivity);
         selectedImage =  getArguments().getString("selectedImage");
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -90,20 +98,19 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         }
         adapter = new ViewPagerAdapter(view.getContext(),humourDetails,kooloMoodSelectListener);
         // Binds the Adapter to the ViewPager
+
         viewPager.setAdapter(adapter);
-        actionBarButtons1 = inflater.inflate(R.layout.action_bar_humor_color,
+
+       /* actionBarButtons1 = inflater.inflate(R.layout.action_bar_humor_color,
                 container, false);
 
         cancelHumorActionView = actionBarButtons1.findViewById(R.id.action_bar_humor_cancel_tv);
         cancelHumorActionView.setOnClickListener(mActionBarListener);
 
         doneHumorActionView = actionBarButtons1.findViewById(R.id.action_bar_humor_done_tv);
-        doneHumorActionView.setOnClickListener(mActionBarListener);
+        doneHumorActionView.setOnClickListener(mActionBarListener);*/
 
-        mActivity.getSupportActionBar().setCustomView(actionBarButtons1);
-        View v = mActivity.getSupportActionBar().getCustomView();
-        Toolbar parent =(Toolbar) v.getParent();//first get parent toolbar of current action bar
-        parent.setContentInsetsAbsolute(0,0);
+
 
         return view;
     }
@@ -115,14 +122,14 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         mListener = mActivity;
     }
 
-    private final View.OnClickListener mActionBarListener = new View.OnClickListener() {
+    /*private final View.OnClickListener mActionBarListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             onActionBarItemSelected(v.getId());
         }
-    };
+    };*/
 
-    private boolean onActionBarItemSelected(int itemId) {
+   /* private boolean onActionBarItemSelected(int itemId) {
         switch (itemId) {
             case R.id.action_bar_humor_cancel_tv:
                 getFragmentManager().popBackStack();
@@ -137,13 +144,88 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
                 break;
         }
         return true;
-    }
+    }*/
 
     private String getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.ENGLISH);
         Date date = new Date();
         return dateFormat.format(date);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar actionBar =mActivity.getSupportActionBar();
+        actionBar.setTitle(mActivity.getResources().getString(R.string.action_select_humor_title));
+    }
+    @Override
+    public void onCreateOptionsMenu(
+            Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_koolo_moodhumor_item, menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_moodline_humor_done:
+                if(mSelectedMoodShot != null) {
+                  /*  MoodShot moodShots = databaseHandler.getMaxDateFromMoodShots();
+
+                    if(moodShots.getMoodCaptureDate() !=null) {
+                        String dateString = moodShots.getMoodCaptureDate();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+                       // DateFormat targetFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                      //  String formattedDate = null;
+                        Date convertedDate = new Date();
+                        try {
+                            convertedDate = dateFormat.parse(dateString);
+                            String dateStart = moodShots.getMoodCaptureDate();
+                            String dateStop = "15/01/2015";
+                            String date = new SimpleDateFormat("dd MM yyyy").format(new Date());
+                            //HH converts hour in 24 hours format (0-23), day calculation
+                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+                            Date d1 = null;
+                            Date d2 = null;
+
+                            try {
+                                d1 = format.parse(dateStart);
+                                d2 = format.parse(dateStop);
+
+                                //in milliseconds
+                                long diff = d2.getTime() - d1.getTime();
+
+
+                                long diffDays = diff / (24 * 60 * 60 * 1000);
+
+                                System.out.print(diffDays + " days, ");
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+                            System.out.println(convertedDate);
+                          //  formattedDate = targetFormat.format(convertedDate);
+                           // System.out.println(formattedDate);
+                          //  holder.moodShotTextView.setText(formattedDate);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }*/
+                    databaseHandler.addMoodShot(mSelectedMoodShot);
+                }
+                //  mListener.onMoodsAction();
+                getFragmentManager().popBackStack();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public List<Humour> loadHumourColours() {
 
         HumourDataStore humourDataStore = HumourDataStore.getSharedHumoursDataStore(mActivity.getResources().getString(R.string.humours_file_name), mActivity);
