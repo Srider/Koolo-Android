@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name = "left_arrow_text">&lt;</string>
+    <string name = "right_arrow_text">&gt;</string>
+</resources>

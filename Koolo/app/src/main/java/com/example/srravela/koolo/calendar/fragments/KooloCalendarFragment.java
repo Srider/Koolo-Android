@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -19,6 +21,7 @@ import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.calendar.activities.KooloCalendarActivity;
 import com.example.srravela.koolo.calendar.adapters.KooloCalendarDatesAdapter;
+import com.example.srravela.koolo.calendar.adapters.KooloCalendarEventsAdapter;
 import com.example.srravela.koolo.calendar.listeners.KooloCalendarInteractionListener;
 import com.example.srravela.koolo.checklists.activities.KooloChecklistActivity;
 import com.example.srravela.koolo.checklists.adapters.KooloChecklistAdapter;
@@ -31,7 +34,7 @@ import com.example.srravela.koolo.entities.Utils;
 
 import java.util.List;
 
-public class KooloCalendarFragment extends Fragment {
+public class KooloCalendarFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private static final String TAG = KooloCalendarFragment.class.getSimpleName();
     private ImageView backgroundImageView;
     private View rootView;
@@ -159,4 +162,13 @@ public class KooloCalendarFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }

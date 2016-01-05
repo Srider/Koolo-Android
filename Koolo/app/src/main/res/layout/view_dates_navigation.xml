@@ -9,13 +9,11 @@
         android:layout_gravity="center_vertical"
         android:maxLength="1"
         android:textSize="24sp"
-        android:text="<"
+        android:text="@string/left_arrow_text"
         android:id="@+id/left_arrow_button"
         android:textColor="@android:color/white"
-        android:background="@drawable/drawable_color_round_grey"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-       />
+        android:layout_centerVertical="true"/>
 
     <GridView
         android:layout_width="305dp"
@@ -35,12 +33,11 @@
         android:layout_toRightOf="@+id/calendar_dates_grid_view"
         android:maxLength="1"
         android:textSize="24sp"
-        android:text=">"
+        android:text="@string/right_arrow_text"
         android:id="@+id/right_arrow_button"
-        android:background="@drawable/drawable_color_round_grey"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="0dp"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"/>
 
 </RelativeLayout>
