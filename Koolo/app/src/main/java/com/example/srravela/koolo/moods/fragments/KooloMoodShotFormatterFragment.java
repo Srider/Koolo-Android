@@ -38,6 +38,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -147,7 +149,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
     }*/
 
     private String getDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.ENGLISH);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy HH:mm:ss", Locale.ENGLISH);
         Date date = new Date();
         return dateFormat.format(date);
     }
@@ -170,54 +172,87 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_moodline_humor_done:
-                if(mSelectedMoodShot != null) {
-                  /*  MoodShot moodShots = databaseHandler.getMaxDateFromMoodShots();
 
-                    if(moodShots.getMoodCaptureDate() !=null) {
+                    MoodShot moodShots = databaseHandler.getMaxDateFromMoodShots();
+
+                    if(moodShots != null && moodShots.getMoodCaptureDate() !=null) {
                         String dateString = moodShots.getMoodCaptureDate();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.ENGLISH);
                        // DateFormat targetFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
                       //  String formattedDate = null;
-                        Date convertedDate = new Date();
+
+
+                          //  Date date = new Date();
+                          //   dateFormat.format(date);
+
+                        Date convertedDate ;
                         try {
                             convertedDate = dateFormat.parse(dateString);
-                            String dateStart = moodShots.getMoodCaptureDate();
-                            String dateStop = "15/01/2015";
-                            String date = new SimpleDateFormat("dd MM yyyy").format(new Date());
+                            System.out.println("convertedDate----------"+convertedDate);
+                          //  String dateStart = moodShots.getMoodCaptureDate();
+                           // String dateStop = "15/01/2015";
+                         //   String date = new SimpleDateFormat("dd MM yyyy").format(new Date());
                             //HH converts hour in 24 hours format (0-23), day calculation
-                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                          //  SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-                            Date d1 = null;
-                            Date d2 = null;
+                          //  Date d1 = null;
+                          //  Date d2 = null;
 
                             try {
-                                d1 = format.parse(dateStart);
-                                d2 = format.parse(dateStop);
-
+                              /*  d1 = format.parse(dateStart);
+                               // d2 = format.parse(dateStop);
+                                d2 = new Date();
                                 //in milliseconds
                                 long diff = d2.getTime() - d1.getTime();
 
 
                                 long diffDays = diff / (24 * 60 * 60 * 1000);
 
-                                System.out.print(diffDays + " days, ");
+                                System.out.print(diffDays + " days, ");*/
 
+
+                                List<Date> listOfDates = new ArrayList<Date>();
+                                listOfDates.add(convertedDate);
+                                listOfDates.add(new Date());
+                                Collections.sort(listOfDates);
+                                List<Date> resultingDates = generateDateListBetween(convertedDate, new Date());
+                                resultingDates.removeAll(listOfDates);
+                                if(resultingDates != null && resultingDates.size()>0) {
+                                    for (Date date1 : resultingDates) {
+                                        MoodShot mSelectedMoodShot1 = new MoodShot();
+                                        mSelectedMoodShot1.setMoodColor("");
+                                        mSelectedMoodShot1.setMoodCaptureUri("");
+                                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss", Locale.ENGLISH);
+
+                                      String  convertedDate1 = dateFormat1.format(date1.toString());
+                                        mSelectedMoodShot1.setMoodCaptureDate(convertedDate1);
+                                        databaseHandler.addMoodShot(mSelectedMoodShot1);
+                                        System.out.println("convertedDate1.toString()::::::::::"+convertedDate1.toString());
+                                    }
+                                } else {
+                                    if(mSelectedMoodShot != null) {
+                                        databaseHandler.addMoodShot(mSelectedMoodShot);
+                                    }
+                                }
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
-
-                            System.out.println(convertedDate);
                           //  formattedDate = targetFormat.format(convertedDate);
                            // System.out.println(formattedDate);
                           //  holder.moodShotTextView.setText(formattedDate);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                    }*/
+
+
+                } else {
+                        // first time only (no db inserted values).
+                if(mSelectedMoodShot != null) {
                     databaseHandler.addMoodShot(mSelectedMoodShot);
                 }
+            }
                 //  mListener.onMoodsAction();
                 getFragmentManager().popBackStack();
                 return true;
@@ -225,7 +260,29 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
                 return super.onOptionsItemSelected(item);
         }
     }
+    private List<Date> generateDateListBetween(Date startDate, Date endDate)
+    {
+        //Flip the input if necessary, to prevent infinite loop
+        if(startDate.after(endDate))
+        {
+            Date temp = startDate;
+            startDate = endDate;
+            endDate = temp;
+        }
 
+        List<Date> resultList = new ArrayList<Date>();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(startDate);
+
+        do
+        {
+            resultList.add(cal.getTime());
+            cal.roll(Calendar.DAY_OF_MONTH, true);  //Roll one day forwards
+        }
+        while(cal.getTime().before(endDate));
+
+        return resultList;
+    }
     public List<Humour> loadHumourColours() {
 
         HumourDataStore humourDataStore = HumourDataStore.getSharedHumoursDataStore(mActivity.getResources().getString(R.string.humours_file_name), mActivity);

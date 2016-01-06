@@ -1,71 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
-    android:layout_marginBottom="25dp"
-    android:layout_marginTop="15dp"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/timeline_view"
-        android:layout_width="1dp"
-        android:layout_height="200dp"
-        android:layout_marginLeft="@dimen/checklist_timeline_margin"
-        android:background="@color/Light_Grey" />
+    <RelativeLayout
+        android:id="@+id/moodshot_image_rel_layout"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/moodshot_color_button"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="@dimen/checklist_status_button_top_margin"
-        android:layout_marginLeft="@dimen/checklist_status_button_left_margin"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/drawable_plain_round_button_green"
-        android:clickable="false" />
+        <View
+            android:id="@+id/timeline_view"
+            android:layout_width="1dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="@dimen/checklist_timeline_margin"
+            android:background="@color/Light_Grey" />
 
-    <View
-        android:id="@+id/traingle_view"
-        android:layout_width="50dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/triangle_black" />
+        <Button
+            android:id="@+id/moodshot_color_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/checklist_status_button_top_margin"
+            android:layout_marginLeft="@dimen/checklist_status_button_left_margin"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/drawable_plain_round_button_green"
+            android:clickable="false" />
+
+        <View
+            android:id="@+id/traingle_view"
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/triangle_black"
+            android:visibility="visible"
+            />
+
+        <RelativeLayout
+            android:id="@+id/moodshot_image_date_rv"
+            android:layout_width="210dp"
+            android:layout_height="200dp"
+            android:layout_toRightOf="@id/traingle_view"
+            android:background="@color/Black"
+            android:orientation="vertical"
+            android:scaleType="fitXY">
+
+            <ImageView
+                android:id="@+id/moodshot_image"
+                android:layout_width="170dp"
+                android:layout_height="165dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/moodshot_date_tv"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal"
+                android:text="kdlfjkdldsf"
+                android:textColor="@color/White"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/moodshot_image_date_rv"
+        android:id="@+id/moodshot_missing_image_rel_layout"
         android:layout_width="210dp"
-        android:layout_height="200dp"
-        android:layout_toRightOf="@id/traingle_view"
-        android:background="@color/Black"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/Light_Grey"
         android:orientation="vertical"
-        android:scaleType="fitXY">
+        android:visibility="visible">
 
         <ImageView
-            android:id="@+id/moodshot_image"
+            android:id="@+id/moodshot_missing_image"
             android:layout_width="170dp"
-            android:layout_height="165dp"
+            android:layout_height="65dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-
             android:scaleType="fitXY" />
 
         <TextView
-            android:id="@+id/moodshot_date_tv"
+            android:id="@+id/moodshot_missing_date_tv"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textColor="@color/White"
-            android:text="kdlfjkdldsf"
             android:textSize="14sp"
             android:textStyle="bold" />
+
+        <View
+            android:id="@+id/missing_date_border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/moodshot_missing_date_tv"
+            android:layout_marginTop="5dp"
+            android:background="@color/White" />
     </RelativeLayout>
+
 
 </RelativeLayout>
