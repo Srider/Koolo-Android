@@ -37,7 +37,7 @@ import java.util.List;
  * Created by srikar on 5/12/15.
  * Updated by tippi on 22/12/15.
  */
-public class KooloMoodLineFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener,
+public class KooloMoodLineFragment extends Fragment implements View.OnClickListener,
         KooloMoodsActivity.OnBackPressedListener {
     private ImageView backgroundImageView;
     ListView moodslist;
@@ -86,12 +86,7 @@ public class KooloMoodLineFragment extends Fragment implements View.OnClickListe
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_moodline_map:
-                FragmentManager fragmentManager=mActivity.getSupportFragmentManager();
-                FragmentTransaction transaction=fragmentManager.beginTransaction();
-                Fragment fragment= KooloMoodMapFragment.newInstance();
-                transaction.replace(R.id.fragment_moods_container, fragment, "moodmapfragment");
-                transaction.addToBackStack("MoodMapFragment");
-                transaction.commitAllowingStateLoss();
+                mActivity.loadMoodMapFragment();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -144,7 +139,7 @@ public class KooloMoodLineFragment extends Fragment implements View.OnClickListe
                     if(moodShots.size() > 0){
                         moodsListAdapter = new KooloMoodsListAdapter(moodShots, mContext, mListener);
                         moodslist.setAdapter(moodsListAdapter);
-                        moodslist.setOnItemClickListener(this);
+                      //  moodslist.setOnItemClickListener(this);
                     } else {
                         Log.i(TAG, "NO ITEMS");
                     }
@@ -190,7 +185,7 @@ public class KooloMoodLineFragment extends Fragment implements View.OnClickListe
         if(moodShots.size() > 0){
             moodsListAdapter = new KooloMoodsListAdapter(moodShots, mContext, mListener);
             moodslist.setAdapter(moodsListAdapter);
-            moodslist.setOnItemClickListener(this);
+          //  moodslist.setOnItemClickListener(this);
         } else {
             Log.i(TAG, "NO ITEMS");
         }
@@ -215,14 +210,15 @@ public class KooloMoodLineFragment extends Fragment implements View.OnClickListe
         addButton.setOnClickListener(this);
         //Checklist
         moodslist=(ListView)rootView.findViewById(R.id.moods_list);
+        moodslist.setOnItemClickListener(null);
 
     }
 
-    @Override
+   /* @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         MoodShot tempMoodShot = moodsListItems.get(position);
         triggerMoodShotFormatterFragment();
-    }
+    }*/
 
     private void triggerMoodShotFormatterFragment() {
         Bundle bundle = new Bundle();
@@ -264,12 +260,13 @@ public class KooloMoodLineFragment extends Fragment implements View.OnClickListe
                 //System.err.println("cancel");
                 // getActivity().onBackPressed();
 
-                FragmentManager fragmentManager=mActivity.getSupportFragmentManager();
+                mActivity.loadMoodMapFragment();
+               /* FragmentManager fragmentManager=mActivity.getSupportFragmentManager();
                 FragmentTransaction transaction=fragmentManager.beginTransaction();
                 Fragment fragment= KooloMoodMapFragment.newInstance();
                 transaction.replace(R.id.fragment_moods_container, fragment, "moodmapfragment");
                 transaction.addToBackStack("moodmapfragment");
-                transaction.commitAllowingStateLoss();
+                transaction.commitAllowingStateLoss();*/
                 // getFragmentManager().popBackStack();
                 break;
 

@@ -240,7 +240,7 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
 
         if(item.getMoodCaptureDate() !=null) {
             String dateString = item.getMoodCaptureDate();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy", Locale.US);
             DateFormat targetFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
             String formattedDate = null;
             Date convertedDate = new Date();
@@ -249,10 +249,10 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
                 System.out.println(convertedDate);
                 formattedDate = targetFormat.format(convertedDate);
                 System.out.println(formattedDate);
-                if(item.getMoodColor() != null) {
-                    holder.moodShotDateTextView.setText(formattedDate);
-                } else {
+                if(item.getMoodColor().isEmpty()) {
                     holder.moosShotMissingDateTextView.setText(formattedDate);
+                } else {
+                    holder.moodShotDateTextView.setText(formattedDate);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
