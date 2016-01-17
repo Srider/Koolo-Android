@@ -1,6 +1,5 @@
 package com.example.srravela.koolo.checklists.fragments;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;

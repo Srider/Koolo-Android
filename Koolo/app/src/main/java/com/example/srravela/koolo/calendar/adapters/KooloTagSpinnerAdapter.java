@@ -5,42 +5,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.srravela.koolo.R;
-import com.example.srravela.koolo.entities.CalendarDates;
 import com.example.srravela.koolo.entities.CalendarEvents;
 
 import java.util.List;
 
 /**
- * Created by srikar on 05/01/16.
+ * Created by srikar on 16/01/16.
  */
-public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnClickListener{
+public class KooloTagSpinnerAdapter  extends BaseAdapter{
 
-    private static final String TAG = KooloCalendarEventsAdapter.class.getSimpleName();
 
-    public List<CalendarEvents> items = null;
+    private static final String TAG = KooloTagSpinnerAdapter.class.getSimpleName();
+
+    public List<String> tags = null;
     LayoutInflater layoutInflater;
     public Context context;
-
-
-    /**
-     * Constructor used for initializing the KooloCalendarDatesAdapter.
-     * @param context
-     * @param items
-     */
-
 
     /**
      * Constructor used for initializing the KooloChecklistItemAdapter.
      * @param context
-     * @param items
+     * @param tags
      */
 
-    public KooloCalendarEventsAdapter(List<CalendarEvents> items, Context context ) {
+    public KooloTagSpinnerAdapter(List<String> tags, Context context ) {
         super();
-        this.items = items;
+        this.tags = tags;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -79,12 +72,12 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
      * @return int
      */
     public int getCount() {
-        return items.size();
+        return tags.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return items.get(position);
+        return tags.get(position);
     }
 
     @Override
@@ -94,19 +87,11 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView= layoutInflater.inflate(R.layout.view_events_cell, null);
+        convertView= layoutInflater.inflate(R.layout.view_spinner_tag_item, null);
 
-        TextView dateView = (TextView)convertView.findViewById(R.id.calendar_date_cell);
-
-        TextView monthText = (TextView)convertView.findViewById(R.id.calendar_date_cell);
-
-        CalendarEvents item = items.get(position);
-//        String calendarDayText = item.getDayText();
-//        String calendarDateText = item.getDateText();
-//
-//        if(calendarDayText!= null && calendarDateText!=null) {
-//            dateView.setText(calendarDayText+"\n"+calendarDateText);
-//        }
+        TextView tagView = (TextView)convertView.findViewById(R.id.tag_text);
+        tagView.setText(tags.get(position));
+        ImageView tickImage = (ImageView)convertView.findViewById(R.id.tag_tick_image);
 
         //TODO: add month here./
 
@@ -125,10 +110,4 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
     void onClick() {
 
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
 }

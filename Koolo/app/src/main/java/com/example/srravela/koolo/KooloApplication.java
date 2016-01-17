@@ -37,7 +37,16 @@ public class KooloApplication extends Application implements Application.Activit
     public static final String TAG=KooloApplication.class.getSimpleName();
     public static final String FIRST_TIME_LAUNCH="FIRST_TIME_LAUNCH";
     public static final String DATE_BUTTON_CONFIGURATION="DATE_BUTTON_CONFIGURATION";
+    public static final String EVENT_BUTTON_CONFIGURATION = "EVENT_BUTTON_CONFIGURATION";
+
+    public static final String EVENT_DATE_ENABLED="EVENT_DATE_ENABLED";
+    public static final String EVENT_DATE_CONFIGURATION="EVENT_DATE_CONFIGURATION";
+    public static final String EVENT_DATE_SELECTION_ACTION="EVENT_DATE_SELECTION_ACTION";
+    public static final String EVENT_TYPE_SELECTION_ACTION="EVENT_TYPE_SELECTION_ACTION";
+    public static final String EVENT_TIME_SELECTION_ACTION = "EVENT_TIME_SELECTION_ACTION";
+
     public static final String DATE_BUTTON_COLOR="DATE_BUTTON_COLOR";
+
 
     public static String imageUri = null;
     public static final String PASSCODE_ENABLED="PASSCODE_ENABLED";

@@ -23,6 +23,7 @@ import com.example.srravela.koolo.calendar.activities.KooloCalendarActivity;
 import com.example.srravela.koolo.calendar.adapters.KooloCalendarDatesAdapter;
 import com.example.srravela.koolo.calendar.adapters.KooloCalendarEventsAdapter;
 import com.example.srravela.koolo.calendar.listeners.KooloCalendarInteractionListener;
+import com.example.srravela.koolo.calendar.utils.DateAndTimeUtility;
 import com.example.srravela.koolo.checklists.activities.KooloChecklistActivity;
 import com.example.srravela.koolo.checklists.adapters.KooloChecklistAdapter;
 import com.example.srravela.koolo.checklists.listeners.KooloChecklistListener;
@@ -32,6 +33,8 @@ import com.example.srravela.koolo.entities.CalendarEvents;
 import com.example.srravela.koolo.entities.Checklist;
 import com.example.srravela.koolo.entities.Utils;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class KooloCalendarFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
@@ -44,11 +47,12 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
     KooloCalendarDatesAdapter calendarDatesAdapter;
     KooloCalendarEventsAdapter calendarEventsAdapter;
 
+    private static int currentWindowIndex;
 
-    List<CalendarDates> calendarDates = null;
+    HashMap<String, List<CalendarDates>> calendarDates = null;
     List<CalendarEvents> calendarEvents = null;
 
-    private Button leftArrowButton, rightArrowButton;
+    private Button leftArrowButton, rightArrowButton, addCalendarEventButton;
     private Context mContext;
     private KooloCalendarActivity mActivity;
     public static KooloCalendarFragment fragmentCalendar;
@@ -80,7 +84,8 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_koolo_calendar, container, false);
+        rootView=inflater.inflate(R.layout.fragment_koolo_calendar, container, false);
+        return rootView;
     }
 
     @Override
@@ -90,6 +95,7 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
         mListener = mActivity;
         mContext=mActivity.getApplicationContext();
 
+        initUI();
     }
 
     /**
@@ -97,6 +103,9 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
      */
     private void initUI(){
         setHasOptionsMenu(true);
+
+        addCalendarEventButton = (Button)rootView.findViewById(R.id.add_calendar_event_button);
+        addCalendarEventButton.setOnClickListener(this);
 
         //Image
         backgroundImageView = (ImageView)rootView.findViewById(R.id.checklist_background_image);
@@ -120,21 +129,25 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
         //CalendarDates
         calendarDatesGridView= (GridView) rootView.findViewById(R.id.calendar_dates_grid_view);
         calendarDates = loadCalendarDates();
-
+        currentWindowIndex = 0;
         if(calendarDates!=null){
-            calendarDatesAdapter = new KooloCalendarDatesAdapter(calendarDates, mContext, this);
+
+            calendarDatesAdapter = new KooloCalendarDatesAdapter(calendarDates.get(""+currentWindowIndex), mContext);
+            calendarDatesAdapter.notifyDataSetChanged();
             calendarDatesGridView.setAdapter(calendarDatesAdapter);
             calendarDatesGridView.setOnItemClickListener(this);
+
+            //Get Event loading for current date.
+            calendarEvents = loadCalendarEventsForDate(calendarDates.get(""+currentWindowIndex).get(0));
         } else {
             Log.i(TAG, "NO ITEMS");
         }
 
         //CalendarEvents
-        calendarEventsListView= (GridView) rootView.findViewById(R.id.calendar_events_list_view);
-        calendarEvents = loadCalendarEventsForDate(calendarDates.get(0));
+        calendarEventsListView= (ListView) rootView.findViewById(R.id.caledar_events_list_view);
 
         if(calendarEvents!=null){
-            calendarEventsAdapter = new KooloCalendarEventsAdapter(calendarEvents, mContext, this);
+            calendarEventsAdapter = new KooloCalendarEventsAdapter(calendarEvents, mContext);
             calendarEventsListView.setAdapter(calendarEventsAdapter);
             calendarEventsListView.setOnItemClickListener(this);
         } else {
@@ -144,18 +157,20 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
     }
 
     //TODO:
-    private List<CalendarDates> loadCalendarDates() {
-        List<CalendarDates> calendarDatesList = null;
-
-        return ;
+    private HashMap<String, List<CalendarDates>> loadCalendarDates() {
+        HashMap<String, List<CalendarDates>> calendarDatesMap = null;
+        DateAndTimeUtility sharedDateAndtimeUtility =  DateAndTimeUtility.getSharedDateAndTimeUtility(mContext);
+        calendarDatesMap = sharedDateAndtimeUtility.getAllFormattedDates();
+        return calendarDatesMap;
     }
 
     //TODO:
     private List<CalendarEvents> loadCalendarEventsForDate(CalendarDates date) {
-        List<CalendarDates> calendarEventsList = null;
+        List<CalendarEvents> calendarEventsList = null;
 
-        return ;
+        return calendarEventsList;
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -164,11 +179,48 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.add_calendar_event_button:
+                loadAddCalendarEventFragment();
+                break;
+            case R.id.left_arrow_button:
+                leftArrowButtonClicked();
+                break;
+            case R.id.right_arrow_button:
+                rightArrowButtonClicked();
+                break;
+        }
+    }
 
+
+    private void loadAddCalendarEventFragment() {
+        Bundle bundle=new Bundle();
+        bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.KOOLO_ADD_CALENDAR_EVENT_ACTION);
+        mListener.onCalendarInteraction(bundle);
+    }
+
+
+    private void leftArrowButtonClicked() {
+
+        if(currentWindowIndex >=0) {
+            currentWindowIndex -= 1;
+            calendarDatesAdapter.items = calendarDates.get(""+currentWindowIndex);
+            calendarDatesGridView.invalidateViews();
+        }
+    }
+
+    private void rightArrowButtonClicked() {
+        if(currentWindowIndex <=4) {
+            currentWindowIndex += 1;
+            calendarDatesAdapter.items = calendarDates.get(""+currentWindowIndex);
+            calendarDatesGridView.invalidateViews();
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
+
+
 }

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.KooloBaseActivity;
 import com.example.srravela.koolo.R;
+import com.example.srravela.koolo.calendar.activities.KooloCalendarActivity;
 import com.example.srravela.koolo.checklists.activities.KooloChecklistActivity;
 import com.example.srravela.koolo.entities.Humour;
 import com.example.srravela.koolo.entities.Utils;
@@ -142,8 +143,8 @@ public class KooloHomeActivity extends KooloBaseActivity implements KooloHomeInt
     }
 
     private void loadCalendarActivity() {
-//        Intent settingsIntent = new Intent(KooloHomeActivity.this, KooloSettingsActivity.class);
-//        startActivity(settingsIntent);
+        Intent calendarIntent = new Intent(KooloHomeActivity.this, KooloCalendarActivity.class);
+        startActivity(calendarIntent);
 
     }
 

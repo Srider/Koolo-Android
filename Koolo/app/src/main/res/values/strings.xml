@@ -25,7 +25,7 @@
     <string name="title_activity_koolo_checklist">KooloChecklistActivity</string>
     <string name="title_activity_koolo_base">KooloBaseActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_koolo_background_image">KooloBackgroundImageActivity</string>
     <string name="title_activity_koolo_updates">KooloUpdatesActivity</string>
@@ -36,6 +36,6 @@
     <string name="title_activity_koolo_passcode_verification">KooloPasscodeVerificationActivity
     </string>
 
-    <string name = "pref_locale">en</string>
+    <string name="pref_locale">en</string>
     <string name="title_activity_koolo_calendar">KooloCalendarActivity</string>
 </resources>

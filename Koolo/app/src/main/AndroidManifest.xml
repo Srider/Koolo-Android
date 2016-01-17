@@ -113,8 +113,7 @@
         </activity>
         <activity
             android:name=".calendar.activities.KooloCalendarActivity"
-            android:label="@string/title_activity_koolo_calendar"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:label="@string/title_activity_koolo_calendar">
         </activity>
     </application>
 

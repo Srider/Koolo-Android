@@ -1,43 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:weightSum="1">
 
     <Button
         android:layout_height="40dp"
         android:layout_width="40dp"
+        android:layout_weight="0.1"
         android:layout_gravity="center_vertical"
         android:maxLength="1"
         android:textSize="24sp"
+        android:layout_margin="3dp"
         android:text="@string/left_arrow_text"
         android:id="@+id/left_arrow_button"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:background="@drawable/drawable_color_round_grey"/>
 
     <GridView
-        android:layout_width="305dp"
+        android:layout_width="290dp"
+        android:layout_weight="0.8"
         android:layout_height="match_parent"
         android:id="@+id/calendar_dates_grid_view"
         android:layout_toRightOf="@+id/left_arrow_button"
+        layout="@layout/view_date_cell"
         android:numColumns="3"
         android:columnCount="3"
         android:rowCount="3"
         android:horizontalSpacing="3dp"
         android:verticalSpacing="3dp"
-        android:background="@color/Dark_Grey"/>
+        android:background="@color/Transparent"/>
 
     <Button
+        android:layout_weight="0.1"
         android:layout_height="40dp"
         android:layout_width="40dp"
+        android:layout_margin="3dp"
         android:layout_toRightOf="@+id/calendar_dates_grid_view"
         android:maxLength="1"
         android:textSize="24sp"
         android:text="@string/right_arrow_text"
         android:id="@+id/right_arrow_button"
         android:layout_alignParentRight="true"
+        android:layout_gravity="center_vertical"
         android:layout_centerVertical="true"
         android:layout_marginLeft="0dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"
+        android:background="@drawable/drawable_color_round_grey"/>
 
-</RelativeLayout>
+</LinearLayout>

@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name = "calendar_title_string">Calendar</string>
-    <string name="event_done_option_string">Done</string>
-    <string name="event_cancel_option_string">Cancel</string>
+    <string name="event_done_option_string">Ferdig</string>
+    <string name="event_cancel_option_string">Avbryt</string>
     <string name="events_file_name">Events.txt</string>
 
-    
     <string name = "left_arrow_text">&lt;</string>
     <string name = "right_arrow_text">&gt;</string>
-    <string name="remind_me_string">Remind me</string>
-
-    <string name="add_tag_string">Add Tag</string>
+    <string name="remind_me_string">Minne meg</string>
+    <string name="add_tag_string">Legg Tag</string>
 
     <string-array name="calendar_tag_array">
-        <item>Tough</item>
-        <item>Long</item>
-        <item>Faith</item>
+        <item>Vanskelig</item>
+        <item>Lang</item>
+        <item>Tro</item>
     </string-array>
 
 </resources>

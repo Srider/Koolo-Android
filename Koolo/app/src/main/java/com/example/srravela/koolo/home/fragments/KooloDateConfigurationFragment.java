@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
+import com.example.srravela.koolo.calendar.listeners.KooloCalendarInteractionListener;
 import com.example.srravela.koolo.home.listeners.KooloHomeInteractionListener;
 
 public class KooloDateConfigurationFragment extends Fragment implements View.OnClickListener{
@@ -169,12 +170,11 @@ public class KooloDateConfigurationFragment extends Fragment implements View.OnC
             case R.id.brown_button:
                 colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BROWN);
                 break;
-
         }
 
         colorEditor.commit();
         Bundle bundle = new Bundle();
-        bundle.putInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION, KooloHomeInteractionListener.KOOLO_CALENDAR_DATE_CONFIGURATION_CHANGED);
+        bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.KOOLO_BORDER_CONFIGURATION_SET_ACTION);
         mListener.onHomeInteraction(bundle);
     }
 }

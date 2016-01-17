@@ -1,21 +1,48 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:layout_height="match_parent">
 
-    <include android:id="@+id/calendar_dates_view"
-        layout="@layout/view_dates_navigation"
+    <ImageView
+        android:id="@+id/checklist_background_image"
         android:layout_width="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_height="0dp"
-        android:layout_weight="0.55"/>
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/background"/>
 
-    <ListView android:id="@+id/caledar_events_list_view"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/calendar_home_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.45"
-        android:layout_margin="2dp"
-        layout="@layout/view_quotes_cell"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-</LinearLayout>
+        <include android:id="@+id/calendar_dates_view"
+            layout="@layout/view_dates_navigation"
+            android:layout_width="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.55"/>
+
+        <ListView android:id="@+id/caledar_events_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.45"
+            android:layout_margin="2dp"
+            layout="@layout/view_events_cell"/>
+
+        <Button
+            android:layout_height="50dp"
+            android:layout_width="50dp"
+            android:layout_weight="0.05"
+            android:id="@+id/add_calendar_event_button"
+            android:layout_below="@+id/calendar_home_layout"
+            android:background="@drawable/plus"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

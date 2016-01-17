@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:orientation="vertical" android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<DatePicker-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="325dp"-->
+        <!--android:id="@+id/date_picker">-->
+        <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="60dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:weightSum="3"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_below="@+id/date_picker"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_centerHorizontal="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="bottom"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="50dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_gravity="left"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="18sp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textAllCaps="false"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_alignParentLeft="true"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Daily"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/daily_button"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@android:color/black" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="50dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="18sp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textAllCaps="false"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Weekly"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/weekly_button"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@android:color/black"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<Button&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="50dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_gravity="right"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="18sp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textAllCaps="false"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="Monthly"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/monthly_button"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="@android:color/black" />&ndash;&gt;-->
+        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+    <!--</DatePicker>-->
+<!--</RelativeLayout>-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:weightSum="1"
+    android:layout_height="match_parent">
+
+    <DatePicker
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_weight="0.5"
+        android:calendarViewShown="false"
+        android:id="@+id/date_picker">
+    </DatePicker>
+    <TimePicker
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:layout_height="300dp"
+        android:id="@+id/time_picker"></TimePicker>
+</LinearLayout>
