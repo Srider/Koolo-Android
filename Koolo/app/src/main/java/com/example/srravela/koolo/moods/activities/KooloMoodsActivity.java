@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -27,10 +29,10 @@ import com.example.srravela.koolo.checklists.listeners.KooloChecklistListener;
 import com.example.srravela.koolo.entities.MoodShot;
 import com.example.srravela.koolo.entities.Utils;
 import com.example.srravela.koolo.moods.database.DatabaseHandler;
+import com.example.srravela.koolo.moods.fragments.KooloMoodLineFragment;
 import com.example.srravela.koolo.moods.fragments.KooloMoodMapFragment;
 import com.example.srravela.koolo.humor.listeners.KooloHumourColorListener;
 import com.example.srravela.koolo.moods.fragments.KooloMoodShotFormatterFragment;
-import com.example.srravela.koolo.moods.fragments.KooloMoodsListFragment;
 import com.example.srravela.koolo.moods.listeners.KooloMoodsListener;
 import com.example.srravela.koolo.moods.utils.MoodsDataStore;
 
@@ -66,6 +68,7 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         databaseHandler = new DatabaseHandler(mContext);
        // actionBar = getSupportActionBar();
        // actionBar.hide();
+       // getSupportFragmentManager().addOnBackStackChangedListener(backStackChangedListener);
 
         initUI();
     }
@@ -93,21 +96,21 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         actionBar.setTitle(getResources().getString(R.string.mood_line_title));
 
     }
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_load:
                 menuItem = item;
                 menuItem.setActionView(R.layout.humor_color_screen);
                 menuItem.expandActionView();
-               /* TestTask task = new TestTask();
-                task.execute("test");*/
+               *//* TestTask task = new TestTask();
+                task.execute("test");*//*
                 break;
             default:
                 break;
         }
         return true;
-    }
+    }*/
     private void showPhoto(Uri photoUri) {
         File imageFile = new File(photoUri.getPath());
         if (imageFile.exists()){
@@ -141,21 +144,27 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
     /**
      * Method for loading Loacations and Management Fragment.
      */
+    Fragment moodLinefragment;
+    Fragment mapfragment;
+    Fragment moodShotFormatterFragment;
     private void loadMoodListFragment(){
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
-        Fragment fragment= KooloMoodsListFragment.newInstance();
-        transaction.replace(R.id.fragment_moods_container, fragment, "moodlistfragment");
+        moodLinefragment= KooloMoodLineFragment.newInstance();
+        transaction.replace(R.id.fragment_moods_container, moodLinefragment, "moodLinefragment");
+        transaction.addToBackStack("moodLinefragment");
         transaction.commitAllowingStateLoss();
     }
     /**
      * Method for loading Loacations and Management Fragment.
      */
-    private void loadMoodMapFragment(){
+
+    public void loadMoodMapFragment(){
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
-        Fragment fragment= KooloMoodMapFragment.newInstance();
-        transaction.replace(R.id.fragment_moods_container, fragment, "moodmapfragment");
+        mapfragment= KooloMoodMapFragment.newInstance();
+        transaction.replace(R.id.fragment_moods_container, mapfragment, "moodmapfragment");
+        transaction.addToBackStack("moodmapfragment");
         transaction.commitAllowingStateLoss();
     }
 
@@ -174,8 +183,15 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
     private void loadMoodsGalleryActivity() {
         KooloApplication.isExternalIntentLoaded = true;
         Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        if (Build.VERSION.SDK_INT <19){
+            intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        } else {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/*");
+        }
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST);
     }
 
@@ -184,7 +200,7 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         bundle.putString("selectedImage", selectedImage.toString());
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
-        Fragment moodShotFormatterFragment= KooloMoodShotFormatterFragment.newInstance();
+         moodShotFormatterFragment= KooloMoodShotFormatterFragment.newInstance();
         moodShotFormatterFragment.setArguments(bundle);
 
         transaction.replace(R.id.fragment_moods_container, moodShotFormatterFragment, "moodmapfragment");
@@ -195,81 +211,18 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         void onBackPressed();
     }
 
-   /* @Override
-    public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm != null) {
-            List<Fragment> fragments = fm.getFragments();
-            for(int i = fragments.size() - 1; i >= 0; i--){
-                Fragment fragment = fragments.get(i);
-                if(fragment != null) {
-                    // found the current fragment
 
-                    // if you want to check for specific fragment class
-                    if(fragment instanceof KooloMoodShotFormatterFragment) {
-
-                    }
-                    break;
-                }
-            }
-        }
-    }*/
-   /*@Override
+   @Override
    public void onBackPressed() {
-       List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
-       if (fragmentList != null) {
-           //TODO: Perform your logic to pass back press here
-           for(Fragment fragment : fragmentList) {
-               *//*if(fragment instanceof OnBackPressedListener){
-                  // ((OnBackPressedListener)fragment).onBackPressed();
-                   finish();
-               } *//*
-               if (fragment instanceof KooloMoodsListFragment) {
-                   //super.onBackPressed();
-                   finish();
-                   break;
-               } else if (fragment instanceof KooloMoodShotFormatterFragment) {
-                   super.onBackPressed();
-                   break;
-               } else {
-                   finish();
-               }
-           }
-       }
+       popAction();
    }
-*/
 
-    private boolean onBackPressed(FragmentManager fm) {
-        if (fm != null) {
-            if (fm.getBackStackEntryCount() > 0) {
-                fm.popBackStack();
-                return true;
-            }
-
-            List<Fragment> fragList = fm.getFragments();
-            if (fragList != null && fragList.size() > 0) {
-                for (Fragment frag : fragList) {
-                    if (frag == null) {
-                        continue;
-                    }
-                    if (frag.isVisible()) {
-                        if (onBackPressed(frag.getChildFragmentManager())) {
-                            return true;
-                        }
-                    }
-                }
-            }
+    public void popAction() {
+        if(getFragmentManager().getBackStackEntryCount() ==0) {
+            getFragmentManager().popBackStack();
+        } else {
+            finish();
         }
-        return false;
-    }
-
-    @Override
-    public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
-        if (onBackPressed(fm)) {
-            return;
-        }
-        super.onBackPressed();
     }
 
     @Override

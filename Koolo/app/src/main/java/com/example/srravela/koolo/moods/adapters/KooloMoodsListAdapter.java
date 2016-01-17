@@ -114,68 +114,133 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
             // Creates a ViewHolder and store references to the two children views
             // we want to bind data to.
             holder = new ViewHolder();
+            holder.moodShotImageRelLayout = (RelativeLayout) convertView.findViewById(R.id.moodshot_image_rel_layout);
             holder.moodShotImageDateRelLayout = (RelativeLayout) convertView.findViewById(R.id.moodshot_image_date_rv);
             holder.moodShotImageView = (ImageView)convertView.findViewById(R.id.moodshot_image);
-            holder.moodShotTextView = (TextView)convertView.findViewById(R.id.moodshot_date_tv);
+            holder.moodShotDateTextView = (TextView)convertView.findViewById(R.id.moodshot_date_tv);
             holder.moodShotColorButton = (Button) convertView.findViewById(R.id.moodshot_color_button);
             holder.moodShotTraingleView = (View) convertView.findViewById(R.id.traingle_view);
-           holder.moodShotColorButton.setTag(position);
+
+            holder.moodShotImageMissingDateRelLayout = (RelativeLayout) convertView.findViewById(R.id.moodshot_missing_image_rel_layout);
+            holder.moosShotMissingDateTextView =(TextView)convertView.findViewById(R.id.moodshot_missing_date_tv);
+
+            holder.moodShotColorButton.setTag(position);
             convertView.setTag(holder);
             holder.moodShotImageView.setOnClickListener(this);
+           // holder.moodShotImageView.getLayoutParams().height =  holder.moodShotImageView.getMaxHeight()/2;
         } else {
             // Get the ViewHolder back to get fast access to the TextView
             // and the ImageView.
-
-
             holder = (ViewHolder) convertView.getTag();
 
         }
         MoodShot item = items.get(position);
-       // Uri moodShotUri = Uri.parse(item.getMoodCaptureUri());
-        if(item.getMoodCaptureUri()!= null) {
-          //  holder.moodShotImageView.setImageURI(Uri.parse(item.getMoodCaptureUri()));
-            InputStream inputStream = null;
-            try {
-               /* URL myUrl = new URL(item.getMoodCaptureUri());
-                InputStream inputStream = (InputStream) myUrl.getContent();
-                Drawable drawable = Drawable.createFromStream(inputStream, null);
-                holder.moodShotImageView.setImageDrawable(drawable);*/
 
-                ContentResolver res = context.getContentResolver();
-                Uri uri = Uri.parse(item.getMoodCaptureUri());
-                inputStream =  res.openInputStream(uri);
-               // Drawable drawable = Drawable.createFromStream(inputStream, null);
+        if(item.getMoodColor().isEmpty()) {
+            holder.moodShotImageMissingDateRelLayout.setVisibility(View.VISIBLE);
+            holder.moodShotImageRelLayout.setVisibility(View.GONE);
+            // holder.moodShotImageView.getLayoutParams().height =  holder.moodShotImageView.getMaxHeight()/2;
+        } else {
+            holder.moodShotImageMissingDateRelLayout.setVisibility(View.GONE);
+            holder.moodShotImageRelLayout.setVisibility(View.VISIBLE);
+            // Uri moodShotUri = Uri.parse(item.getMoodCaptureUri());
+            if(item.getMoodCaptureUri()!= null) {
+                //  holder.moodShotImageView.setImageURI(Uri.parse(item.getMoodCaptureUri()));
+                InputStream inputStream = null;
+                try {
+                    ContentResolver res = context.getContentResolver();
+                    Uri uri = Uri.parse(item.getMoodCaptureUri());
+                    inputStream =  res.openInputStream(uri);
+                    // Drawable drawable = Drawable.createFromStream(inputStream, null);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = false;
+                    options.inPreferredConfig = Bitmap.Config.RGB_565;
+                    options.inDither = true;
+                    options.inSampleSize = 4;
 
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = false;
-                options.inPreferredConfig = Bitmap.Config.RGB_565;
-                options.inDither = true;
+                    //  Bitmap myBitmap = BitmapFactory.decodeFile(uri.toString(),options);
+                    Bitmap preview_bitmap = BitmapFactory.decodeStream(inputStream, null, options);
+                    Drawable drawable = new BitmapDrawable(Resources.getSystem(),preview_bitmap);
+                    // updateDrawable(d);
+                    holder.moodShotImageView.setImageDrawable(drawable);
 
-                options.inSampleSize = 4;
+                    // holder.moodShotImageView.getLayoutParams().height = 50;
+                    // holder.moodShotImageView.setBackgroundColor(Color.WHITE);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if(inputStream != null)
+                        try {
+                            inputStream.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                }
+            }
 
-              //  Bitmap myBitmap = BitmapFactory.decodeFile(uri.toString(),options);
-                Bitmap preview_bitmap = BitmapFactory.decodeStream(inputStream, null, options);
-
-                Drawable drawable = new BitmapDrawable(Resources.getSystem(),preview_bitmap);
-               // updateDrawable(d);
-                holder.moodShotImageView.setImageDrawable(drawable);
-
-               // holder.moodShotImageView.getLayoutParams().height = 50;
-               // holder.moodShotImageView.setBackgroundColor(Color.WHITE);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-               if(inputStream != null)
-                    try {
-                        inputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            holder.moodShotColorButton.setOnClickListener(this);
+            Utils.ColorType colorType =  Utils.ColorType.valueOf(item.getMoodColor());
+            //Utils.ColorType colorType = item.getMoodColor();
+            switch (colorType) {
+                case RED:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_red);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Red));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_red));
+                    break;
+                case GREEN:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_theme_green);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.SkyBlue));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_sky_blue));
+                    break;
+                case YELLOW:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_yellow);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Yellow));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_yellow));
+                    break;
+                case ORANGE:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_orange);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Orange));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_orange));
+                    break;
+                case GREY:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_grey);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Light_Grey));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_light_grey));
+                    break;
+                case BLACK:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_black);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Black));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_black));
+                    break;
+                case BROWN:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_brown);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Brown));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_brown));
+                    break;
+                case PINK:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_pink);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Pink));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_pink));
+                    break;
+                case DARK_GREY:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_darkgrey);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Dark_Grey));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_dark_grey));
+                    break;
+                case BLUE:
+                    holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_blue);
+                    holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Blue));
+                    holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_blue));
+                    break;
+                default:
+                    break;
             }
         }
+
+
         if(item.getMoodCaptureDate() !=null) {
             String dateString = item.getMoodCaptureDate();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.US);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy", Locale.US);
             DateFormat targetFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
             String formattedDate = null;
             Date convertedDate = new Date();
@@ -184,77 +249,29 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
                 System.out.println(convertedDate);
                 formattedDate = targetFormat.format(convertedDate);
                 System.out.println(formattedDate);
-                holder.moodShotTextView.setText(formattedDate);
+                if(item.getMoodColor().isEmpty()) {
+                    holder.moosShotMissingDateTextView.setText(formattedDate);
+                } else {
+                    holder.moodShotDateTextView.setText(formattedDate);
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
-        holder.moodShotColorButton.setOnClickListener(this);
-        Utils.ColorType colorType =  Utils.ColorType.valueOf(item.getMoodColor());
-        //Utils.ColorType colorType = item.getMoodColor();
-        switch (colorType) {
-            case RED:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_red);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Red));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_red));
-                break;
-            case GREEN:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_theme_green);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.SkyBlue));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_sky_blue));
-                break;
-            case YELLOW:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_yellow);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Yellow));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_yellow));
-                break;
-            case ORANGE:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_orange);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Orange));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_orange));
-                break;
-            case GREY:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_grey);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Light_Grey));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_light_grey));
-                break;
-            case BLACK:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_black);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Black));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_black));
-                break;
-            case BROWN:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_brown);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Brown));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_brown));
-                break;
-            case PINK:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_pink);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Pink));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_pink));
-                break;
-            case DARK_GREY:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_darkgrey);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Dark_Grey));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_dark_grey));
-                break;
-            case BLUE:
-                holder.moodShotColorButton.setBackgroundResource(R.drawable.drawable_color_round_blue);
-                holder.moodShotImageDateRelLayout.setBackgroundColor(context.getResources().getColor(R.color.Blue));
-                holder.moodShotTraingleView.setBackground(context.getResources().getDrawable(R.drawable.triangle_blue));
-                break;
-            default:
-                break;
-        }
+
 
         return convertView;
     }
     static class ViewHolder {
-        RelativeLayout moodShotImageDateRelLayout;
+        RelativeLayout  moodShotImageRelLayout;
         Button moodShotColorButton;
-        TextView moodShotTextView;
-        ImageView moodShotImageView;
         View moodShotTraingleView;
+        RelativeLayout moodShotImageDateRelLayout;
+        TextView moodShotDateTextView;
+        ImageView moodShotImageView;
+
+        RelativeLayout moodShotImageMissingDateRelLayout;
+        TextView  moosShotMissingDateTextView;
     }
     /**
      * Method to check whether if the list is empty or not.

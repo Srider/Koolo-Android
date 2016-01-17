@@ -114,6 +114,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // code to get all MoodShot in a list view
+    public MoodShot getMaxDateFromMoodShots() {
+        MoodShot moodShotItem = null;
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_MOODSHOTS +" ORDER BY "+ MOOD_CAPTURE_DATE+" DESC LIMIT 1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            moodShotItem = new MoodShot();
+            moodShotItem.setMoodShotId(cursor.getInt(0));
+            moodShotItem.setMoodColor(cursor.getString(1));
+            moodShotItem.setMoodCaptureDate(cursor.getString(2));
+            moodShotItem.setMoodCaptureUri(cursor.getString(3));
+
+
+        }
+
+        // return moodShot list
+        return moodShotItem;
+    }
+
+    // code to get all MoodShot in a list view
     public List<MoodShot> getAllMoodShots() {
         List<MoodShot> moodShotList = new ArrayList<MoodShot>();
         // Select All Query
