@@ -37,8 +37,7 @@ import java.util.List;
  * Created by srikar on 5/12/15.
  * Updated by tippi on 22/12/15.
  */
-public class KooloMoodLineFragment extends Fragment implements View.OnClickListener,
-        KooloMoodsActivity.OnBackPressedListener {
+public class KooloMoodLineFragment extends Fragment implements View.OnClickListener, KooloMoodsActivity.OnBackPressedListener{
     private ImageView backgroundImageView;
     ListView moodslist;
     KooloMoodsListAdapter moodsListAdapter;
@@ -102,10 +101,18 @@ public class KooloMoodLineFragment extends Fragment implements View.OnClickListe
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mListener = mActivity;
+        ((KooloMoodsActivity) getActivity()).setOnBackPressedListener(this);
         mContext=mActivity.getApplicationContext();
 
         initUI();
+    }
+    @Override
+    public void doBack() {
+        //BackPressed in activity will call this;
+        //getFragmentManager().popBackStack();
+        getActivity().finish();
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == FRAGMENT_VALUE && resultCode == Activity.RESULT_OK) {
@@ -274,12 +281,12 @@ public class KooloMoodLineFragment extends Fragment implements View.OnClickListe
     }
 
 
-
+/*
     @Override
     public void onBackPressed() {
         // getActivity().onBackPressed();
        // getActivity().finish();
-    }
+    }*/
 
     @Override
     public void onDetach() {

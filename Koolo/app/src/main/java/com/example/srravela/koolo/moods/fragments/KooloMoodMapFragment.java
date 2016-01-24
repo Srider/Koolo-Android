@@ -55,6 +55,7 @@ public class KooloMoodMapFragment extends Fragment implements View.OnClickListen
         super.onCreate(savedInstanceState);
         // mActivity.getSupportActionBar().setTitle("Select Humor Color");
         mActivity = (KooloMoodsActivity) getActivity();
+        ((KooloMoodsActivity) getActivity()).setOnBackPressedListener(this);
 
     }
 
@@ -217,14 +218,19 @@ public class KooloMoodMapFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra(KooloMoodLineFragment.FRAGMENT_KEY,KooloMoodLineFragment.FRAGMENT_VALUE);
-        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
-        getFragmentManager().popBackStack();
+       // Intent intent = new Intent();
+      //  intent.putExtra(KooloMoodLineFragment.FRAGMENT_KEY,KooloMoodLineFragment.FRAGMENT_VALUE);
+       // getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+        //getFragmentManager().popBackStack();
 
-    }
+    }*/
+  @Override
+  public void doBack() {
+      //BackPressed in activity will call this;
+      getFragmentManager().popBackStack();
+  }
 
     @Override
     public void onDetach() {

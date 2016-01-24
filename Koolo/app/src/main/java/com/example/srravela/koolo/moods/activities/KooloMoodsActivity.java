@@ -207,23 +207,48 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
         transaction.addToBackStack("MoodShotFormatterFragment");
         transaction.commitAllowingStateLoss();
     }
-    public interface OnBackPressedListener {
-        void onBackPressed();
-    }
 
 
-   @Override
+  /* @Override
    public void onBackPressed() {
        popAction();
-   }
+   }*/
 
-    public void popAction() {
+    /*public void popAction() {
         if(getFragmentManager().getBackStackEntryCount() ==0) {
-            getFragmentManager().popBackStack();
-        } else {
+          //  getFragmentManager().popBackStack();
             finish();
+        } else {
+           // finish();
+            getFragmentManager().popBackStack();
         }
+    }*/
+
+
+   protected OnBackPressedListener onBackPressedListener;
+
+    public interface OnBackPressedListener {
+        void doBack();
     }
+
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
+    }
+    /*@Override
+    public void onBackPressed(){
+    FragmentManager fm = getSupportFragmentManager();
+    // Call current fragment's onPopBackStack if it has one.
+    String fragmentTag = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 1).getName();
+    Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+    if (currentFragment instanceof KooloMoodLineFragment)
+            ((KooloMoodLineFragment)currentFragment).onBackPressed();
+    else if (currentFragment instanceof KooloMoodMapFragment)
+        ((KooloMoodMapFragment)currentFragment).onBackPressed();
+    else if (currentFragment instanceof KooloMoodShotFormatterFragment)
+        ((KooloMoodShotFormatterFragment)currentFragment).onBackPressed();
+        else
+        fm.popBackStack();
+    }*/
 
     @Override
     public void onMoodsAction(Bundle bundle) {
@@ -317,6 +342,19 @@ public class KooloMoodsActivity extends KooloBaseActivity implements KooloMoodsL
             }*/
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        if (onBackPressedListener != null)
+            onBackPressedListener.doBack();
+        else
+            super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        onBackPressedListener = null;
+        super.onDestroy();
     }
     private String getDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);

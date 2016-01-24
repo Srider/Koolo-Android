@@ -114,6 +114,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mActivity=(KooloMoodsActivity)getActivity();
+        ((KooloMoodsActivity) getActivity()).setOnBackPressedListener(this);
         mListener = mActivity;
     }
 
@@ -258,6 +259,11 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
                 return super.onOptionsItemSelected(item);
         }
     }
+    @Override
+    public void doBack() {
+        //BackPressed in activity will call this;
+        getFragmentManager().popBackStack();
+    }
     private List<Date> generateDateListBetween(Date startDate, Date endDate)
     {
         //Flip the input if necessary, to prevent infinite loop
@@ -340,10 +346,10 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         //mSelectedMoodShot = selectedMoodShot;
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
         getFragmentManager().popBackStack();
-    }
+    }*/
 
     @Override
     public void onDetach() {
