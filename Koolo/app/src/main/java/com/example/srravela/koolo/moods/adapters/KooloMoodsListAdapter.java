@@ -123,7 +123,7 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
 
             holder.moodShotImageMissingDateRelLayout = (RelativeLayout) convertView.findViewById(R.id.moodshot_missing_image_rel_layout);
             holder.moosShotMissingDateTextView =(TextView)convertView.findViewById(R.id.moodshot_missing_date_tv);
-
+            holder.timeline_view1= (View) convertView.findViewById(R.id.timeline_view1);
             holder.moodShotColorButton.setTag(position);
             convertView.setTag(holder);
             holder.moodShotImageView.setOnClickListener(this);
@@ -250,6 +250,7 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
                 formattedDate = targetFormat.format(convertedDate);
                 System.out.println(formattedDate);
                 if(item.getMoodColor().isEmpty()) {
+                    holder.timeline_view1.setVisibility(View.VISIBLE);
                     holder.moosShotMissingDateTextView.setText(formattedDate);
                 } else {
                     holder.moodShotDateTextView.setText(formattedDate);
@@ -269,7 +270,7 @@ public class KooloMoodsListAdapter extends BaseAdapter implements View.OnClickLi
         RelativeLayout moodShotImageDateRelLayout;
         TextView moodShotDateTextView;
         ImageView moodShotImageView;
-
+        View timeline_view1;
         RelativeLayout moodShotImageMissingDateRelLayout;
         TextView  moosShotMissingDateTextView;
     }
