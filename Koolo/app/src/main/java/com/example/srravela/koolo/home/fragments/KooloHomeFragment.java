@@ -5,19 +5,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
+import com.example.srravela.koolo.calendar.adapters.KooloCalendarEventsAdapter;
+import com.example.srravela.koolo.calendar.utils.EventsDataStore;
+import com.example.srravela.koolo.entities.CalendarEvents;
 import com.example.srravela.koolo.home.listeners.KooloHomeInteractionListener;
 
-import org.w3c.dom.Text;
+import java.util.List;
 
-public class KooloHomeFragment extends Fragment implements View.OnClickListener {
+public class KooloHomeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     public static final String TAG=KooloHomeFragment.class.getSimpleName();
     private Context mContext;
     private Activity mActivity;
@@ -27,6 +34,11 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener 
     Button mPopUpMenuButton, mPopUpCalendarButton, mPopUpCameraButton, mPopUpChecklistButton;
     private View rootView, popUpMenuView;
     private KooloHomeInteractionListener mListener;
+
+    ListView todaysEventsListView;
+    List<CalendarEvents> calendarEvents = null;
+    KooloCalendarEventsAdapter calendarEventsAdapter;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -142,9 +154,18 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener 
             mSelectedQuoteTextView.setVisibility(View.INVISIBLE);
         }
 
-        mDayNotificationText = (TextView)homeNotificationsView.findViewById(R.id.day_notification);
-        mTimeNotificationText = (TextView)homeNotificationsView.findViewById(R.id.time_notification);
-        mLastDayNotificationText = (TextView)homeNotificationsView.findViewById(R.id.last_day_notification);
+
+        // Todays Events
+        todaysEventsListView= (ListView) rootView.findViewById(R.id.todays_events_list_view);
+        calendarEvents = loadCalendarEvents();
+
+        if(calendarEvents!=null){
+            calendarEventsAdapter = new KooloCalendarEventsAdapter(calendarEvents, mContext, true);
+            todaysEventsListView.setAdapter(calendarEventsAdapter);
+            todaysEventsListView.setOnItemClickListener(this);
+        } else {
+            Log.i(TAG, "NO ITEMS");
+        }
 
         mSettingsButton = (Button)rootView.findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(this);
@@ -229,5 +250,26 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener 
         Bundle bundle = new Bundle();
         bundle.putInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION, KooloHomeInteractionListener.KOOLO_POPUP_CAMERA_BUTTON_CLICKED);
         mListener.onHomeInteraction(bundle);
+    }
+
+
+    //TODO:
+    private List<CalendarEvents> loadCalendarEvents() {
+        List<CalendarEvents> calendarEventsList = null;
+        EventsDataStore sharedEventsDataStore;
+        if(calendarEventsList == null) {
+            sharedEventsDataStore = EventsDataStore.getSharedEventsDataStore(mContext.getResources().getString(R.string.events_file_name), mContext);
+
+            //First Get transfers from file.
+            calendarEventsList = sharedEventsDataStore.readEventsFromFile();
+        }
+
+        return calendarEventsList;
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

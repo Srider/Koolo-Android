@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
+import com.example.srravela.koolo.entities.CalendarDates;
 import com.example.srravela.koolo.entities.CalendarEvents;
 
 import java.io.File;
@@ -174,7 +175,7 @@ public class EventsDataStore {
      * @return boolean
      */
     public static List<CalendarEvents> readEventsFromFile() {
-        List<CalendarEvents> eventsList = new ArrayList<CalendarEvents>();;
+        List<CalendarEvents> eventsList = new ArrayList<CalendarEvents>();
         if(isEventsFileReadable()) {
             FileInputStream fis = null;
             try {
@@ -197,5 +198,21 @@ public class EventsDataStore {
             }
         }
         return eventsList;
+    }
+
+    public static List<CalendarEvents>  readEventsForDate(CalendarDates date) {
+        List<CalendarEvents> eventsList = readEventsFromFile();
+        List<CalendarEvents> selectedDateEventsList = new ArrayList<CalendarEvents>();
+        DateAndTimeUtility sharedDateAndTimeUtility = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext);
+
+        if(eventsList != null) {
+            for(CalendarEvents calendarEvent : eventsList) {
+                String[] dateComponents = sharedDateAndTimeUtility.getRefactoredDateFromString(calendarEvent.getEventDate());
+                if(dateComponents[0].equals(date.getDateText()) && dateComponents[1].equals(date.getDayText()) && dateComponents[2].equals(date.getMonthText())) {
+                    selectedDateEventsList.add(calendarEvent);
+                }
+            }
+        }
+        return selectedDateEventsList;
     }
 }

@@ -133,7 +133,6 @@ public class DateAndTimeUtility {
         refactoredComponents[1] = "Dec";
                 break;
         }
-
         return refactoredComponents;
     }
 

@@ -12,6 +12,10 @@
 
     <string name="add_tag_string">Add Tag</string>
 
+    <string name="tough_tag">Tough</string>
+    <string name="faith_tag">Long</string>
+    <string name="long_tag">Faith</string>
+
     <string-array name="calendar_tag_array">
         <item>Tough</item>
         <item>Long</item>

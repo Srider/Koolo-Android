@@ -8,8 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.srravela.koolo.R;
+import com.example.srravela.koolo.calendar.utils.DateAndTimeUtility;
 import com.example.srravela.koolo.entities.CalendarDates;
 import com.example.srravela.koolo.entities.CalendarEvents;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
     public List<CalendarEvents> items = null;
     LayoutInflater layoutInflater;
     public Context context;
+    boolean isHomeFragment = false;
 
 
     /**
@@ -38,10 +42,11 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
      * @param items
      */
 
-    public KooloCalendarEventsAdapter(List<CalendarEvents> items, Context context ) {
+    public KooloCalendarEventsAdapter(List<CalendarEvents> items, Context context, boolean isHomeFragment ) {
         super();
         this.items = items;
         this.context = context;
+        this.isHomeFragment = isHomeFragment;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -96,19 +101,57 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView= layoutInflater.inflate(R.layout.view_events_cell, null);
 
-        TextView dateView = (TextView)convertView.findViewById(R.id.calendar_date_cell);
+        TextView eventHeaderText = (TextView)convertView.findViewById(R.id.event_header_text);
 
-        TextView monthText = (TextView)convertView.findViewById(R.id.calendar_date_cell);
+        TextView eventClockText = (TextView) convertView.findViewById(R.id.event_clock_text);
+
+        TextView frequencyText = (TextView) convertView.findViewById(R.id.event_frequency_text);
+
+        TextView toughTextView = (TextView) convertView.findViewById(R.id.tough_tag_text);
+        TextView longTextView = (TextView) convertView.findViewById(R.id.long_tag_text);
+        TextView faithTextView = (TextView) convertView.findViewById(R.id.faith_tag_text);
 
         CalendarEvents item = items.get(position);
-//        String calendarDayText = item.getDayText();
-//        String calendarDateText = item.getDateText();
-//
-//        if(calendarDayText!= null && calendarDateText!=null) {
-//            dateView.setText(calendarDayText+"\n"+calendarDateText);
-//        }
+        String eventHeader = item.getEventName();
+        String timeText = item.getEventTime();
+        String frequency = item.getEventType();
 
-        //TODO: add month here./
+        //Set Event Header.
+        if(eventHeader != null) {
+            eventHeaderText.setText(eventHeader);
+        }
+
+        //Set Event Time
+        if(timeText != null) {
+            eventClockText.setText("Kl:"+timeText);
+        }
+
+        //Set Frequency Text.
+        if(frequency != null) {
+            frequencyText.setText(frequency);
+        }
+
+        if(!isHomeFragment) {
+            //        if(item.isTough()) {
+            toughTextView.setVisibility(View.VISIBLE);
+//        } else {
+//            toughTextView.setVisibility(View.INVISIBLE);
+//        }
+//
+//        if(item.isFaith()) {
+            faithTextView.setVisibility(View.VISIBLE);
+//        } else {
+//            faithTextView.setVisibility(View.INVISIBLE);
+//        }
+//
+//        if(item.isLong()) {
+            longTextView.setVisibility(View.VISIBLE);
+//        } else {
+//            longTextView.setVisibility(View.INVISIBLE);
+//        }
+        }
+
+
 
 
         return convertView;

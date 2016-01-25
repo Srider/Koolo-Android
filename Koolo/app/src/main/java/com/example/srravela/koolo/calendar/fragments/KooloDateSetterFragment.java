@@ -45,7 +45,6 @@ public class KooloDateSetterFragment extends DialogFragment {
         mContext = (KooloCalendarActivity)getActivity();
     }
 
-
     public void setOnDateSetListener(DatePickerDialog.OnDateSetListener ondate) {
         onDateSet = ondate;
     }
@@ -53,8 +52,6 @@ public class KooloDateSetterFragment extends DialogFragment {
     public void setOnButtonClickListener(OnButtonClickedListener onButtonSelected) {
         onButtonSet = onButtonSelected;
     }
-
-
 
     @Override
     public void setArguments(Bundle args) {

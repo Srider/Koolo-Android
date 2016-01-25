@@ -75,6 +75,9 @@ public class KooloCalendarActivity extends KooloBaseActivity implements KooloCal
             case KOOLO_LOAD_BORDER_CONFIGURATION_ACTION:
                 loadBorderConfigurationFragment();
                 break;
+            case CALENDAR_EVENT_DONE_ACTION:
+                popAction();
+                break;
         }
     }
 

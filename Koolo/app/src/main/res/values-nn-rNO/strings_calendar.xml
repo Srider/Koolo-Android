@@ -9,6 +9,11 @@
     <string name = "right_arrow_text">&gt;</string>
     <string name="remind_me_string">Minne meg</string>
     <string name="add_tag_string">Legg Tag</string>
+
+    <string name="tough_tag">Vanskelig</string>
+    <string name="faith_tag">Tro</string>
+    <string name="long_tag">Lang</string>
+
     <string-array name="calendar_tag_array">
         <item>Vanskelig</item>
         <item>Lang</item>

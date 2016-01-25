@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
@@ -24,10 +25,12 @@ import com.example.srravela.koolo.calendar.adapters.KooloCalendarDatesAdapter;
 import com.example.srravela.koolo.calendar.adapters.KooloCalendarEventsAdapter;
 import com.example.srravela.koolo.calendar.listeners.KooloCalendarInteractionListener;
 import com.example.srravela.koolo.calendar.utils.DateAndTimeUtility;
+import com.example.srravela.koolo.calendar.utils.EventsDataStore;
 import com.example.srravela.koolo.checklists.activities.KooloChecklistActivity;
 import com.example.srravela.koolo.checklists.adapters.KooloChecklistAdapter;
 import com.example.srravela.koolo.checklists.listeners.KooloChecklistListener;
 import com.example.srravela.koolo.checklists.utils.GoalsDataStore;
+import com.example.srravela.koolo.checklists.utils.TransfersDataStore;
 import com.example.srravela.koolo.entities.CalendarDates;
 import com.example.srravela.koolo.entities.CalendarEvents;
 import com.example.srravela.koolo.entities.Checklist;
@@ -147,7 +150,7 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
         calendarEventsListView= (ListView) rootView.findViewById(R.id.caledar_events_list_view);
 
         if(calendarEvents!=null){
-            calendarEventsAdapter = new KooloCalendarEventsAdapter(calendarEvents, mContext);
+            calendarEventsAdapter = new KooloCalendarEventsAdapter(calendarEvents, mContext, false);
             calendarEventsListView.setAdapter(calendarEventsAdapter);
             calendarEventsListView.setOnItemClickListener(this);
         } else {
@@ -167,7 +170,12 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
     //TODO:
     private List<CalendarEvents> loadCalendarEventsForDate(CalendarDates date) {
         List<CalendarEvents> calendarEventsList = null;
-
+        EventsDataStore sharedEventsDataStore;
+        if(calendarEventsList == null) {
+            sharedEventsDataStore = EventsDataStore.getSharedEventsDataStore(mContext.getResources().getString(R.string.events_file_name), mContext);
+            //First Get transfers from file.
+            calendarEventsList = sharedEventsDataStore.readEventsForDate(date);
+        }
         return calendarEventsList;
     }
 
@@ -219,8 +227,10 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        calendarEvents = loadCalendarEventsForDate(calendarDates.get(""+currentWindowIndex).get(position));
+        if(calendarEvents== null) {
+            Toast.makeText(mContext, "No events available for this date", Toast.LENGTH_LONG).show();
+            calendarEventsListView.setVisibility(View.INVISIBLE);
+        }
     }
-
-
 }
