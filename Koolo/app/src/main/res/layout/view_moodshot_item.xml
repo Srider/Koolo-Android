@@ -8,15 +8,13 @@
         android:id="@+id/moodshot_image_rel_layout"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="15dp"
         android:visibility="visible"
         android:orientation="vertical">
 
         <View
             android:id="@+id/timeline_view"
             android:layout_width="1dp"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:layout_marginLeft="@dimen/checklist_timeline_margin"
             android:background="@color/Light_Grey" />
 
