@@ -11,6 +11,7 @@ public class CalendarEvents  implements Serializable {
     private String eventDate;
     private String eventTime;
     private String eventType;
+    private String eventMonth;
     private boolean isTough;
     private boolean isLong;
     private boolean isFaith;
@@ -22,6 +23,7 @@ public class CalendarEvents  implements Serializable {
         this.eventDate = eventDate;
         this.eventTime = eventTime;
         this.eventType = eventType;
+        this.eventMonth = eventMonth;
         this.isTough = isTough;
         this.isLong = isLong;
         this.isFaith = isFaith;
@@ -46,6 +48,16 @@ public class CalendarEvents  implements Serializable {
     public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
+
+
+    public String getEventMonth() {
+        return eventMonth;
+    }
+
+    public void setEventMonth(String eventMonth) {
+        this.eventMonth = eventMonth;
+    }
+
 
     public String getEventTime() {
         return eventTime;

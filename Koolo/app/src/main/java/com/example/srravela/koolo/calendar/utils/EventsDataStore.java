@@ -205,7 +205,7 @@ public class EventsDataStore {
         List<CalendarEvents> selectedDateEventsList = new ArrayList<CalendarEvents>();
         DateAndTimeUtility sharedDateAndTimeUtility = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext);
 
-        if(eventsList != null) {
+        if(eventsList != null || eventsList.size() >0) {
             for(CalendarEvents calendarEvent : eventsList) {
                 String[] dateComponents = sharedDateAndTimeUtility.getRefactoredDateFromString(calendarEvent.getEventDate());
                 if(dateComponents[0].equals(date.getDateText()) && dateComponents[1].equals(date.getDayText()) && dateComponents[2].equals(date.getMonthText())) {

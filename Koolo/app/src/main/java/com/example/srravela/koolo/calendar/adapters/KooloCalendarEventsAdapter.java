@@ -30,10 +30,12 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
 
 
     /**
-     * Constructor used for initializing the KooloCalendarDatesAdapter.
-     * @param context
      * @param items
      */
+    public void setEvents(List<CalendarEvents> items) {
+        this.items = items;
+        this.notifyDataSetChanged();
+    }
 
 
     /**

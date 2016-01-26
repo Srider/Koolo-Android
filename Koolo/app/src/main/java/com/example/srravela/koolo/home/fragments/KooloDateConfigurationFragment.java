@@ -174,7 +174,7 @@ public class KooloDateConfigurationFragment extends Fragment implements View.OnC
 
         colorEditor.commit();
         Bundle bundle = new Bundle();
-        bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.KOOLO_BORDER_CONFIGURATION_SET_ACTION);
+        bundle.putInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION, KooloHomeInteractionListener.KOOLO_CALENDAR_DATE_CONFIGURATION_CHANGED);
         mListener.onHomeInteraction(bundle);
     }
 }

@@ -62,14 +62,13 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
     private KooloCalendarActivity mActivity;
     private Context mContext;
     public static Utils.ColorType colorType;
-    private static String eventDate;
-    private static String eventTime;
-    private static String eventType;
-    private static String eventText;
+    private  String eventDate;
+    private  String eventTime;
+    private  String eventType;
+    private  String eventText;
     private boolean isTough = false;
     private boolean isLong = false;
     private boolean isFaith = false;
-    private boolean isRemindMe = false;
 
     KooloAddCalendarEventFragment eventFragment;
 
@@ -136,8 +135,10 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
 
         monthText = (TextView) rootView.findViewById(R.id.month_text);
         monthText.setText(dateComponents[1]);
+
         reminderCheckbox = (CheckBox) rootView.findViewById(R.id.remindme_checkbox);
         reminderCheckbox.setOnCheckedChangeListener(this);
+
         eventEditText = (EditText) rootView.findViewById(R.id.event_edit_text);
         eventEditText.setOnEditorActionListener(this);
 
@@ -271,9 +272,6 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         if(isFaith) {
             tagSpinner.setSelection(2);
         }
-        if(isRemindMe) {
-            reminderCheckbox.setChecked(true);
-        }
 
         //Resume Date and times.
         Boolean isEventConfigurationButtonSet = sharedPreferences.getBoolean(KooloApplication.EVENT_BUTTON_CONFIGURATION, false);
@@ -285,10 +283,13 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
             monthText.setText(sharedPreferences.getString(OnButtonClickedListener.MONTH, null));
             eventTypeTextView.setText(eventType);
             eventTagButton.setText("Kl."+eventTime);
+        } else {
+            eventTypeTextView.setText("");
+            eventTagButton.setText(mContext.getResources().getString(R.string.clinic_tag));
+
         }
 
-        Boolean isRemindMe = sharedPreferences.getBoolean(OnButtonClickedListener.REMINDME, false);
-        reminderCheckbox.setChecked(isRemindMe);
+        reminderCheckbox.setChecked(sharedPreferences.getBoolean(OnButtonClickedListener.REMINDME, false));
     }
 
 
@@ -325,16 +326,13 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         if(canProceed()) {
             CalendarEvents newCalendarEvent = new CalendarEvents(eventText,eventDate,eventTime,eventType,isTough,isLong,isFaith,reminderCheckbox.isChecked(),colorType);
             if(addCalendarEventsToDataStore(newCalendarEvent)) {
-                Toast.makeText(mContext,"New Calendar Event Added", Toast.LENGTH_LONG).show();
+                resetSharedPreferences();
                 bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_DONE_ACTION);
+                mListener.onCalendarInteraction(bundle);
             } else {
-                Toast.makeText(mContext,"Calendar Event Add Failed !!!", Toast.LENGTH_LONG).show();
-                bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_CANCEL_ACTION);
+                resetSharedPreferences();
             }
-            mListener.onCalendarInteraction(bundle);
-
         }
-
     }
 
     @Override
@@ -422,6 +420,52 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         SharedPreferences.Editor configurationEditor=configurationSharedPreferences.edit();
         configurationEditor.putBoolean(OnButtonClickedListener.REMINDME, isChecked);
         configurationEditor.commit();
-        isRemindMe = isChecked;
     }
+
+
+    private void resetSharedPreferences() {
+
+        SharedPreferences dateSelectionPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
+        SharedPreferences.Editor configurationEditor=dateSelectionPreferences.edit();
+        configurationEditor.putBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION, true);
+        configurationEditor.putBoolean(KooloApplication.EVENT_BUTTON_CONFIGURATION, false);
+        configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.DARK_GREY);
+        configurationEditor.putBoolean(OnButtonClickedListener.REMINDME, false);
+        configurationEditor.putString(OnButtonClickedListener.BUTTON_CLICKED_ACTION, null);
+        configurationEditor.putString(OnButtonClickedListener.EVENTNAME, null);
+        configurationEditor.putString(OnButtonClickedListener.DATE, null);
+        configurationEditor.putString(OnButtonClickedListener.TIME, null);
+        configurationEditor.putString(OnButtonClickedListener.TIME, null);
+        configurationEditor.putString(OnButtonClickedListener.MONTH, null);
+        configurationEditor.putString(OnButtonClickedListener.SUBDATE, null);
+        configurationEditor.putString(OnButtonClickedListener.DAY,null);
+        configurationEditor.commit();
+
+        eventDate = null;
+        eventType = null;
+        eventTime = null;
+        eventText = null;
+
+
+        List<Integer> tags = tagSpinner.getSelectedIndices();
+
+        for(Integer tag : tags){
+            switch(tag) {
+                case 0:
+                    isTough = false;
+                    break;
+                case 1:
+                    isLong = false;
+                    break;
+                case 2:
+                    isFaith = false;
+                    break;
+            }
+        }
+
+        reminderCheckbox.setChecked(false);
+
+        colorType = Utils.ColorType.DARK_GREY;
+    }
+
 }

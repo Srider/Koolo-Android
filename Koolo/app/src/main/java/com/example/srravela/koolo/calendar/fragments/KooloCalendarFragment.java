@@ -68,6 +68,7 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
      *
      * @return A new instance of fragment KooloCalendarFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static KooloCalendarFragment newInstance() {
         KooloCalendarFragment fragment = new KooloCalendarFragment();
@@ -151,6 +152,7 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
 
         if(calendarEvents!=null){
             calendarEventsAdapter = new KooloCalendarEventsAdapter(calendarEvents, mContext, false);
+            calendarEventsAdapter.notifyDataSetChanged();
             calendarEventsListView.setAdapter(calendarEventsAdapter);
             calendarEventsListView.setOnItemClickListener(this);
         } else {
@@ -228,9 +230,12 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         calendarEvents = loadCalendarEventsForDate(calendarDates.get(""+currentWindowIndex).get(position));
-        if(calendarEvents== null) {
-            Toast.makeText(mContext, "No events available for this date", Toast.LENGTH_LONG).show();
-            calendarEventsListView.setVisibility(View.INVISIBLE);
-        }
+
+        calendarEventsAdapter.setEvents(calendarEvents);
+
+//        if(calendarEvents == null || calendarEvents.size() == 0) {
+//            Toast.makeText(mContext, "No events available for this date", Toast.LENGTH_LONG).show();
+////            calendarEventsListView.setVisibility(View.INVISIBLE);
+//        }
     }
 }

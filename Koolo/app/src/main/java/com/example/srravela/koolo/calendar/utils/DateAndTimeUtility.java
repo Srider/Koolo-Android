@@ -93,9 +93,9 @@ public class DateAndTimeUtility {
         String[] components = eventDate.split("-");
         refactoredComponents[0] = components[0];
         refactoredComponents[1] = getFormattedDayOfWeekForDate(eventDate);
+//        refactoredComponents[2] = components[2];
 
-        Log.d(TAG, components[0]+ components[1]+ components[2]);
-        switch(Integer.parseInt(components[2])) {
+        switch(Integer.parseInt(components[1])) {
             case 0:
                 refactoredComponents[2] = "Jan";
                 break;
@@ -130,9 +130,12 @@ public class DateAndTimeUtility {
         refactoredComponents[2] = "Nov";
                 break;
             case 11:
-        refactoredComponents[1] = "Dec";
+        refactoredComponents[2] = "Dec";
                 break;
         }
+
+        Log.d(TAG, components[0]+ components[1]+ components[2]);
+
         return refactoredComponents;
     }
 
