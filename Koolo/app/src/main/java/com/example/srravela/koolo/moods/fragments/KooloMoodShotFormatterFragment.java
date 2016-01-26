@@ -144,7 +144,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         switch (item.getItemId()) {
             case R.id.action_moodline_humor_done:
 
-                    MoodShot moodShots = databaseHandler.getMaxDateFromMoodShots();
+                   /* MoodShot moodShots = databaseHandler.getMaxDateFromMoodShots();
 
                     if(moodShots != null && moodShots.getMoodCaptureDate() !=null) {
                         String dateString = moodShots.getMoodCaptureDate();
@@ -170,7 +170,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
                           //  Date d2 = null;
 
                             try {
-                              /*  d1 = format.parse(dateStart);
+                              *//*  d1 = format.parse(dateStart);
                                // d2 = format.parse(dateStop);
                                 d2 = new Date();
                                 //in milliseconds
@@ -179,7 +179,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
 
                                 long diffDays = diff / (24 * 60 * 60 * 1000);
 
-                                System.out.print(diffDays + " days, ");*/
+                                System.out.print(diffDays + " days, ");*//*
                                 Date currentDate = new Date();
                                 Date today = new Date();
                                 SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy", Locale.ENGLISH);
@@ -246,12 +246,14 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
                         }
 
 
-                } else {
+                }*/ /*else {
                         // first time only (no db inserted values).
                 if(mSelectedMoodShot != null) {
                     databaseHandler.addMoodShot(mSelectedMoodShot);
+                }*/
+                if(mSelectedMoodShot != null) {
+                    databaseHandler.addMoodShot(mSelectedMoodShot);
                 }
-            }
                 //  mListener.onMoodsAction();
                 getFragmentManager().popBackStack();
                 return true;
@@ -264,7 +266,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         //BackPressed in activity will call this;
         getFragmentManager().popBackStack();
     }
-    private List<Date> generateDateListBetween(Date startDate, Date endDate)
+   /* private List<Date> generateDateListBetween(Date startDate, Date endDate)
     {
         //Flip the input if necessary, to prevent infinite loop
         if(startDate.after(endDate))
@@ -286,7 +288,7 @@ public class KooloMoodShotFormatterFragment extends Fragment  implements KooloMo
         while(cal.getTime().before(endDate));
 
         return resultList;
-    }
+    }*/
     public List<Humour> loadHumourColours() {
 
         HumourDataStore humourDataStore = HumourDataStore.getSharedHumoursDataStore(mActivity.getResources().getString(R.string.humours_file_name), mActivity);
