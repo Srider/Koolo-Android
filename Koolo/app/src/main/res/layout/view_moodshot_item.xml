@@ -11,23 +11,27 @@
         android:visibility="visible"
         android:orientation="vertical">
 
-        <View
-            android:id="@+id/timeline_view"
-            android:layout_width="1dp"
-            android:layout_height="220dp"
-            android:layout_marginLeft="@dimen/checklist_timeline_margin"
-            android:background="@color/Light_Grey" />
+        <FrameLayout
+            android:layout_width="50dp" android:layout_height="220dp"
+            android:id="@+id/mood_item_cell_layout">
+            <View
+                android:id="@+id/timeline_view"
+                android:layout_width="1dp"
+                android:layout_height="220dp"
+                android:layout_marginLeft="@dimen/checklist_timeline_margin"
+                android:background="@color/Light_Grey" />
 
-        <Button
-            android:id="@+id/moodshot_color_button"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginBottom="@dimen/checklist_status_button_top_margin"
-            android:layout_marginLeft="@dimen/checklist_status_button_left_margin"
-            android:layout_marginTop="80dp"
-            android:background="@drawable/drawable_plain_round_button_green"
-            android:clickable="false" />
+            <Button
+                android:id="@+id/moodshot_color_button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/checklist_status_button_top_margin"
+                android:layout_marginLeft="@dimen/checklist_status_button_left_margin"
+                android:layout_marginTop="21dp"
+                android:background="@drawable/drawable_plain_round_button_green"
+                android:clickable="false" />
+        </FrameLayout>
 
         <View
             android:id="@+id/traingle_view"

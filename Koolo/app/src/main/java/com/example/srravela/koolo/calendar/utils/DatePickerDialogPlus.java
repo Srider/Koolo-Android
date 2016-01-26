@@ -82,6 +82,7 @@ public class DatePickerDialogPlus extends DatePickerDialog {
         String time = ""+mTimePicker.getCurrentHour()+":"+mTimePicker.getCurrentMinute();
         buttonBundle.putString(OnButtonClickedListener.DATE, date);
         buttonBundle.putString(OnButtonClickedListener.TIME, time);
+        buttonBundle.putInt(OnButtonClickedListener.MONTH, mDatePicker.getMonth());
         mButtonCallBack.onButtonClicked(buttonBundle);
         dismiss();
     }
