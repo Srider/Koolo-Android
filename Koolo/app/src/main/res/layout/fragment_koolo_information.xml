@@ -108,8 +108,8 @@
         android:layout_margin="@dimen/activity_vertical_margin">
 
         <ImageView
-            android:layout_height="50dp"
-            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
             android:id="@+id/finished_legend_color"
             android:layout_gravity="center_vertical"
             android:layout_alignParentLeft="true"
@@ -138,8 +138,8 @@
 
         <ImageView
             android:id="@+id/not_done_legend_color"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
             android:layout_gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="15dp"
@@ -167,8 +167,8 @@
 
         <ImageView
             android:id="@+id/ongoing_legend_color"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
             android:layout_gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="15dp"
