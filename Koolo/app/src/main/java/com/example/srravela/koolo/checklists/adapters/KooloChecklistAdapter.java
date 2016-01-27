@@ -131,13 +131,13 @@ public class KooloChecklistAdapter  extends BaseAdapter implements View.OnClickL
         Utils.StatusType statusType = item.getStatusType();
         switch (statusType) {
             case FINISHED:
-                statusView.setBackgroundResource(R.drawable.drawable_plain_round_button_green);
+                statusView.setBackgroundResource(R.drawable.green);
                 break;
             case NOT_DONE:
-                statusView.setBackgroundResource(R.drawable.drawable_plain_round_button_red);
+                statusView.setBackgroundResource(R.drawable.red);
                 break;
             case ONGOING:
-                statusView.setBackgroundResource(R.drawable.drawable_plain_round_button_yellow);
+                statusView.setBackgroundResource(R.drawable.yellow);
                 break;
             case UNCOUNTED:
                 statusView.setVisibility(View.INVISIBLE);

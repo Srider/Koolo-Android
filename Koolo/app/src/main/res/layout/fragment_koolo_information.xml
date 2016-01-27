@@ -107,14 +107,14 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/activity_vertical_margin">
 
-        <View
+        <ImageView
             android:layout_height="50dp"
             android:layout_width="50dp"
             android:id="@+id/finished_legend_color"
             android:layout_gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="15dp"
-            android:background="@drawable/drawable_color_round_green"/>
+            android:background="@drawable/green"/>
 
         <TextView
             android:layout_height="40dp"
@@ -136,14 +136,14 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/activity_vertical_margin">
 
-        <View
+        <ImageView
             android:id="@+id/not_done_legend_color"
             android:layout_height="50dp"
             android:layout_width="50dp"
             android:layout_gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="15dp"
-            android:background="@drawable/drawable_color_round_red"/>
+            android:background="@drawable/red"/>
 
         <TextView
             android:layout_height="40dp"
@@ -165,14 +165,14 @@
         android:orientation="horizontal"
         android:layout_margin="@dimen/activity_vertical_margin">
 
-        <View
+        <ImageView
             android:id="@+id/ongoing_legend_color"
             android:layout_height="50dp"
             android:layout_width="50dp"
             android:layout_gravity="center_vertical"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="15dp"
-            android:background="@drawable/drawable_color_round_yellow"/>
+            android:background="@drawable/yellow"/>
 
         <TextView
             android:layout_height="40dp"
