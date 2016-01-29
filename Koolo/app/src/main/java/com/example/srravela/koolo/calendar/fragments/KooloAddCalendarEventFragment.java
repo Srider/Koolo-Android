@@ -49,12 +49,14 @@ import java.util.List;
 public class KooloAddCalendarEventFragment extends Fragment implements View.OnClickListener, CheckBox.OnCheckedChangeListener, OnButtonClickedListener, DatePickerDialog.OnDateSetListener, TextView.OnEditorActionListener {
     // TODO: Rename parameter arguments, choose names that match
     private View rootView;
-    private Button dateButton, clockButton, eventTagButton;
+    private View tagView;
+
+    private Button dateButton, clockButton, eventTagButton, tagDoneButton, tagCancelButton;
     private MultipleSelectionSpinner tagSpinner;
     private KooloTagSpinnerAdapter tagAdapter = null;
     List<String> tags;
     private TextView monthText;
-    private CheckBox reminderCheckbox;
+    private CheckBox reminderCheckbox, toughCheckbox, longCheckbox, faithCheckbox;
     private EditText eventEditText;
     private TextView eventTypeTextView;
     private DatePicker datePicker;
@@ -121,6 +123,19 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
     }
 
     private void initUI() {
+
+        tagView = (View) rootView.findViewById(R.id.tag_selection_view);
+
+        toughCheckbox = (CheckBox)tagView.findViewById(R.id.tough_checkbox);
+        longCheckbox = (CheckBox)tagView.findViewById(R.id.long_checkbox);
+        faithCheckbox = (CheckBox)tagView.findViewById(R.id.faith_checkbox);
+
+        tagDoneButton = (Button)tagView.findViewById(R.id.tag_done_button);
+        tagDoneButton.setOnClickListener(this);
+
+        tagCancelButton = (Button)tagView.findViewById(R.id.tag_cancel_button);
+        tagCancelButton.setOnClickListener(this);
+
         String[] dateComponents = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext).getDateComponents();
 
         dateButton = (Button) rootView.findViewById(R.id.calendar_date_button);
@@ -144,8 +159,8 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
 
         eventTypeTextView = (TextView) rootView.findViewById(R.id.event_type_text);
 
-        tagSpinner = (MultipleSelectionSpinner) rootView.findViewById(R.id.tag_spinner);
-        tagSpinner.setItems(getResources().getStringArray(R.array.calendar_tag_array));
+//        tagSpinner = (MultipleSelectionSpinner) rootView.findViewById(R.id.tag_spinner);
+//        tagSpinner.setItems(getResources().getStringArray(R.array.calendar_tag_array));
 
     }
 
@@ -183,11 +198,49 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
                 goToBorderSelectorPage();
                 break;
             case R.id.event_time_button:
+                displayTagSelector();
                 break;
             case R.id.clock_button:
                 displayDatePicker();
                 break;
+            case R.id.tag_done_button:
+                hideTagSelector();
+                break;
+            case R.id.tag_cancel_button:
+                hideTagSelector();
+                break;
         }
+    }
+
+    private void displayTagSelector() {
+        if(tagView != null) {
+            tagView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideTagSelector() {
+
+        if(tagView != null) {
+            tagView.setVisibility(View.INVISIBLE);
+        }
+
+        SharedPreferences configurationSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
+        SharedPreferences.Editor configurationEditor=configurationSharedPreferences.edit();
+
+        if(toughCheckbox != null) {
+            configurationEditor.putBoolean(OnButtonClickedListener.TOUGH_TAG_STATUS, toughCheckbox.isChecked());
+        }
+
+        if(longCheckbox != null) {
+            configurationEditor.putBoolean(OnButtonClickedListener.LONG_TAG_STATUS, longCheckbox.isChecked());
+        }
+
+        if (faithCheckbox!= null) {
+            configurationEditor.putBoolean(OnButtonClickedListener.FAITH_TAG_STATUS, faithCheckbox.isChecked());
+        }
+
+        configurationEditor.commit();
+
     }
 
     private void goToBorderSelectorPage() {
@@ -262,15 +315,26 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
             }
         }
 
+        isTough = sharedPreferences.getBoolean(OnButtonClickedListener.TOUGH_TAG_STATUS, false);
+        isLong = sharedPreferences.getBoolean(OnButtonClickedListener.LONG_TAG_STATUS, false);
+        isFaith = sharedPreferences.getBoolean(OnButtonClickedListener.FAITH_TAG_STATUS, false);
 
         if(isTough) {
-            tagSpinner.setSelection(0);
+            toughCheckbox.setChecked(true);
+        } else {
+            toughCheckbox.setChecked(false);
         }
+
         if(isLong) {
-            tagSpinner.setSelection(1);
+            longCheckbox.setChecked(true);
+        } else {
+            longCheckbox.setChecked(false);
         }
-        if(isFaith) {
-            tagSpinner.setSelection(2);
+
+        if (isFaith) {
+            faithCheckbox.setChecked(true);
+        } else {
+            faithCheckbox.setChecked(false);
         }
 
         //Resume Date and times.
@@ -296,7 +360,6 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
     private void addCalendarEvent() {
         Bundle bundle=new Bundle();
 
-
         SharedPreferences dateSelectionPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
         Boolean isEventConfigurationButtonSet = dateSelectionPreferences.getBoolean(KooloApplication.EVENT_BUTTON_CONFIGURATION, false);
         if(isEventConfigurationButtonSet) {
@@ -307,21 +370,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
 
         eventText = eventEditText.getText().toString();
 
-        List<Integer> tags = tagSpinner.getSelectedIndices();
 
-        for(Integer tag : tags){
-            switch(tag) {
-                case 0:
-                    isTough = true;
-                    break;
-                case 1:
-                    isLong = true;
-                    break;
-                case 2:
-                    isFaith = true;
-                    break;
-            }
-        }
 
         if(canProceed()) {
             CalendarEvents newCalendarEvent = new CalendarEvents(eventText,eventDate,eventTime,eventType,isTough,isLong,isFaith,reminderCheckbox.isChecked(),colorType);
@@ -446,25 +495,15 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         eventTime = null;
         eventText = null;
 
+        configurationEditor.putBoolean(OnButtonClickedListener.TOUGH_TAG_STATUS, false);
+        configurationEditor.putBoolean(OnButtonClickedListener.LONG_TAG_STATUS, false);
+        configurationEditor.putBoolean(OnButtonClickedListener.FAITH_TAG_STATUS, false);
 
-        List<Integer> tags = tagSpinner.getSelectedIndices();
-
-        for(Integer tag : tags){
-            switch(tag) {
-                case 0:
-                    isTough = false;
-                    break;
-                case 1:
-                    isLong = false;
-                    break;
-                case 2:
-                    isFaith = false;
-                    break;
-            }
-        }
+        isTough = false;
+        isLong = false;
+        isFaith = false;
 
         reminderCheckbox.setChecked(false);
-
         colorType = Utils.ColorType.DARK_GREY;
     }
 

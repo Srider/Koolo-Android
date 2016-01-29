@@ -200,19 +200,19 @@ public class MultipleSelectionSpinner extends Spinner implements
     }
 
     public String getSelectedItemsAsString() {
-        StringBuilder sb = new StringBuilder();
-        boolean foundOne = false;
+    StringBuilder sb = new StringBuilder();
+    boolean foundOne = false;
 
-        for (int i = 0; i < _items.length; ++i) {
-            if (mSelection[i]) {
-                if (foundOne) {
-                    sb.append(", ");
-                }
-                foundOne = true;
-                sb.append(_items[i]);
+    for (int i = 0; i < _items.length; ++i) {
+        if (mSelection[i]) {
+            if (foundOne) {
+                sb.append(", ");
             }
+            foundOne = true;
+            sb.append(_items[i]);
         }
-        return sb.toString();
+    }
+    return sb.toString();
     }
 
 }

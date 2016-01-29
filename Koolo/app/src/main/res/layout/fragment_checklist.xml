@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/checklist_background_image"
         android:layout_width="match_parent"
@@ -34,4 +35,5 @@
         android:descendantFocusability="blocksDescendants"
         android:divider="@null"
         android:scrollbars="none" />
+
 </RelativeLayout>

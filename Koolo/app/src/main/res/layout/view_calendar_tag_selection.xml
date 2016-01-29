@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="150dp"
+    android:weightSum="5"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="190dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tag_header"
+            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:text="Add Tag"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:textColor="@color/Black"/>
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:text="Add Tag"
+            android:textSize="20dp"
+            android:layout_below="@+id/tag_header"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:background="@color/Light_Grey"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/not_done_legend_color"
+            android:text="@string/tough_tag"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/Black"/>
+        <CheckBox
+            android:id="@+id/tough_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/not_done_legend_color"
+            android:text="@string/long_tag"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/Black"/>
+        <CheckBox
+            android:id="@+id/long_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/not_done_legend_color"
+            android:text="@string/faith_tag"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/Black"/>
+        <CheckBox
+            android:id="@+id/faith_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/tag_cancel_button"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:textAllCaps="false"
+            android:text="Cancel"/>
+        <Button
+            android:id="@+id/tag_done_button"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/tag_cancel_button"
+            android:textAllCaps="false"
+            android:text="Done"/>
+    </RelativeLayout>
+
+</LinearLayout>

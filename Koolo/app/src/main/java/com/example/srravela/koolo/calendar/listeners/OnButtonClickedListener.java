@@ -17,6 +17,11 @@ public interface OnButtonClickedListener {
     public static final String SUBDATE = "SUBDATE";
     public static final String REMINDME = "REMINDME";
     public static final String EVENTNAME= "EVENTNAME";
+    public static final String TOUGH_TAG_STATUS= "TOUGH_TAG_STATUS";
+    public static final String LONG_TAG_STATUS= "LONG_TAG_STATUS";
+    public static final String FAITH_TAG_STATUS= "FAITH_TAG_STATUS";
+
+
 
 
 
