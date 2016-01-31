@@ -18,10 +18,14 @@ import android.widget.TextView;
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.calendar.adapters.KooloCalendarEventsAdapter;
+import com.example.srravela.koolo.calendar.utils.DateAndTimeUtility;
 import com.example.srravela.koolo.calendar.utils.EventsDataStore;
+import com.example.srravela.koolo.entities.CalendarDates;
 import com.example.srravela.koolo.entities.CalendarEvents;
+import com.example.srravela.koolo.entities.Utils;
 import com.example.srravela.koolo.home.listeners.KooloHomeInteractionListener;
 
+import java.sql.Date;
 import java.util.List;
 
 public class KooloHomeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
@@ -38,7 +42,7 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
     ListView todaysEventsListView;
     List<CalendarEvents> calendarEvents = null;
     KooloCalendarEventsAdapter calendarEventsAdapter;
-
+    CalendarDates todaysDate = null;
 
     /**
      * Use this factory method to create a new instance of
@@ -78,6 +82,8 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
     }
 
     private void intiUI(){
+        todaysDate = getTodaysCalendarDate();
+
         View homeNotificationsView = (View)rootView.findViewById(R.id.home_notification_view);
         popUpMenuView = (View)rootView.findViewById(R.id.menu_button_view);
         popUpMenuView.setVisibility(View.GONE);
@@ -94,8 +100,6 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
 
         mPopUpChecklistButton = (Button)popUpMenuView.findViewById(R.id.checklist_button);
         mPopUpChecklistButton.setOnClickListener(this);
-
-
 
         mCalendarDateButton = (Button) homeNotificationsView.findViewById(R.id.calendar_date_button);
         mCalendarDateButton.setOnClickListener(this);
@@ -154,18 +158,27 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
             mSelectedQuoteTextView.setVisibility(View.INVISIBLE);
         }
 
-
         // Todays Events
         todaysEventsListView= (ListView) rootView.findViewById(R.id.todays_events_list_view);
         calendarEvents = loadCalendarEvents();
 
-        if(calendarEvents!=null){
+        if(calendarEvents!=null && calendarEvents.size()>0){
             calendarEventsAdapter = new KooloCalendarEventsAdapter(calendarEvents, mContext, true);
             todaysEventsListView.setAdapter(calendarEventsAdapter);
             todaysEventsListView.setOnItemClickListener(this);
+
+            mCalendarDateButton.setText(todaysDate.getDayText() + "\n" + todaysDate.getDateText());
+            CalendarEvents lastEvent = calendarEvents.get(calendarEvents.size() - 1);
+            if(lastEvent != null) {
+                configureDateButtonForColorType(lastEvent.getColorType());
+            }
         } else {
+            configureDateButtonForColorType(Utils.ColorType.DARK_GREY);
+
             Log.i(TAG, "NO ITEMS");
         }
+
+        mCalendarDateButton.setText(todaysDate.getDayText() + "\n" + todaysDate.getDateText());
 
         mSettingsButton = (Button)rootView.findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(this);
@@ -231,7 +244,6 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
     }
 
 
-
     void triggerCalendarActivityEvent() {
         Bundle bundle = new Bundle();
         bundle.putInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION, KooloHomeInteractionListener.KOOLO_POPUP_CALENDAR_BUTTON_CLICKED);
@@ -243,7 +255,6 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         Bundle bundle = new Bundle();
         bundle.putInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION, KooloHomeInteractionListener.KOOLO_POPUP_CHECKLIST_BUTTON_CLICKED);
         mListener.onHomeInteraction(bundle);
-
     }
 
     void triggerCameraActivityEvent() {
@@ -259,11 +270,11 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         EventsDataStore sharedEventsDataStore;
         if(calendarEventsList == null) {
             sharedEventsDataStore = EventsDataStore.getSharedEventsDataStore(mContext.getResources().getString(R.string.events_file_name), mContext);
-
             //First Get transfers from file.
-            calendarEventsList = sharedEventsDataStore.readEventsFromFile();
+            if(todaysDate != null) {
+                calendarEventsList = sharedEventsDataStore.readEventsForDate(todaysDate);
+            }
         }
-
         return calendarEventsList;
     }
 
@@ -271,5 +282,53 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    private CalendarDates getTodaysCalendarDate() {
+        String [] dateComponents = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext).getDateComponents();
+        String dateText = dateComponents[2];
+        String dayText = dateComponents[0];
+        String monthText = dateComponents[1];
+
+        Log.d(TAG, dateText+dayText+monthText);
+
+        Utils.ColorType colorType= Utils.ColorType.DARK_GREY;
+
+        return new CalendarDates(dateText, dayText, monthText, colorType);
+    }
+
+    private void configureDateButtonForColorType(Utils.ColorType colorType) {
+        switch (colorType) {
+            case DARK_GREY:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_darkgray);
+                break;
+            case YELLOW:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_yellow);
+                break;
+            case BLACK:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_black);
+                break;
+            case RED:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_red);
+                break;
+            case GREY:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_gray);
+                break;
+            case PINK:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_magenta);
+                break;
+            case ORANGE:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_orange);
+                break;
+            case BLUE:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_blue);
+                break;
+            case GREEN:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_theme_green);
+                break;
+            case BROWN:
+                mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_brown);
+                break;
+        }
     }
 }

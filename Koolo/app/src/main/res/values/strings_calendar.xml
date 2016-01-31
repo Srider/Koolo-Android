@@ -17,6 +17,7 @@
     <string name="long_tag">Faith</string>
 
     <string name= "clinic_tag">Clinic</string>
+    <string name= "cl_symbol">Cl.</string>
 
 
     <string-array name="calendar_tag_array">

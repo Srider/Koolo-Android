@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="150dp"
     android:weightSum="5"
     android:layout_gravity="center_horizontal"
+    android:background="@color/Light_Grey"
     android:layout_height="190dp">
 
     <RelativeLayout
@@ -30,7 +31,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
-            android:background="@color/Light_Grey"/>
+            android:background="@color/Dark_Grey"/>
 
     </RelativeLayout>
 

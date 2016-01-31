@@ -12,6 +12,7 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:maxLines="2"
+        android:textAllCaps="false"
         android:textSize="14sp"
         android:text="@string/default_calendar_date_string"
         android:textColor="@color/layby_text_color_white"

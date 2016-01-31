@@ -93,7 +93,6 @@ public class DateAndTimeUtility {
         String[] components = eventDate.split("-");
         refactoredComponents[0] = components[0];
         refactoredComponents[1] = getFormattedDayOfWeekForDate(eventDate);
-//        refactoredComponents[2] = components[2];
 
         switch(Integer.parseInt(components[1])) {
             case 0:

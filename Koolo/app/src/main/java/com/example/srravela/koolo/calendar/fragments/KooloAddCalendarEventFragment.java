@@ -1,14 +1,11 @@
 package com.example.srravela.koolo.calendar.fragments;
 
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,32 +14,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.calendar.activities.KooloCalendarActivity;
-import com.example.srravela.koolo.calendar.adapters.KooloTagSpinnerAdapter;
 import com.example.srravela.koolo.calendar.listeners.KooloCalendarInteractionListener;
 import com.example.srravela.koolo.calendar.listeners.OnButtonClickedListener;
 import com.example.srravela.koolo.calendar.utils.DateAndTimeUtility;
 import com.example.srravela.koolo.calendar.utils.EventsDataStore;
-import com.example.srravela.koolo.calendar.utils.MultipleSelectionSpinner;
 import com.example.srravela.koolo.entities.CalendarEvents;
 import com.example.srravela.koolo.entities.Utils;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -52,8 +42,6 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
     private View tagView;
 
     private Button dateButton, clockButton, eventTagButton, tagDoneButton, tagCancelButton;
-    private MultipleSelectionSpinner tagSpinner;
-    private KooloTagSpinnerAdapter tagAdapter = null;
     List<String> tags;
     private TextView monthText;
     private CheckBox reminderCheckbox, toughCheckbox, longCheckbox, faithCheckbox;
@@ -158,10 +146,6 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         eventEditText.setOnEditorActionListener(this);
 
         eventTypeTextView = (TextView) rootView.findViewById(R.id.event_type_text);
-
-//        tagSpinner = (MultipleSelectionSpinner) rootView.findViewById(R.id.tag_spinner);
-//        tagSpinner.setItems(getResources().getStringArray(R.array.calendar_tag_array));
-
     }
 
     @Override
@@ -346,11 +330,10 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
             dateButton.setText(sharedPreferences.getString(OnButtonClickedListener.SUBDATE, null) + "\n" + sharedPreferences.getString(OnButtonClickedListener.DAY, null));
             monthText.setText(sharedPreferences.getString(OnButtonClickedListener.MONTH, null));
             eventTypeTextView.setText(eventType);
-            eventTagButton.setText("Kl."+eventTime);
+            eventTagButton.setText(mContext.getResources().getString(R.string.cl_symbol)+eventTime);
         } else {
             eventTypeTextView.setText("");
-            eventTagButton.setText(mContext.getResources().getString(R.string.clinic_tag));
-
+            eventTagButton.setText(mContext.getResources().getString(R.string.add_tag_string));
         }
 
         reminderCheckbox.setChecked(sharedPreferences.getBoolean(OnButtonClickedListener.REMINDME, false));
@@ -391,7 +374,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         eventType = buttonBundle.getString(OnButtonClickedListener.BUTTON_CLICKED_ACTION, null);
         eventTime = buttonBundle.getString(OnButtonClickedListener.TIME, null);
 
-        eventTagButton.setText("Kl."+eventTime);
+        eventTagButton.setText(mContext.getResources().getString(R.string.cl_symbol)+eventTime);
         eventTypeTextView.setText(eventType);
 
         String[] dateComponents = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext).getRefactoredDateFromString(eventDate);

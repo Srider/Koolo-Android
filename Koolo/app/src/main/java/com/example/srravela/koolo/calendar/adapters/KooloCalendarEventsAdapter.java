@@ -125,7 +125,7 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
 
         //Set Event Time
         if(timeText != null) {
-            eventClockText.setText("Kl:"+timeText);
+            eventClockText.setText(context.getResources().getString(R.string.cl_symbol)+timeText);
         }
 
         //Set Frequency Text.
@@ -134,27 +134,24 @@ public class KooloCalendarEventsAdapter  extends BaseAdapter implements View.OnC
         }
 
         if(!isHomeFragment) {
-            //        if(item.isTough()) {
-            toughTextView.setVisibility(View.VISIBLE);
-//        } else {
-//            toughTextView.setVisibility(View.INVISIBLE);
-//        }
-//
-//        if(item.isFaith()) {
-            faithTextView.setVisibility(View.VISIBLE);
-//        } else {
-//            faithTextView.setVisibility(View.INVISIBLE);
-//        }
-//
-//        if(item.isLong()) {
-            longTextView.setVisibility(View.VISIBLE);
-//        } else {
-//            longTextView.setVisibility(View.INVISIBLE);
-//        }
+            if(item.isTough()) {
+                toughTextView.setVisibility(View.VISIBLE);
+            } else {
+                toughTextView.setVisibility(View.INVISIBLE);
+            }
+
+            if(item.isFaith()) {
+                faithTextView.setVisibility(View.VISIBLE);
+            } else {
+                faithTextView.setVisibility(View.INVISIBLE);
+            }
+
+            if(item.isLong()) {
+                longTextView.setVisibility(View.VISIBLE);
+            } else {
+                longTextView.setVisibility(View.INVISIBLE);
+            }
         }
-
-
-
 
         return convertView;
     }
