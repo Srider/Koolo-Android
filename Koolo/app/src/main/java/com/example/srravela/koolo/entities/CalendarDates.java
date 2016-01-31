@@ -9,13 +9,25 @@ public class CalendarDates  implements Serializable {
     private String dateText;
     private String dayText;
     private String monthText;
+
+    public String getYearText() {
+        return yearText;
+    }
+
+    public void setYearText(String yearText) {
+        this.yearText = yearText;
+    }
+
+    private String yearText;
+
     private Utils.ColorType colorType;
 
-    public CalendarDates(String dateText, String dayText,String monthText, Utils.ColorType colorType) {
+    public CalendarDates(String dateText, String dayText,String monthText,String yearText, Utils.ColorType colorType) {
         this.dateText = dateText;
         this.dayText = dayText;
         this.monthText = monthText;
         this.colorType = colorType;
+        this.yearText = yearText;
     }
 
     public  void setDateText(String dateText) {

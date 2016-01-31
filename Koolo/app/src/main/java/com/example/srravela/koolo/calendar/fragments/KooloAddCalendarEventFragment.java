@@ -137,7 +137,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         clockButton.setOnClickListener(this);
 
         monthText = (TextView) rootView.findViewById(R.id.month_text);
-        monthText.setText(dateComponents[1]);
+        monthText.setText(dateComponents[1] +" "+dateComponents[5]);
 
         reminderCheckbox = (CheckBox) rootView.findViewById(R.id.remindme_checkbox);
         reminderCheckbox.setOnCheckedChangeListener(this);
@@ -328,7 +328,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
             eventType = sharedPreferences.getString(OnButtonClickedListener.BUTTON_CLICKED_ACTION, null);
             eventTime = sharedPreferences.getString(OnButtonClickedListener.TIME, null);
             dateButton.setText(sharedPreferences.getString(OnButtonClickedListener.SUBDATE, null) + "\n" + sharedPreferences.getString(OnButtonClickedListener.DAY, null));
-            monthText.setText(sharedPreferences.getString(OnButtonClickedListener.MONTH, null));
+            monthText.setText(sharedPreferences.getString(OnButtonClickedListener.MONTH, null) +" "+sharedPreferences.getString(OnButtonClickedListener.YEAR, null));
             eventTypeTextView.setText(eventType);
             eventTagButton.setText(mContext.getResources().getString(R.string.cl_symbol)+eventTime);
         } else {
@@ -379,7 +379,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
 
         String[] dateComponents = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext).getRefactoredDateFromString(eventDate);
         dateButton.setText(dateComponents[0]+"\n"+dateComponents[1]);
-        monthText.setText(dateComponents[2]);
+        monthText.setText(dateComponents[2]+""+dateComponents[2]);
 
         //Store in shared Preferences.
         SharedPreferences configurationSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
@@ -389,6 +389,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         configurationEditor.putString(OnButtonClickedListener.DATE, eventDate);
         configurationEditor.putString(OnButtonClickedListener.TIME, eventTime);
         configurationEditor.putString(OnButtonClickedListener.MONTH, dateComponents[2]);
+        configurationEditor.putString(OnButtonClickedListener.YEAR, dateComponents[3]);
         configurationEditor.putString(OnButtonClickedListener.SUBDATE, dateComponents[0]);
         configurationEditor.putString(OnButtonClickedListener.DAY, dateComponents[1]);
         configurationEditor.commit();
@@ -469,6 +470,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         configurationEditor.putString(OnButtonClickedListener.TIME, null);
         configurationEditor.putString(OnButtonClickedListener.TIME, null);
         configurationEditor.putString(OnButtonClickedListener.MONTH, null);
+        configurationEditor.putString(OnButtonClickedListener.YEAR, null);
         configurationEditor.putString(OnButtonClickedListener.SUBDATE, null);
         configurationEditor.putString(OnButtonClickedListener.DAY, null);
         configurationEditor.putBoolean(OnButtonClickedListener.TOUGH_TAG_STATUS, false);

@@ -40,7 +40,7 @@
         android:layout_below="@+id/calendar_date_button"
         android:gravity="center"
         android:maxLines="1"
-        android:textSize="16sp"
+        android:textSize="12sp"
         android:textColor="@color/Black"
         android:background="@android:color/transparent"/>
     </RelativeLayout>

@@ -296,12 +296,14 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         String dateText = dateComponents[2];
         String dayText = dateComponents[0];
         String monthText = dateComponents[1];
+        String yearText = dateComponents[3];
+
 
         Log.d(TAG, dateText+dayText+monthText);
 
         Utils.ColorType colorType= Utils.ColorType.DARK_GREY;
 
-        return new CalendarDates(dateText, dayText, monthText, colorType);
+        return new CalendarDates(dateText, dayText, monthText, yearText, colorType);
     }
 
     private void configureDateButtonForColorType(Utils.ColorType colorType) {

@@ -67,7 +67,7 @@ public class DateAndTimeUtility {
         futureDate.setTime(futureDateSeconds);
 
         newDatecomponents = futureDate.toString().split(" ");
-        newCalendarDates = new CalendarDates(newDatecomponents[2], newDatecomponents[0], newDatecomponents[1], Utils.ColorType.DARK_GREY);
+        newCalendarDates = new CalendarDates(newDatecomponents[2], newDatecomponents[0], newDatecomponents[1],newDatecomponents[5], Utils.ColorType.DARK_GREY);
 
         return newCalendarDates;
     }
@@ -89,11 +89,11 @@ public class DateAndTimeUtility {
         String month = null;
         String day = null;
         String date = null;
-        String[] refactoredComponents = new String[3];
+        String[] refactoredComponents = new String[4];
         String[] components = eventDate.split("-");
         refactoredComponents[0] = components[0];
         refactoredComponents[1] = getFormattedDayOfWeekForDate(eventDate);
-
+        refactoredComponents[3] = components[2];
         switch(Integer.parseInt(components[1])) {
             case 0:
                 refactoredComponents[2] = "Jan";

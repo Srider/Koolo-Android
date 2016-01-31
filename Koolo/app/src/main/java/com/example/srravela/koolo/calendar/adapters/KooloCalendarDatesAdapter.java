@@ -113,7 +113,7 @@ public class KooloCalendarDatesAdapter extends BaseAdapter implements View.OnCli
         }
 
         //TODO: add month here./
-        monthText.setText(item.getMonthText());
+        monthText.setText(item.getMonthText()+" "+item.getYearText());
 
 
         return convertView;
