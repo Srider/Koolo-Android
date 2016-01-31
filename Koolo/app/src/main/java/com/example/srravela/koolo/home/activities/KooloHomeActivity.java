@@ -27,6 +27,7 @@ import com.example.srravela.koolo.KooloBaseActivity;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.calendar.activities.KooloCalendarActivity;
 import com.example.srravela.koolo.checklists.activities.KooloChecklistActivity;
+import com.example.srravela.koolo.entities.CalendarEvents;
 import com.example.srravela.koolo.entities.Humour;
 import com.example.srravela.koolo.entities.Utils;
 import com.example.srravela.koolo.home.fragments.KooloDateConfigurationFragment;
@@ -93,13 +94,16 @@ public class KooloHomeActivity extends KooloBaseActivity implements KooloHomeInt
 
     @Override
     public void onHomeInteraction(Bundle urlBundle) {
+
         int homeAction = urlBundle.getInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION);
+        CalendarEvents selectedCalendarEvent = null;
         switch(homeAction) {
             case KOOLO_SETTINGS_BUTTON_CLICKED:
                 loadSettingsActivity();
                 break;
             case KOOLO_CALENDAR_DATE_BUTTON_CLICKED:
-                loadCalendarDateButtonConfigurationFragment();
+                selectedCalendarEvent = (CalendarEvents) urlBundle.getSerializable(KooloHomeInteractionListener.KOOLO_HOME_SELECTED_CALENDAR_EVENT);
+                loadCalendarDateButtonConfigurationFragment(selectedCalendarEvent);
                 break;
             case KOOLO_CALENDAR_DATE_CONFIGURATION_CHANGED:
                 popDateConfigurationFromStack();
@@ -119,11 +123,14 @@ public class KooloHomeActivity extends KooloBaseActivity implements KooloHomeInt
     /**
      *  Method for Date Configurations Fragment.
      */
-    private void loadCalendarDateButtonConfigurationFragment() {
+    private void loadCalendarDateButtonConfigurationFragment(CalendarEvents selectedCalendarEvent) {
         FragmentManager fragmentManager=getFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         //TODO:
         Fragment fragment= KooloDateConfigurationFragment.newInstance();
+        Bundle eventBundle = new Bundle();
+        eventBundle.putSerializable("SelectedEvent", selectedCalendarEvent);
+        fragment.setArguments(eventBundle);
         transaction.replace(R.id.fragment_home_container,fragment,"koolodateconfigurationfragment");
         transaction.addToBackStack(null);
         transaction.commit();

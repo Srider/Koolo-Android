@@ -215,4 +215,36 @@ public class EventsDataStore {
         }
         return selectedDateEventsList;
     }
+
+    public static  boolean updateFileForCalendarEvent(CalendarEvents selectedCalendarEvent) {
+        boolean updationStatus = false;
+        boolean itemFound = false;
+        List<CalendarEvents> calendarEventsList = readEventsFromFile();
+        DateAndTimeUtility sharedDateAndTimeUtility = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext);
+
+        if(calendarEventsList!= null && calendarEventsList.size()>0) {
+
+            for(CalendarEvents calendarEvent : calendarEventsList) {
+                if((calendarEvent.getEventName().equals(selectedCalendarEvent.getEventName()))
+                        && (calendarEvent.getEventDate().equals(selectedCalendarEvent.getEventDate()))
+                        && (calendarEvent.getEventTime().equals(selectedCalendarEvent.getEventTime()))
+                        && (calendarEvent.getEventType().equals(selectedCalendarEvent.getEventType()))
+                        && (calendarEvent.isTough() == selectedCalendarEvent.isTough())
+                        && (calendarEvent.isLong() == selectedCalendarEvent.isLong())
+                        && (calendarEvent.isFaith() == selectedCalendarEvent.isFaith())
+                        && (calendarEvent.isRemindMe() == selectedCalendarEvent.isRemindMe())) {
+
+                    //Replace Item here
+                    calendarEvent.setColorType(selectedCalendarEvent.getColorType());
+                    itemFound = true;
+                    break;
+                }
+            }
+            if(itemFound) {
+                updationStatus = writeEventsToFile(calendarEventsList);
+            }
+        }
+        return updationStatus;
+    }
+
 }

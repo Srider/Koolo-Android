@@ -14,6 +14,7 @@ public interface KooloHomeInteractionListener {
     public static final int KOOLO_POPUP_CALENDAR_BUTTON_CLICKED = 4;
     public static final int KOOLO_POPUP_CHECKLIST_BUTTON_CLICKED =5;
     public static final int KOOLO_POPUP_CAMERA_BUTTON_CLICKED=6;
+    public static final String KOOLO_HOME_SELECTED_CALENDAR_EVENT="KOOLO_HOME_SELECTED_CALENDAR_EVENT";
 
     public void onHomeInteraction(Bundle urlBundle);
 }

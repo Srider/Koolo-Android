@@ -38,7 +38,7 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
     Button mPopUpMenuButton, mPopUpCalendarButton, mPopUpCameraButton, mPopUpChecklistButton;
     private View rootView, popUpMenuView;
     private KooloHomeInteractionListener mListener;
-
+    private static CalendarEvents selectedEvent;
     ListView todaysEventsListView;
     List<CalendarEvents> calendarEvents = null;
     KooloCalendarEventsAdapter calendarEventsAdapter;
@@ -85,12 +85,12 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         todaysDate = getTodaysCalendarDate();
 
         View homeNotificationsView = (View)rootView.findViewById(R.id.home_notification_view);
+
         popUpMenuView = (View)rootView.findViewById(R.id.menu_button_view);
         popUpMenuView.setVisibility(View.GONE);
 
         mPopUpMenuButton = (Button)rootView.findViewById(R.id.menu_button);
         mPopUpMenuButton.setOnClickListener(this);
-
 
         mPopUpCalendarButton = (Button)popUpMenuView.findViewById(R.id.calendar_button);
         mPopUpCalendarButton.setOnClickListener(this);
@@ -169,12 +169,15 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
 
             mCalendarDateButton.setText(todaysDate.getDayText() + "\n" + todaysDate.getDateText());
             CalendarEvents lastEvent = calendarEvents.get(calendarEvents.size() - 1);
-            if(lastEvent != null) {
+
+            if(selectedEvent != null) {
+                configureDateButtonForColorType(selectedEvent.getColorType());
+            } else if(lastEvent != null) {
+                selectedEvent = lastEvent;
                 configureDateButtonForColorType(lastEvent.getColorType());
             }
         } else {
             configureDateButtonForColorType(Utils.ColorType.DARK_GREY);
-
             Log.i(TAG, "NO ITEMS");
         }
 
@@ -240,6 +243,7 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
     void loadDateButtonConfigurationFragment() {
         Bundle bundle = new Bundle();
         bundle.putInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION, KooloHomeInteractionListener.KOOLO_CALENDAR_DATE_BUTTON_CLICKED);
+        bundle.putSerializable(KooloHomeInteractionListener.KOOLO_HOME_SELECTED_CALENDAR_EVENT, selectedEvent);
         mListener.onHomeInteraction(bundle);
     }
 
@@ -282,6 +286,9 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        //first get event.
+        selectedEvent = calendarEvents.get(position);
+        configureDateButtonForColorType(calendarEvents.get(position).getColorType());
     }
 
     private CalendarDates getTodaysCalendarDate() {

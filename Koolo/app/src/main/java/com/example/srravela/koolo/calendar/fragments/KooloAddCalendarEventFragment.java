@@ -470,7 +470,10 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         configurationEditor.putString(OnButtonClickedListener.TIME, null);
         configurationEditor.putString(OnButtonClickedListener.MONTH, null);
         configurationEditor.putString(OnButtonClickedListener.SUBDATE, null);
-        configurationEditor.putString(OnButtonClickedListener.DAY,null);
+        configurationEditor.putString(OnButtonClickedListener.DAY, null);
+        configurationEditor.putBoolean(OnButtonClickedListener.TOUGH_TAG_STATUS, false);
+        configurationEditor.putBoolean(OnButtonClickedListener.LONG_TAG_STATUS, false);
+        configurationEditor.putBoolean(OnButtonClickedListener.FAITH_TAG_STATUS, false);
         configurationEditor.commit();
 
         eventDate = null;
@@ -478,13 +481,11 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         eventTime = null;
         eventText = null;
 
-        configurationEditor.putBoolean(OnButtonClickedListener.TOUGH_TAG_STATUS, false);
-        configurationEditor.putBoolean(OnButtonClickedListener.LONG_TAG_STATUS, false);
-        configurationEditor.putBoolean(OnButtonClickedListener.FAITH_TAG_STATUS, false);
-
         isTough = false;
         isLong = false;
         isFaith = false;
+
+
 
         reminderCheckbox.setChecked(false);
         colorType = Utils.ColorType.DARK_GREY;
