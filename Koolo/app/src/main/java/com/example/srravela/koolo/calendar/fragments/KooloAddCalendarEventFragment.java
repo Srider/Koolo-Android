@@ -353,8 +353,6 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
 
         eventText = eventEditText.getText().toString();
 
-
-
         if(canProceed()) {
             CalendarEvents newCalendarEvent = new CalendarEvents(eventText,eventDate,eventTime,eventType,isTough,isLong,isFaith,reminderCheckbox.isChecked(),colorType);
             if(addCalendarEventsToDataStore(newCalendarEvent)) {

@@ -12,6 +12,7 @@
         android:gravity="center"
         android:maxLines="2"
         android:textSize="14sp"
+        android:textAllCaps="false"
         android:text="@string/default_calendar_date_string"
         android:textColor="@color/layby_text_color_white"
         android:background="@drawable/drawable_calendar_date_text_border"/>

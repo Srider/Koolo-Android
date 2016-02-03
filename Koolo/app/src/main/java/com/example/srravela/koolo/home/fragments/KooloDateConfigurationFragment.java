@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.calendar.listeners.KooloCalendarInteractionListener;
+import com.example.srravela.koolo.calendar.utils.DateAndTimeUtility;
 import com.example.srravela.koolo.calendar.utils.EventsDataStore;
 import com.example.srravela.koolo.entities.CalendarEvents;
 import com.example.srravela.koolo.entities.Utils;
@@ -87,8 +88,11 @@ public class KooloDateConfigurationFragment extends Fragment implements View.OnC
 
     private void intiUI(){
 
+        String[] dateComponents = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext).getDateComponents();
+
         mDefaultConfigurationButton  = (Button) rootView.findViewById(R.id.default_date_button);
         mDefaultConfigurationButton.setOnClickListener(this);
+        mDefaultConfigurationButton.setText(dateComponents[0] + "\n" + dateComponents[2]);
 
         mAquaMarineButton  = (Button) rootView.findViewById(R.id.theme_green_button);
         mAquaMarineButton.setOnClickListener(this);
@@ -128,85 +132,104 @@ public class KooloDateConfigurationFragment extends Fragment implements View.OnC
     @Override
     public void onClick(View v) {
 
-        SharedPreferences configurationSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
-        Boolean isDateConfigurationButtonSet = configurationSharedPreferences.getBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION,true);
 
-        if(!isDateConfigurationButtonSet) {
-            SharedPreferences.Editor configurationEditor=configurationSharedPreferences.edit();
-            configurationEditor.putBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION, true);
-            configurationEditor.commit();
-        }
+            SharedPreferences configurationSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
+            Boolean isDateConfigurationButtonSet = configurationSharedPreferences.getBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION,true);
 
-        SharedPreferences colorSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
-        SharedPreferences.Editor colorEditor=colorSharedPreferences.edit();
+            if(!isDateConfigurationButtonSet) {
+                SharedPreferences.Editor configurationEditor=configurationSharedPreferences.edit();
+                configurationEditor.putBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION, true);
+                configurationEditor.commit();
+            }
 
-        switch(v.getId()) {
-            case R.id.default_date_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.DARK_GREY);
-                selectedCalendarEvent.setColorType(Utils.ColorType.DARK_GREY);
-                break;
+            SharedPreferences colorSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
+            SharedPreferences.Editor colorEditor=colorSharedPreferences.edit();
 
-            case R.id.yellow_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.YELLOW);
-                selectedCalendarEvent.setColorType(Utils.ColorType.YELLOW);
-                break;
+            switch(v.getId()) {
+                case R.id.default_date_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.DARK_GREY);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.DARK_GREY);
+                    }
+                    break;
 
-            case R.id.black_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLACK);
-                selectedCalendarEvent.setColorType(Utils.ColorType.BLACK);
-                break;
+                case R.id.yellow_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.YELLOW);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.YELLOW);
+                    }
+                    break;
 
-            case R.id.red_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.RED);
-                selectedCalendarEvent.setColorType(Utils.ColorType.RED);
-                break;
+                case R.id.black_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLACK);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.BLACK);
+                    }
+                    break;
 
-            case R.id.light_gray_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.LIGHT_GREY);
-                selectedCalendarEvent.setColorType(Utils.ColorType.GREY);
-                break;
+                case R.id.red_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.RED);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.RED);
+                    }
+                    break;
 
-            case R.id.pink_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.PINK);
-                selectedCalendarEvent.setColorType(Utils.ColorType.PINK);
-                break;
+                case R.id.light_gray_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.LIGHT_GREY);
+                    selectedCalendarEvent.setColorType(Utils.ColorType.GREY);
+                    break;
 
-            case R.id.orange_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.ORANGE);
-                selectedCalendarEvent.setColorType(Utils.ColorType.ORANGE);
-                break;
+                case R.id.pink_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.PINK);
+                    selectedCalendarEvent.setColorType(Utils.ColorType.PINK);
+                    break;
 
-            case R.id.blue_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLUE);
-                selectedCalendarEvent.setColorType(Utils.ColorType.BLUE);
-                break;
+                case R.id.orange_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.ORANGE);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.ORANGE);
+                    }
+                    break;
 
-            case R.id.theme_green_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.THEME_GREEN);
-                selectedCalendarEvent.setColorType(Utils.ColorType.GREEN);
-                break;
+                case R.id.blue_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLUE);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.BLUE);
+                    }
+                    break;
 
-            case R.id.brown_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BROWN);
-                selectedCalendarEvent.setColorType(Utils.ColorType.BROWN);
-                break;
-        }
-        colorEditor.commit();
-        updateCalendarEvents();
+                case R.id.theme_green_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.THEME_GREEN);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.GREEN);
+                    }
+                    break;
+
+                case R.id.brown_button:
+                    colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BROWN);
+                    if(selectedCalendarEvent != null) {
+                        selectedCalendarEvent.setColorType(Utils.ColorType.BROWN);
+                    }
+                    break;
+            }
+            colorEditor.commit();
+            updateCalendarEvents();
     }
 
     private void updateCalendarEvents() {
         EventsDataStore sharedEventsDataStore;
-        sharedEventsDataStore = EventsDataStore.getSharedEventsDataStore(mContext.getResources().getString(R.string.events_file_name), mContext);
-        boolean status = sharedEventsDataStore.updateFileForCalendarEvent(selectedCalendarEvent);
-        if(status) {
-            Log.d(TAG, "Updated Event Successfully");
-            Toast.makeText(mContext,"Event updated Successfully", Toast.LENGTH_LONG).show();
+        if(selectedCalendarEvent != null) {
+            sharedEventsDataStore = EventsDataStore.getSharedEventsDataStore(mContext.getResources().getString(R.string.events_file_name), mContext);
+            boolean status = sharedEventsDataStore.updateFileForCalendarEvent(selectedCalendarEvent);
+            if (status) {
+                Log.d(TAG, "Updated Event Successfully");
+                Toast.makeText(mContext, "Event updated Successfully", Toast.LENGTH_LONG).show();
 
-        } else {
-            Log.d(TAG, "Update Event Failed");
-            Toast.makeText(mContext,"Event update failed", Toast.LENGTH_LONG).show();
+            } else {
+                Log.d(TAG, "Update Event Failed");
+                Toast.makeText(mContext, "Event update failed", Toast.LENGTH_LONG).show();
 
+            }
         }
         Bundle bundle = new Bundle();
         bundle.putInt(KooloHomeInteractionListener.KOOLO_HOME_ACTION, KooloHomeInteractionListener.KOOLO_CALENDAR_DATE_CONFIGURATION_CHANGED);
