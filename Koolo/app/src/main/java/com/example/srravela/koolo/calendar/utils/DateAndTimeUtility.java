@@ -11,8 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by srikar on 16/01/16.
@@ -138,16 +140,57 @@ public class DateAndTimeUtility {
         return refactoredComponents;
     }
 
+//    private String getFormattedDayOfWeekForDate(String date) {
+//
+//        Calendar c = Calendar.getInstance(Locale.getDefault());
+//        String formattedDay = null;
+//        int dayOfWeek = 0;
+//        String[] dateComponents = date.split("-");
+//
+//        try {
+//            c.set(Integer.parseInt(dateComponents[2]),Integer.parseInt(dateComponents[1]), Integer.parseInt(dateComponents[0]) );
+////            c.setTime(new SimpleDateFormat("dd-mm-yyyy").parse(date));
+//            dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        switch(dayOfWeek) {
+//            case Calendar.SUNDAY:
+//                formattedDay = "Sun";
+//                break;
+//            case Calendar.SATURDAY:
+//                formattedDay = "Sat";
+//                break;
+//            case Calendar.MONDAY:
+//                formattedDay = "Mon";
+//                break;
+//            case Calendar.TUESDAY:
+//                formattedDay = "Tue";
+//                break;
+//            case Calendar.WEDNESDAY:
+//                formattedDay = "Wed";
+//                break;
+//            case Calendar.THURSDAY:
+//                formattedDay = "Thu";
+//                break;
+//            case Calendar.FRIDAY:
+//                formattedDay = "Fri";
+//                break;
+//        }
+//
+//        return formattedDay;
+//    }
+
     private String getFormattedDayOfWeekForDate(String date) {
-        Calendar c = Calendar.getInstance();
+
+        Calendar c = Calendar.getInstance(Locale.getDefault());
         String formattedDay = null;
         int dayOfWeek = 0;
-        try {
-            c.setTime(new SimpleDateFormat("dd-mm-yyyy").parse(date));
-            dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        String[] dateComponents = date.split("-");
+
+        c.set(Integer.parseInt(dateComponents[2]),Integer.parseInt(dateComponents[1]), Integer.parseInt(dateComponents[0]) );
+        dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
         switch(dayOfWeek) {
             case Calendar.SUNDAY:

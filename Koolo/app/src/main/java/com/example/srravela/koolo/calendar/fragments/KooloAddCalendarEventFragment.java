@@ -354,7 +354,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         eventText = eventEditText.getText().toString();
 
         if(canProceed()) {
-            CalendarEvents newCalendarEvent = new CalendarEvents(eventText,eventDate,eventTime,eventType,isTough,isLong,isFaith,reminderCheckbox.isChecked(),colorType);
+            CalendarEvents newCalendarEvent = new CalendarEvents(eventText,eventDate,eventTime,eventType,toughCheckbox.isChecked(),longCheckbox.isChecked(),faithCheckbox.isChecked(),reminderCheckbox.isChecked(),colorType);
             if(addCalendarEventsToDataStore(newCalendarEvent)) {
                 resetSharedPreferences();
                 bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_DONE_ACTION);

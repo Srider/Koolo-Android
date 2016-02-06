@@ -99,6 +99,11 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
         mListener = mActivity;
         mContext=mActivity.getApplicationContext();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         initUI();
     }
 
@@ -126,6 +131,7 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
         //Button
         leftArrowButton = (Button) rootView.findViewById(R.id.left_arrow_button);
         leftArrowButton.setOnClickListener(this);
+        leftArrowButton.setVisibility(View.INVISIBLE);
 
         rightArrowButton = (Button) rootView.findViewById(R.id.right_arrow_button);
         rightArrowButton.setOnClickListener(this);
@@ -212,18 +218,34 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
 
     private void leftArrowButtonClicked() {
 
-        if(currentWindowIndex >=0) {
+        if(currentWindowIndex >0) {
+            if(leftArrowButton.getVisibility()== View.INVISIBLE) {
+                leftArrowButton.setVisibility(View.VISIBLE);
+            }
+            if(rightArrowButton.getVisibility()== View.INVISIBLE) {
+                rightArrowButton.setVisibility(View.VISIBLE);
+            }
             currentWindowIndex -= 1;
             calendarDatesAdapter.items = calendarDates.get(""+currentWindowIndex);
             calendarDatesGridView.invalidateViews();
+        } else {
+            leftArrowButton.setVisibility(View.INVISIBLE);
         }
     }
 
     private void rightArrowButtonClicked() {
-        if(currentWindowIndex <=4) {
+        if(currentWindowIndex <3) {
+            if(rightArrowButton.getVisibility()== View.INVISIBLE) {
+                rightArrowButton.setVisibility(View.VISIBLE);
+            }
+            if(leftArrowButton.getVisibility()== View.INVISIBLE) {
+                leftArrowButton.setVisibility(View.VISIBLE);
+            }
             currentWindowIndex += 1;
             calendarDatesAdapter.items = calendarDates.get(""+currentWindowIndex);
             calendarDatesGridView.invalidateViews();
+        } else {
+            rightArrowButton.setVisibility(View.INVISIBLE);
         }
     }
 

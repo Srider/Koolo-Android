@@ -175,7 +175,7 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
             } else if(lastEvent != null) {
                 selectedEvent = lastEvent;
                 configureDateButtonForColorType(lastEvent.getColorType());
-            } 
+            }
         } else {
             configureDateButtonForColorType(Utils.ColorType.DARK_GREY);
             Log.i(TAG, "NO ITEMS");
