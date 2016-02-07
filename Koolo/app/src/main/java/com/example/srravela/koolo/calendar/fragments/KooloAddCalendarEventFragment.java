@@ -173,9 +173,6 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
                 break;
             case R.id.event_cancel_option:
                 resetSharedPreferences();
-//                Bundle bundle=new Bundle();
-//                bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_CANCEL_ACTION);
-//                mListener.onCalendarInteraction(bundle);
                 break;
         }
         return super.onOptionsItemSelected(item);

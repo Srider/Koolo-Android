@@ -13,6 +13,7 @@ import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.calendar.listeners.KooloCalendarInteractionListener;
 import com.example.srravela.koolo.calendar.listeners.OnBorderConfigurationListener;
+import com.example.srravela.koolo.calendar.utils.DateAndTimeUtility;
 import com.example.srravela.koolo.entities.Utils;
 import com.example.srravela.koolo.home.listeners.KooloHomeInteractionListener;
 
@@ -76,7 +77,10 @@ public class KooloBorderConfigurationFragment extends android.app.Fragment imple
 
     private void intiUI(){
 
+        String[] dateComponents = DateAndTimeUtility.getSharedDateAndTimeUtility(mContext).getDateComponents();
+
         mDefaultConfigurationButton  = (Button) rootView.findViewById(R.id.default_date_border_button);
+        mDefaultConfigurationButton.setText(dateComponents[2] + "\n" + dateComponents[0]);
         mDefaultConfigurationButton.setOnClickListener(this);
 
         mAquaMarineButton  = (Button) rootView.findViewById(R.id.theme_green_border_button);
