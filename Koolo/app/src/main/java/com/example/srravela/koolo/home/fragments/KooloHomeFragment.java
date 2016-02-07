@@ -81,7 +81,8 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         setHasOptionsMenu(true);
     }
 
-    private void intiUI(){
+    private void intiUI() {
+
         todaysDate = getTodaysCalendarDate();
 
         View homeNotificationsView = (View)rootView.findViewById(R.id.home_notification_view);
@@ -104,47 +105,10 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         mCalendarDateButton = (Button) homeNotificationsView.findViewById(R.id.calendar_date_button);
         mCalendarDateButton.setOnClickListener(this);
 
-        SharedPreferences sharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
-        Boolean isDateConfigurationButtonSet = sharedPreferences.getBoolean(KooloApplication.FIRST_TIME_LAUNCH, true);
-        if(isDateConfigurationButtonSet) {
-            String dataConfiguration = sharedPreferences.getString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.DARK_GREY);
+        mSettingsButton = (Button)rootView.findViewById(R.id.settings_button);
+        mSettingsButton.setOnClickListener(this);
 
-            switch(dataConfiguration) {
-                case  KooloApplication.DARK_GREY:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_darkgray);
-                    break;
-                case KooloApplication.THEME_GREEN:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_theme_green);
-                    break;
-                case KooloApplication.LIGHT_GREY:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_gray);
-                    break;
-                case KooloApplication.BLUE:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_blue);
-                    break;
-                case  KooloApplication.YELLOW:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_yellow);
-                    break;
-                case  KooloApplication.RED:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_red);
-                    break;
-                case KooloApplication.PINK:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_magenta);
-                    break;
-                case  KooloApplication.ORANGE:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_orange);
-                    break;
-                case  KooloApplication.BLACK:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_black);
-                    break;
-                case  KooloApplication.BROWN:
-                    mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_brown);
-                    break;
-            }
-        } else {
-            mCalendarDateButton.setBackgroundResource(R.drawable.drawable_mood_color_red);
-        }
-
+        //Quotes
         SharedPreferences homeQuotePreferences=mContext.getSharedPreferences(KooloApplication.SELECTED_HOME_QUOTE, mContext.MODE_PRIVATE);
         String selectedQuote = homeQuotePreferences.getString(KooloApplication.SELECTED_HOME_QUOTE, mContext.getResources().getString(R.string.default_quote_string));
 
@@ -177,14 +141,56 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
                 configureDateButtonForColorType(lastEvent.getColorType());
             }
         } else {
-            configureDateButtonForColorType(Utils.ColorType.DARK_GREY);
+
+            SharedPreferences sharedPreferences=mContext.getSharedPreferences(KooloApplication.HOME_DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
+            Boolean isDateConfigurationButtonSet = sharedPreferences.getBoolean(KooloApplication.IS_HOME_DATE_BUTTON_CONFIGURATION_SET, false);
+            if(isDateConfigurationButtonSet) {
+                String dataConfiguration = sharedPreferences.getString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.DARK_GREY);
+
+                switch(dataConfiguration) {
+                    case  KooloApplication.DARK_GREY:
+                        configureDateButtonForColorType(Utils.ColorType.DARK_GREY);
+                        break;
+                    case KooloApplication.THEME_GREEN:
+                        configureDateButtonForColorType(Utils.ColorType.GREEN);
+                        break;
+                    case KooloApplication.LIGHT_GREY:
+                        configureDateButtonForColorType(Utils.ColorType.GREY);
+                        break;
+                    case KooloApplication.BLUE:
+                        configureDateButtonForColorType(Utils.ColorType.BLUE);
+                        break;
+                    case  KooloApplication.YELLOW:
+                        configureDateButtonForColorType(Utils.ColorType.YELLOW);
+                        break;
+                    case  KooloApplication.RED:
+                        configureDateButtonForColorType(Utils.ColorType.RED);
+                        break;
+                    case KooloApplication.PINK:
+                        configureDateButtonForColorType(Utils.ColorType.PINK);
+                        break;
+                    case  KooloApplication.ORANGE:
+                        configureDateButtonForColorType(Utils.ColorType.ORANGE);
+                        break;
+                    case KooloApplication.BLACK:
+                        configureDateButtonForColorType(Utils.ColorType.BLACK);
+                        break;
+                    case KooloApplication.BROWN:
+                        configureDateButtonForColorType(Utils.ColorType.BROWN);
+                        break;
+                }
+            } else {
+                configureDateButtonForColorType(Utils.ColorType.DARK_GREY);
+            }
+
             Log.i(TAG, "NO ITEMS");
         }
 
+        //Date Button
         mCalendarDateButton.setText(todaysDate.getDayText() + "\n" + todaysDate.getDateText());
 
-        mSettingsButton = (Button)rootView.findViewById(R.id.settings_button);
-        mSettingsButton.setOnClickListener(this);
+        //Reset Menu
+        resetPopUpMenu();
     }
 
     @Override
@@ -236,6 +242,14 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
             isMenuExpanded=true;
             mPopUpMenuButton.setBackgroundResource(R.drawable.close);
 
+        }
+    }
+
+    private void resetPopUpMenu() {
+        if(isMenuExpanded) {
+            popUpMenuView.setVisibility(View.GONE);
+            isMenuExpanded=false;
+            mPopUpMenuButton.setBackgroundResource(R.drawable.plus);
         }
     }
 

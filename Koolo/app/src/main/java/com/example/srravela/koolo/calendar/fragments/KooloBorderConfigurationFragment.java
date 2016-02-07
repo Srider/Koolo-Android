@@ -118,50 +118,51 @@ public class KooloBorderConfigurationFragment extends android.app.Fragment imple
     public void onClick(View v) {
 
         SharedPreferences configurationSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
-        Boolean isDateConfigurationButtonSet = configurationSharedPreferences.getBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION,true);
+        Boolean isDateConfigurationButtonSet = configurationSharedPreferences.getBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION, true);
+
+        SharedPreferences.Editor configurationEditor=configurationSharedPreferences.edit();
+
 
         if(!isDateConfigurationButtonSet) {
-            SharedPreferences.Editor configurationEditor=configurationSharedPreferences.edit();
             configurationEditor.putBoolean(KooloApplication.DATE_BUTTON_CONFIGURATION, true);
             configurationEditor.commit();
         }
 
-        SharedPreferences colorSharedPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
-        SharedPreferences.Editor colorEditor=colorSharedPreferences.edit();
-
         switch(v.getId()) {
             case R.id.default_date_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.DARK_GREY);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.DARK_GREY);
                 break;
             case R.id.yellow_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.YELLOW);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.YELLOW);
                 break;
             case R.id.black_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLACK);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLACK);
                 break;
             case R.id.red_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.RED);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.RED);
                 break;
             case R.id.light_gray_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.LIGHT_GREY);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.LIGHT_GREY);
                 break;
             case R.id.pink_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.PINK);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.PINK);
                 break;
             case R.id.orange_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.ORANGE);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.ORANGE);
                 break;
             case R.id.blue_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLUE);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BLUE);
                 break;
             case R.id.theme_green_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.THEME_GREEN);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.THEME_GREEN);
                 break;
             case R.id.brown_border_button:
-                colorEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BROWN);
+                configurationEditor.putString(KooloApplication.DATE_BUTTON_COLOR, KooloApplication.BROWN);
                 break;
         }
-        colorEditor.commit();
+        configurationEditor.commit();
+
+
         Bundle bundle = new Bundle();
         bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.KOOLO_BORDER_CONFIGURATION_SET_ACTION);
         mCalendarListener.onCalendarInteraction(bundle);

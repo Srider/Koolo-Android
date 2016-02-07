@@ -36,6 +36,11 @@ import javax.xml.parsers.ParserConfigurationException;
 public class KooloApplication extends Application implements Application.ActivityLifecycleCallbacks{
     public static final String TAG=KooloApplication.class.getSimpleName();
     public static final String FIRST_TIME_LAUNCH="FIRST_TIME_LAUNCH";
+
+    public static final String HOME_DATE_BUTTON_CONFIGURATION="HOME_DATE_BUTTON_CONFIGURATION";
+
+    public static final String IS_HOME_DATE_BUTTON_CONFIGURATION_SET="IS_HOME_DATE_BUTTON_CONFIGURATION_SET";
+
     public static final String DATE_BUTTON_CONFIGURATION="DATE_BUTTON_CONFIGURATION";
     public static final String EVENT_BUTTON_CONFIGURATION = "EVENT_BUTTON_CONFIGURATION";
 

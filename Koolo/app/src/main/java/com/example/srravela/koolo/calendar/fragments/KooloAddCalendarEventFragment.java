@@ -172,9 +172,10 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
                 addCalendarEvent();
                 break;
             case R.id.event_cancel_option:
-                Bundle bundle=new Bundle();
-                bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_CANCEL_ACTION);
-                mListener.onCalendarInteraction(bundle);
+                resetSharedPreferences();
+//                Bundle bundle=new Bundle();
+//                bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_CANCEL_ACTION);
+//                mListener.onCalendarInteraction(bundle);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -346,7 +347,6 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
 
 
     private void addCalendarEvent() {
-        Bundle bundle=new Bundle();
 
         SharedPreferences dateSelectionPreferences=mContext.getSharedPreferences(KooloApplication.DATE_BUTTON_CONFIGURATION, mContext.MODE_PRIVATE);
         Boolean isEventConfigurationButtonSet = dateSelectionPreferences.getBoolean(KooloApplication.EVENT_BUTTON_CONFIGURATION, false);
@@ -362,8 +362,7 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
             CalendarEvents newCalendarEvent = new CalendarEvents(eventText,eventDate,eventTime,eventType,toughCheckbox.isChecked(),longCheckbox.isChecked(),faithCheckbox.isChecked(),reminderCheckbox.isChecked(),colorType);
             if(addCalendarEventsToDataStore(newCalendarEvent)) {
                 resetSharedPreferences();
-                bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_DONE_ACTION);
-                mListener.onCalendarInteraction(bundle);
+
             } else {
                 resetSharedPreferences();
             }
@@ -490,10 +489,13 @@ public class KooloAddCalendarEventFragment extends Fragment implements View.OnCl
         isLong = false;
         isFaith = false;
 
-
-
         reminderCheckbox.setChecked(false);
         colorType = Utils.ColorType.DARK_GREY;
+
+        Bundle bundle=new Bundle();
+        bundle.putInt(KooloCalendarInteractionListener.KOOLO_CALENDAR_ACTION, KooloCalendarInteractionListener.CALENDAR_EVENT_DONE_ACTION);
+        mListener.onCalendarInteraction(bundle);
     }
+
 
 }

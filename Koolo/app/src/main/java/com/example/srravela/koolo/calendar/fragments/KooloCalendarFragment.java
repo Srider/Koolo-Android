@@ -149,11 +149,10 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
 
             //Get Event loading for current date.
             calendarEvents = loadCalendarEventsForDate(calendarDates.get(""+currentWindowIndex).get(0));
-            if(calendarEvents != null || calendarEvents.size()>0) {
+            if(calendarEvents != null && calendarEvents.size()>0) {
                 calendarDates.get(""+currentWindowIndex).get(0).setColorType(calendarEvents.get(calendarEvents.size()-1).getColorType());
                 calendarDatesGridView.invalidateViews();
             }
-
         } else {
             Log.i(TAG, "NO ITEMS");
         }
@@ -169,7 +168,6 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
         } else {
             Log.i(TAG, "NO ITEMS");
         }
-
     }
 
     //TODO:
@@ -259,11 +257,15 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
         CalendarDates selectedDate = calendarDates.get(""+currentWindowIndex).get(position);
         calendarEvents = loadCalendarEventsForDate(selectedDate);
 
-        calendarEventsAdapter.setEvents(calendarEvents);
-
-        if(calendarEvents != null || calendarEvents.size()>0) {
+        if(calendarEvents != null && calendarEvents.size()>0) {
+            calendarEventsAdapter.setEvents(calendarEvents);
             selectedDate.setColorType(calendarEvents.get(calendarEvents.size()-1).getColorType());
             calendarDatesGridView.invalidateViews();
         }
+    }
+
+    public void onBackPressed() {
+        //handle back press event
+        mActivity.finish();
     }
 }

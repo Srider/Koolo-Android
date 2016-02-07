@@ -9,11 +9,14 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.UiThread;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.srravela.koolo.KooloApplication;
@@ -34,6 +37,9 @@ import java.util.Calendar;
 public class KooloCalendarActivity extends KooloBaseActivity implements KooloCalendarInteractionListener {
     private static final String TAG = KooloCalendarActivity.class.getSimpleName();
     private FrameLayout kooloCalendarFragmentContainer;
+    private ImageView backgroundImageView;
+    KooloCalendarFragment kooloCalendarEventFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +52,31 @@ public class KooloCalendarActivity extends KooloBaseActivity implements KooloCal
     }
 
     void initUI() {
+
+        backgroundImageView = (ImageView)findViewById(R.id.home_image);
         loadCalendarFragment();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences backgroundSharedPreferences=mContext.getSharedPreferences(KooloApplication.SELECTED_BACKGROUND_IMAGE_URI, mContext.MODE_PRIVATE);
+        SharedPreferences backgroundImageFlagPreferences=mContext.getSharedPreferences(KooloApplication.BACKGROUND_IMAGE_SELECTED, mContext.MODE_PRIVATE);
+        if(backgroundImageFlagPreferences.getBoolean(KooloApplication.BACKGROUND_IMAGE_SELECTED, false)) {
+            Uri myUri = Uri.parse(backgroundSharedPreferences.getString(KooloApplication.SELECTED_BACKGROUND_IMAGE_URI, KooloApplication.getImageUri()));
+            backgroundImageView.setImageURI(myUri);
+        } else {
+            backgroundImageView.setImageResource(R.drawable.background);
+        }
     }
 
     private void loadCalendarFragment() {
         FragmentManager fragmentManager=getFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         //TODO:
-        Fragment fragment= KooloCalendarFragment.newInstance();
-        transaction.replace(R.id.fragment_calendar_container, fragment, "koolocalendarfragment");
+        kooloCalendarEventFragment = KooloCalendarFragment.newInstance();
+        transaction.replace(R.id.fragment_calendar_container, kooloCalendarEventFragment, "koolocalendarfragment");
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -76,6 +98,9 @@ public class KooloCalendarActivity extends KooloBaseActivity implements KooloCal
                 loadBorderConfigurationFragment();
                 break;
             case CALENDAR_EVENT_DONE_ACTION:
+                popAction();
+                break;
+            case CALENDAR_EVENT_CANCEL_ACTION:
                 popAction();
                 break;
         }
@@ -104,6 +129,13 @@ public class KooloCalendarActivity extends KooloBaseActivity implements KooloCal
     public void popAction() {
         if(getFragmentManager().getBackStackEntryCount() > 1) {
             getFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(kooloCalendarEventFragment.isVisible()) {
+            kooloCalendarEventFragment.onBackPressed();
         }
     }
 }
