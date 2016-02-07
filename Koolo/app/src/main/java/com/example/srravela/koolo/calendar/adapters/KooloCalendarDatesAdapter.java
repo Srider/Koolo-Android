@@ -7,10 +7,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.srravela.koolo.KooloApplication;
 import com.example.srravela.koolo.R;
 import com.example.srravela.koolo.checklists.listeners.ChecklistItemsUpdatedListener;
 import com.example.srravela.koolo.entities.CalendarDates;
 import com.example.srravela.koolo.entities.Checklist;
+import com.example.srravela.koolo.entities.Utils;
 
 import java.util.List;
 
@@ -99,6 +102,7 @@ public class KooloCalendarDatesAdapter extends BaseAdapter implements View.OnCli
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         convertView= layoutInflater.inflate(R.layout.view_date_cell, null);
 
         TextView dateView = (TextView)convertView.findViewById(R.id.calendar_date_cell);
@@ -115,7 +119,42 @@ public class KooloCalendarDatesAdapter extends BaseAdapter implements View.OnCli
         //TODO: add month here./
         monthText.setText(item.getMonthText()+" "+item.getYearText());
 
+        switch (item.getColorType()) {
 
+        }
+        switch (item.getColorType()) {
+
+            case DARK_GREY:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_darkgray);
+                break;
+            case YELLOW:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_yellow);
+                break;
+            case BLACK:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_black);
+                break;
+            case RED:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_red);
+                break;
+            case GREY:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_gray);
+                break;
+            case PINK:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_magenta);
+                break;
+            case ORANGE:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_orange);
+                break;
+            case BLUE:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_blue);
+                break;
+            case GREEN:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_theme_green);
+                break;
+            case BROWN:
+                dateView.setBackgroundResource(R.drawable.drawable_mood_color_brown);
+                break;
+        }
         return convertView;
     }
 

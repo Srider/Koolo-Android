@@ -149,6 +149,11 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
 
             //Get Event loading for current date.
             calendarEvents = loadCalendarEventsForDate(calendarDates.get(""+currentWindowIndex).get(0));
+            if(calendarEvents != null || calendarEvents.size()>0) {
+                calendarDates.get(""+currentWindowIndex).get(0).setColorType(calendarEvents.get(calendarEvents.size()-1).getColorType());
+                calendarDatesGridView.invalidateViews();
+            }
+
         } else {
             Log.i(TAG, "NO ITEMS");
         }
@@ -251,13 +256,14 @@ public class KooloCalendarFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        calendarEvents = loadCalendarEventsForDate(calendarDates.get(""+currentWindowIndex).get(position));
+        CalendarDates selectedDate = calendarDates.get(""+currentWindowIndex).get(position);
+        calendarEvents = loadCalendarEventsForDate(selectedDate);
 
         calendarEventsAdapter.setEvents(calendarEvents);
 
-//        if(calendarEvents == null || calendarEvents.size() == 0) {
-//            Toast.makeText(mContext, "No events available for this date", Toast.LENGTH_LONG).show();
-////            calendarEventsListView.setVisibility(View.INVISIBLE);
-//        }
+        if(calendarEvents != null || calendarEvents.size()>0) {
+            selectedDate.setColorType(calendarEvents.get(calendarEvents.size()-1).getColorType());
+            calendarDatesGridView.invalidateViews();
+        }
     }
 }

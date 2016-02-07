@@ -1,11 +1,15 @@
 package com.example.srravela.koolo.calendar.fragments;
 
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +39,7 @@ import com.example.srravela.koolo.entities.Utils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class KooloAddCalendarEventFragment extends Fragment implements View.OnClickListener, CheckBox.OnCheckedChangeListener, OnButtonClickedListener, DatePickerDialog.OnDateSetListener, TextView.OnEditorActionListener {
     // TODO: Rename parameter arguments, choose names that match

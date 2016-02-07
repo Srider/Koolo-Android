@@ -228,9 +228,14 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         if(isMenuExpanded) {
             popUpMenuView.setVisibility(View.GONE);
             isMenuExpanded=false;
+            mPopUpMenuButton.setBackgroundResource(R.drawable.plus);
+
+
         } else {
             popUpMenuView.setVisibility(View.VISIBLE);
             isMenuExpanded=true;
+            mPopUpMenuButton.setBackgroundResource(R.drawable.close);
+
         }
     }
 
@@ -297,12 +302,8 @@ public class KooloHomeFragment extends Fragment implements View.OnClickListener,
         String dayText = dateComponents[0];
         String monthText = dateComponents[1];
         String yearText = dateComponents[3];
-
-
         Log.d(TAG, dateText+dayText+monthText);
-
         Utils.ColorType colorType= Utils.ColorType.DARK_GREY;
-
         return new CalendarDates(dateText, dayText, monthText, yearText, colorType);
     }
 
